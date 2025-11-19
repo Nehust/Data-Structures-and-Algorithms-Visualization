@@ -1,54 +1,40 @@
 import "./css/App.css";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
-import AboutScreen from "./screens/AboutScreen";
-import AlgoScreen from "./screens/AlgoScreen";
-import Cookies from "js-cookie";
-import HomeScreen from "./screens/HomeScreen";
-import ReactGA from "react-ga4";
+import About from "./Page/About";
+import Algo from "./Page/Algo";
+import Home from "./Page/Home";
 
 const App = () => {
-  // Google Analytics
-  useEffect(() => {
-    ReactGA.initialize("G-0ERQ9E89XM");
-    ReactGA.send({ hitType: "pageview", page: "home" });
-  }, []);
-
-  // Khởi tạo theme từ cookie (KHÔNG cần useEffect để setState)
-  const [theme, setTheme] = useState(() => {
-    return Cookies.get("theme") || "light";
-  });
+  //
+  const [theme, setTheme] = useState("light");
 
   // Cập nhật DOM mỗi khi theme đổi
   useEffect(() => {
     document.body.setAttribute("data-theme", theme);
   }, [theme]);
 
-  // Toggle theme
+  // Toggle theme: hàm chuyển đổi theme là dark or light
   const toggleTheme = () => {
     const newTheme = theme === "light" ? "dark" : "light";
     setTheme(newTheme);
-    Cookies.set("theme", newTheme);
   };
 
   return (
-    //  basename={process.env.PUBLIC_URL + "/"}
-    <Router>
       <Routes>
         <Route
-          path="/about"
-          element={<AboutScreen theme={theme} toggleTheme={toggleTheme} />}
+          path="about"
+          element={<About theme={theme} toggleTheme={toggleTheme} />}
         />
         <Route
-          path="/algo"
-          element={<AlgoScreen theme={theme} toggleTheme={toggleTheme} />}
+          path="algo"
+          element={<Algo theme={theme} toggleTheme={toggleTheme} />}
         />
         <Route
           index
-          element={<HomeScreen theme={theme} toggleTheme={toggleTheme} />}
+          element={<Home theme={theme} toggleTheme={toggleTheme} />}
         />
-      </Routes>
-    </Router>
+      </Routes> 
   );
 };
 
