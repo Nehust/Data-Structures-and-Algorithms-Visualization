@@ -1,35 +1,55 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import "./css/App.css";
+import React, { useEffect, useState } from "react";
+import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
+import AboutScreen from "./screens/AboutScreen";
+import AlgoScreen from "./screens/AlgoScreen";
+import Cookies from "js-cookie";
+import HomeScreen from "./screens/HomeScreen";
+import ReactGA from "react-ga4";
 
-function App() {
-  const [count, setCount] = useState(0)
+const App = () => {
+  // Google Analytics
+  useEffect(() => {
+    ReactGA.initialize("G-0ERQ9E89XM");
+    ReactGA.send({ hitType: "pageview", page: "home" });
+  }, []);
+
+  // Khởi tạo theme từ cookie (KHÔNG cần useEffect để setState)
+  const [theme, setTheme] = useState(() => {
+    return Cookies.get("theme") || "light";
+  });
+
+  // Cập nhật DOM mỗi khi theme đổi
+  useEffect(() => {
+    document.body.setAttribute("data-theme", theme);
+  }, [theme]);
+
+  // Toggle theme
+  const toggleTheme = () => {
+    const newTheme = theme === "light" ? "dark" : "light";
+    setTheme(newTheme);
+    Cookies.set("theme", newTheme);
+  };
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+    //  basename={process.env.PUBLIC_URL + "/"}
+    <Router>
+      <Routes>
+        <Route
+          path="/about"
+          element={<AboutScreen theme={theme} toggleTheme={toggleTheme} />}
+        />
+        <Route
+          path="/algo"
+          element={<AlgoScreen theme={theme} toggleTheme={toggleTheme} />}
+        />
+        <Route
+          index
+          element={<HomeScreen theme={theme} toggleTheme={toggleTheme} />}
+        />
+      </Routes>
+    </Router>
+  );
+};
 
-export default App
+export default App;
