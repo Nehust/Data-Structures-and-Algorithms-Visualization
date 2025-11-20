@@ -8,19 +8,15 @@ import {
 } from "react-icons/bs";
 import { IconContext } from "react-icons";
 import { Link } from "react-router-dom";
-import {useState } from "react";
-import { RxHamburgerMenu } from "react-icons/rx";
-import "../css/App.css";    
-
-
-
+import {useState, useEffect } from "react";
+import { RxHamburgerMenu } from "react-icons/rx";  
 
 const Header = ({ theme, toggleTheme }) => {
-  const [menuVisible, setMenuVisible] = useState(false);
-  const toggleMenu = () => {setMenuVisible(prevMenuVisible => !prevMenuVisible);};
+  const [menuVisible, setMenuVisible] = useState('hide');
+  const toggleMenu = () => {setMenuVisible(prevMenuVisible => prevMenuVisible === 'show' ? 'hidden' : 'show')};
   const menuClass = {
-    true: "visible",
-    false: "hidden",
+    show: "show",
+    hidden: "hidden",
   };
 
   return (
