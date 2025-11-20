@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import React from "react";
 import { algoMap } from "../../AlgoList";
-
+const id = 0;
 const SearchFilter = () => {
   return algoMap.map((name) => (
     <Link style={{ textDecoration: "none" }}>

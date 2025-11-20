@@ -1,6 +1,6 @@
 import "./css/App.css";
 import { useEffect, useState } from "react";
-import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import About from "./Page/About";
 import Algo from "./Page/Algo";
 import Home from "./Page/Home";

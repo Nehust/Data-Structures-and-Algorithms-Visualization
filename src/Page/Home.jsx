@@ -1,7 +1,8 @@
 import "../css/App.css";
 import { useState } from "react";
-import Header from "../../components/Header";
-import Footer from "../../components/Footer";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
+import SearchFilter from "../components/Home/SearchFilter";
 
 const Home = ({ theme, toggleTheme }) => {
   return (
