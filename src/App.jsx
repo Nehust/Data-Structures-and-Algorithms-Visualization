@@ -5,7 +5,7 @@ import About from "./Page/About";
 import Algo from "./Page/Algo";
 import Home from "./Page/Home";
 
-const App = () => {
+export default function App() {
   //
   const [theme, setTheme] = useState("light");
 
@@ -27,7 +27,7 @@ const App = () => {
           element={<About theme={theme} toggleTheme={toggleTheme} />}
         />
         <Route
-          path="algo"
+          path="?algo"
           element={<Algo theme={theme} toggleTheme={toggleTheme} />}
         />
         <Route
@@ -37,5 +37,3 @@ const App = () => {
       </Routes> 
   );
 };
-
-export default App;

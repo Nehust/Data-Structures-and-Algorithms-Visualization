@@ -11,7 +11,7 @@ import { Link } from "react-router-dom";
 import {useState, useEffect } from "react";
 import { RxHamburgerMenu } from "react-icons/rx";  
 
-const Header = ({ theme, toggleTheme }) => {
+export default function Header({ theme, toggleTheme }) {
   const [menuVisible, setMenuVisible] = useState('hide');
   const toggleMenu = () => {setMenuVisible(prevMenuVisible => prevMenuVisible === 'show' ? 'hidden' : 'show')};
   const menuClass = {
@@ -94,4 +94,4 @@ const Header = ({ theme, toggleTheme }) => {
     </>
   );
 };
-export default Header;
+  
