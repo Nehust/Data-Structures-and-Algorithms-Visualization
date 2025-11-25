@@ -122,7 +122,7 @@ function addDivisorToAnimationBar(animBarRef) {
 }
 
 export default class AnimationManager extends EventListener {
-	constructor(canvasRef, animBarRef, setHighlightState, unhighlightLine) {
+	constructor(canvasRef, animBarRef) {
 		super();
 
 		this.objectManager = new ObjectManager(canvasRef);
@@ -135,9 +135,6 @@ export default class AnimationManager extends EventListener {
 		this.animationPaused = false;
 		this.awaitingStep = false;
 		this.currentlyAnimating = false;
-
-		this.setHighlightState = setHighlightState;
-		this.unhighlightLine = unhighlightLine;
 
 		// Array holding the code for the animation.  This is
 		// an array of strings, each of which is an animation command
@@ -232,7 +229,7 @@ export default class AnimationManager extends EventListener {
 			/>
 		);
 
-		// const tableEntry = document.createElement('td');
+		const tableEntry = document.createElement('td');
 
 		const controlBar = document.getElementById('GeneralAnimationControls');
 
@@ -257,10 +254,10 @@ export default class AnimationManager extends EventListener {
 		bottomLevel.appendChild(txtNode);
 		newTable.appendChild(midLevel);
 
-		// tableEntry.appendChild(newTable);
+		tableEntry.appendChild(newTable);
 
-		// // Append the element in page (in span)
-		// controlBar.appendChild(tableEntry);
+		// Append the element in page (in span)
+		controlBar.appendChild(tableEntry);
 
 		this.setSpeed(speed);
 

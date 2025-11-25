@@ -9,7 +9,7 @@ export default function Home({ theme, toggleTheme }) {
   return (
     <Routes>
       <Route
-        path=""
+        path="/*"
         element={
           <div className="container">
             {/* Hiển thị header */}

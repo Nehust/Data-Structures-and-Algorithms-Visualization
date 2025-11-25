@@ -55,7 +55,7 @@ export default function Algo({ theme, toggleTheme }) {
     <div className="VisualizationMainPage">
       <div id="container">
         <AlgoHeader header={header} theme={theme} toggleTheme={toggleTheme}  />
-        <AlgoSection theme={theme} />
+        {/* <AlgoSection theme={theme} /> */}
         <AlgoFooter />
       </div>
     </div>

@@ -24,8 +24,6 @@ export default function AlgoSection({ theme }) {
 			animManagRef.current = new AnimationManager(
 				canvasRef,
 				animBarRef,
-				null, 
-				null,
 			);
 
 			const curALgo = new AlgoClass(
