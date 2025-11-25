@@ -27,7 +27,7 @@ export default function App() {
           element={<About theme={theme} toggleTheme={toggleTheme} />}
         />
         <Route
-          path="?algo"
+          path=":algo"
           element={<Algo theme={theme} toggleTheme={toggleTheme} />}
         />
         <Route
