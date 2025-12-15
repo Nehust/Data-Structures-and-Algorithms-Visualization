@@ -1,7 +1,14 @@
-import "../css/AlgoScreen.css";
-import React, { useLocation } from "react";
-import AlgoSection from "../components/AlgoScreen/AlgoSection.jsx";
-import { algoMap } from "../AlgoList.js";
+import '../css/AlgoScreen.css';
+import '../css/App.css';
+
+import { BsFillSunFill, BsMoonFill } from 'react-icons/bs';
+import { Link, useLocation } from 'react-router-dom';
+import AlgoSection from '../components/AlgoScreen/AlgoSection';
+import AlgorithmNotFound404 from '../components/AlgorithmNotFound404';
+import PropTypes from 'prop-types';
+import React from 'react';
+import { algoMap } from '../AlgoList';
+
 
 // component footer
 function AlgoFooter() {
@@ -15,7 +22,7 @@ function AlgoFooter() {
 }
 
 // component header
-function AlgoHeader(header, theme, toggleTheme) {
+function AlgoHeader({ header, theme, toggleTheme }) {
   return (
     <div id="header">
       <h1>
@@ -57,7 +64,7 @@ export default function Algo({ theme, toggleTheme }) {
         <AlgoHeader header={header} theme={theme} toggleTheme={toggleTheme}  />
         {/* <AlgoSection theme={theme} /> */}
         <AlgoFooter />
-      </div>
+      </div>  
     </div>
   );
 }

@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import React from "react";
 import { algoMap } from "../../AlgoList";
-let id = 0;
 export default function SearchFilter() {
   const algoList = Object.values(algoMap).map(([name, ,id]) => [name, id]
   );
