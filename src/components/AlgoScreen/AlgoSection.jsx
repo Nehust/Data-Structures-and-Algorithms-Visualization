@@ -60,7 +60,7 @@ const AlgoSection = ({ theme }) => {
     return () => {
       window.removeEventListener("resize", updateDimensions);
     };
-  }, [algoName]);
+  }, [algoName, algoDetails, searchParams]);
 
   if (!algoDetails) {
     return <div>Algorithm not found</div>;

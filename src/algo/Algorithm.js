@@ -326,17 +326,14 @@ export default class Algorithm {
 
   // Abstract methods - these should be implemented in the base class
 
-  // eslint-disable-next-line no-unused-vars
   sizeChanged(newWidth, newHeight) {
     throw new Error("sizeChanged() should be implemented in base class");
   }
 
-  // eslint-disable-next-line no-unused-vars
   disableUI(event) {
     throw new Error("disableUI() should be implemented in base class");
   }
 
-  // eslint-disable-next-line no-unused-vars
   enableUI(event) {
     throw new Error("enableUI() should be implemented in base class");
   }
