@@ -21,19 +21,19 @@ export default function App() {
   };
 
   return (
-      <Routes>
-        <Route
-          path="about"
-          element={<About theme={theme} toggleTheme={toggleTheme} />}
-        />
-        <Route
-          path=":algo"
-          element={<Algo theme={theme} toggleTheme={toggleTheme} />}
-        />
-        <Route
-          index
-          element={<Home theme={theme} toggleTheme={toggleTheme} />}
-        />
-      </Routes> 
+    <Routes>
+      <Route
+        path="about"
+        element={<About theme={theme} toggleTheme={toggleTheme} />}
+      />
+      <Route
+        path=":algo"
+        element={<Algo theme={theme} toggleTheme={toggleTheme} />}
+      />
+      <Route
+        path="/*"
+        element={<Home theme={theme} toggleTheme={toggleTheme} />}
+      />
+    </Routes>
   );
-};
+}

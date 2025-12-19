@@ -63,28 +63,24 @@ import SingleAnimation from './SingleAnimation.js';
 import { Slider } from '@mui/material';
 import { UndoConnect } from './AnimatedLine.js';
 
-// Utility function to read a cookie
+// Persistence helpers (local-only): use localStorage instead of cookies
 function getCookie(cookieName) {
-	let i, x, y;
-	const cookies = document.cookie.split(';');
-	for (i = 0; i < cookies.length; i++) {
-		x = cookies[i].substr(0, cookies[i].indexOf('='));
-		y = cookies[i].substr(cookies[i].indexOf('=') + 1);
-		x = x.replace(/^\s+|\s+$/g, '');
-		if (x === cookieName) {
-			return unescape(y);
-		}
+	try {
+		return window.localStorage.getItem(cookieName);
+	} catch (e) {
+		return null;
 	}
 }
 
-// Utility function to write a cookie
-function setCookie(cookieName, value, expireDays) {
-	const exDate = new Date();
-	exDate.setDate(exDate.getDate() + expireDays);
-	document.cookie = cookieName + '=' + value;
+function setCookie(cookieName, value, _expireDays) {
+	try {
+		window.localStorage.setItem(cookieName, value);
+	} catch (e) {
+		// ignore storage errors
+	}
 }
 
-const ANIMATION_SPEED_DEFAULT = 75;
+const ANIMATION_SPEED_DEFAULT = 50;
 
 function addControlToAnimationBar(animBarRef, type, name, callback) {
 	const element = document.createElement('input');
@@ -736,7 +732,7 @@ export default class AnimationManager extends EventListener {
 	}
 
 	stopTimer() {
-		clearInterval(this.timer);
+		clearTimeout(this.timer);
 	}
 }
 
@@ -1021,13 +1017,12 @@ export const act = {
 
 		this.undoBlock.push(new UndoHighlight(params[0], !params[1], params[2]));
 	},
-	highlightCodeLine([methodName, line]) {
-		this.setHighlightState(methodName, line);
-		this.undoBlock.push(new UndoCodeHighlight(this.unhighlightLine, methodName, line));
+	// Disable pseudocode highlight effects for local simplified project
+	highlightCodeLine([_methodName, _line]) {
+		// no-op
 	},
-	unhighlightCodeLine([methodName, line]) {
-		this.unhighlightLine(methodName, line);
-		this.undoBlock.push(new UndoCodeUnhighlight(this.setHighlightState, methodName, line));
+	unhighlightCodeLine([_methodName, _line]) {
+		// no-op
 	},
 	setAlpha(params) {
 		// id, alpha

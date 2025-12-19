@@ -1,14 +1,10 @@
-import '../css/AlgoScreen.css';
-import '../css/App.css';
+import "../css/AlgoScreen.css";
+import "../css/App.css";
 
-import { BsFillSunFill, BsMoonFill } from 'react-icons/bs';
-import { Link, useLocation } from 'react-router-dom';
-import AlgoSection from '../components/AlgoScreen/AlgoSection';
-import AlgorithmNotFound404 from '../components/AlgorithmNotFound404';
-import PropTypes from 'prop-types';
-import React from 'react';
-import { algoMap } from '../AlgoList';
-
+import { BsFillSunFill, BsMoonFill } from "react-icons/bs";
+import { Link, useLocation } from "react-router-dom";
+import { algoMap } from "../AlgoList";
+import AlgoSection from "../components/AlgoScreen/AlgoSection";
 
 // component footer
 function AlgoFooter() {
@@ -55,16 +51,20 @@ export default function Algo({ theme, toggleTheme }) {
   const location = useLocation();
   const algoName = location.pathname.slice(1);
   const algoDetails = algoMap[algoName];
-  console.log(algoDetails);
-  const [header, _] = algoDetails;
+
+  if (!algoDetails || !Array.isArray(algoDetails)) {
+    return <div>Algorithm not found</div>;
+  }
+
+  const [header] = algoDetails;
 
   return (
     <div className="VisualizationMainPage">
       <div id="container">
-        <AlgoHeader header={header} theme={theme} toggleTheme={toggleTheme}  />
-        {/* <AlgoSection theme={theme} /> */}
+        <AlgoHeader header={header} theme={theme} toggleTheme={toggleTheme} />
+        <AlgoSection theme={theme} />
         <AlgoFooter />
-      </div>  
+      </div>
     </div>
   );
 }

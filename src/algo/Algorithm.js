@@ -1,6 +1,31 @@
+// Copyright 2011 David Galles, University of San Francisco. All rights reserved.
+//
+// Redistribution and use in source and binary forms, with or without modification, are
+// permitted provided that the following conditions are met:
+//
+// 1. Redistributions of source code must retain the above copyright notice, this list of
+// conditions and the following disclaimer.
+//
+// 2. Redistributions in binary form must reproduce the above copyright notice, this list
+// of conditions and the following disclaimer in the documentation and/or other materials
+// provided with the distribution.
+//
+// THIS SOFTWARE IS PROVIDED BY <COPYRIGHT HOLDER> ``AS IS'' AND ANY EXPRESS OR IMPLIED
+// WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
+// FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL <COPYRIGHT HOLDER> OR
+// CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+// CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+// SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+// ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+// NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+// ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+//
+// The views and conclusions contained in the software and documentation are those of the
+// authors and should not be interpreted as representing official policies, either expressed
+// or implied, of the University of San Francisco
+
 import { act } from "../anim/AnimationMain";
 
-// Thêm một nhãn (label) vào thanh điều khiển thuật toán
 export function addLabelToAlgorithmBar(labelName, group) {
   const element = document.createElement("p");
   element.appendChild(document.createTextNode(labelName));
@@ -20,7 +45,6 @@ export function addLabelToAlgorithmBar(labelName, group) {
   return element;
 }
 
-// Thêm một checkbox vào thanh điều khiển thuật toán
 export function addCheckboxToAlgorithmBar(boxLabel, checked, group) {
   const element = document.createElement("input");
 
@@ -54,7 +78,6 @@ export function addCheckboxToAlgorithmBar(boxLabel, checked, group) {
   return element;
 }
 
-// Thêm một dropdown (select) vào thanh điều khiển thuật toán
 export function addDropDownGroupToAlgorithmBar(optionNames, groupName, group) {
   const dropDown = document.createElement("select");
   dropDown.name = groupName;
@@ -81,7 +104,6 @@ export function addDropDownGroupToAlgorithmBar(optionNames, groupName, group) {
   return dropDown;
 }
 
-// Thêm một nhóm radio button vào thanh điều khiển thuật toán
 export function addRadioButtonGroupToAlgorithmBar(
   buttonNames,
   groupName,
@@ -124,7 +146,6 @@ export function addRadioButtonGroupToAlgorithmBar(
   return buttonList;
 }
 
-// Thêm một input vào thanh điều khiển thuật toán
 export function addControlToAlgorithmBar(type, value, group) {
   const element = document.createElement("input");
 
@@ -145,7 +166,6 @@ export function addControlToAlgorithmBar(type, value, group) {
   return element;
 }
 
-// Thêm một đường phân cách vào thanh điều khiển thuật toán
 export function addDivisorToAlgorithmBar() {
   const divisorLeft = document.createElement("td");
   divisorLeft.setAttribute("class", "divisorLeft");
@@ -158,7 +178,6 @@ export function addDivisorToAlgorithmBar() {
   controlBar.appendChild(divisorRight);
 }
 
-// Thêm một nhóm (group) vào thanh điều khiển thuật toán
 export function addGroupToAlgorithmBar(horizontal, parentGroup) {
   const group = document.createElement("div");
 
@@ -177,10 +196,6 @@ export function addGroupToAlgorithmBar(horizontal, parentGroup) {
   return group;
 }
 
-const CODE_LINE_HEIGHT = 15;
-const CODE_HIGHLIGHT_COLOR = "#FF0000";
-const CODE_STANDARD_COLOR = "#000000";
-
 export default class Algorithm {
   constructor(am, w, h) {
     if (am == null) {
@@ -190,175 +205,13 @@ export default class Algorithm {
     am.addListener("AnimationStarted", this, this.disableUI);
     am.addListener("AnimationEnded", this, this.enableUI);
     am.addListener("AnimationUndo", this, this.undo);
+
     this.canvasWidth = w;
     this.canvasHeight = h;
 
     this.actionHistory = [];
     this.recordAnimation = true;
     this.commands = [];
-  }
-
-  addCodeToCanvasBaseAll(
-    code,
-    key,
-    start_x = 0,
-    start_y = 0,
-    line_height = CODE_LINE_HEIGHT
-  ) {
-    return {
-      english: this.addCodeToCanvasBase(
-        code[key]["english"],
-        start_x,
-        start_y,
-        line_height,
-        CODE_STANDARD_COLOR,
-        32
-      ),
-      code: this.addCodeToCanvasBase(
-        code[key]["code"],
-        start_x,
-        start_y,
-        line_height,
-        CODE_STANDARD_COLOR,
-        33
-      ),
-    };
-  }
-
-  addCodeToCanvasBase(
-    code,
-    start_x,
-    start_y,
-    line_height,
-    standard_color,
-    layer
-  ) {
-    line_height =
-      typeof line_height !== "undefined" ? line_height : CODE_LINE_HEIGHT;
-    standard_color =
-      typeof standard_color !== "undefined"
-        ? standard_color
-        : CODE_STANDARD_COLOR;
-    layer = typeof layer != "undefined" ? layer : 32;
-    const isCode = true;
-    const codeID = Array(code.length);
-    let i, j;
-    for (i = 0; i < code.length; i++) {
-      codeID[i] = new Array(code[i].length);
-      for (j = 0; j < code[i].length; j++) {
-        codeID[i][j] = this.nextIndex++;
-        this.cmd(
-          act.createLabel,
-          codeID[i][j],
-          code[i][j],
-          start_x,
-          start_y + i * line_height,
-          0,
-          isCode
-        );
-        this.cmd(act.setForegroundColor, codeID[i][j], standard_color);
-        this.cmd(act.setLayer, codeID[i][j], layer);
-        if (j > 0) {
-          this.cmd(act.alignRight, codeID[i][j], codeID[i][j - 1]);
-        }
-      }
-    }
-    return codeID;
-  }
-
-  highlight(ind1, ind2, codeID, type) {
-    if (!codeID) return;
-    // Type specified
-    if (type) {
-      this.highlight(ind1, ind2, codeID[type]);
-      return;
-    }
-
-    // TODO: A more robust way to handle this is to move all highlight calls from algorithms to
-    // a separate method (e.g. highlightCodeLine). This workaround allows the existing code to
-    // stay mostly the same, as otherwise this would cause a fair bit of changes. This should
-    // still be moved to a separate method in the future.
-    if (typeof codeID === "string") {
-      this.cmd(act.highlightCodeLine, codeID, ind1);
-      return;
-    }
-
-    // Single pseudocode type
-    if (codeID[0] !== undefined) {
-      this.cmd(
-        act.setForegroundColor,
-        codeID[ind1][ind2],
-        CODE_HIGHLIGHT_COLOR
-      );
-      return;
-    }
-    // Multiple pseudocode types
-    if (codeID.english.length)
-      this.cmd(
-        act.setForegroundColor,
-        codeID.english[ind1][ind2],
-        CODE_HIGHLIGHT_COLOR
-      );
-    if (codeID.code.length)
-      this.cmd(
-        act.setForegroundColor,
-        codeID.code[ind1][ind2],
-        CODE_HIGHLIGHT_COLOR
-      );
-  }
-
-  unhighlight(ind1, ind2, codeID, type) {
-    if (!codeID) return;
-
-    if (typeof codeID === "string") {
-      this.cmd(act.unhighlightCodeLine, codeID, ind1);
-      return;
-    }
-    // Type specified
-    if (type) {
-      this.unhighlight(ind1, ind2, codeID[type]);
-      return;
-    }
-    // Single pseudocode type
-    if (codeID[0] !== undefined) {
-      this.cmd(act.setForegroundColor, codeID[ind1][ind2], CODE_STANDARD_COLOR);
-      return;
-    }
-    // Multiple pseudocode types
-    if (codeID.english.length)
-      this.cmd(
-        act.setForegroundColor,
-        codeID.english[ind1][ind2],
-        CODE_STANDARD_COLOR
-      );
-    if (codeID.code.length)
-      this.cmd(
-        act.setForegroundColor,
-        codeID.code[ind1][ind2],
-        CODE_STANDARD_COLOR
-      );
-  }
-
-  removeCode(codeID) {
-    if (!codeID) return;
-    if (codeID.english) {
-      this.removeCode(codeID.english);
-      this.removeCode(codeID.code);
-      return;
-    }
-    for (let i = 0; i < codeID.length; i++) {
-      for (let j = 0; j < codeID[i].length; j++) {
-        this.cmd(act.delete, codeID[i][j]);
-      }
-    }
-  }
-
-  setCodeAlpha(code, newAlpha) {
-    for (let i = 0; i < code.length; i++) {
-      for (let j = 0; j < code[i].length; j++) {
-        this.cmd(act.setAlpha, code[i][j], newAlpha);
-      }
-    }
   }
 
   shake(button) {
@@ -492,3 +345,72 @@ export default class Algorithm {
     throw new Error("reset() should be implemented in base class");
   }
 }
+
+export function controlKey(keyASCII) {
+  return (
+    keyASCII === 8 || // backspace
+    keyASCII === 9 || // tab
+    keyASCII === 37 || // % percent
+    keyASCII === 38 || // & ampersand
+    keyASCII === 39 || // ' apostrophe
+    keyASCII === 40 || // ( left parenthesis
+    keyASCII === 46 || // . period
+    keyASCII === 188 || // , commas
+    keyASCII === 220 // | pipe
+  );
+}
+
+Algorithm.prototype.returnSubmitFloat = function (field, funct, maxsize) {
+  if (maxsize !== undefined) {
+    field.size = maxsize;
+  }
+  return function (event) {
+    let keyASCII = 0;
+    if (window.event) {
+      // IE
+      keyASCII = event.keyCode;
+    } else if (event.which) {
+      // Netscape/Firefox/Opera
+      keyASCII = event.which;
+    }
+    // Submit on return
+    if (keyASCII === 13) {
+      funct();
+    }
+    // Control keys (arrows, del, etc) are always OK
+    else if (controlKey(keyASCII)) {
+      return;
+    }
+    // - (minus sign) only OK at beginning of number
+    //  (For now we will allow anywhere -- hard to see where the beginning of the
+    //   number is ...)
+    //else if (keyASCII == 109 && field.value.length  == 0)
+    else if (keyASCII === 109) {
+      return;
+    }
+    // Digis are OK if we have enough space
+    else if (
+      (maxsize !== undefined || field.value.length < maxsize) &&
+      keyASCII >= 48 &&
+      keyASCII <= 57
+    ) {
+      return;
+    }
+    // . (Decimal point) is OK if we haven't had one yet, and there is space
+    else if (
+      (maxsize !== undefined || field.value.length < maxsize) &&
+      keyASCII === 190 &&
+      field.value.indexOf(".") === -1
+    ) {
+      return;
+    }
+    // Nothing else is OK
+    else {
+      return false;
+    }
+  };
+};
+
+Algorithm.prototype.addReturnSubmit = function (field, action) {
+  field.onkeydown = this.returnSubmit(field, action, 4, false);
+};

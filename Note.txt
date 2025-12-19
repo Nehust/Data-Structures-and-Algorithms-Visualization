@@ -1,0 +1,46 @@
+Tôi đang làm 1 dự án web cấu trúc dữ liệu và giải thuật, tôi lấy ý tưởng và code từ 1 dự án repo trên github, tôi muốn nó thành 1 dự án local (loại bỏ các câu lệnh dùng cho web), dự án repo có 1 số chỗ code cũ cần được thay đổi phù hợp với react mới, loại bỏ các đoạn code liên quan đến hiệu ứng chạy liên quan đến pseudocode BigO(Phần đó khá phức tạp với dự án project 1 của tôi)
+
+---
+Ghi chú triển khai (lần cập nhật: 2025-12-18)
+
+1) Những thay đổi đã thực hiện
+- Routing: sửa Route gốc để hỗ trợ nested routes: xem src/App.jsx
+- Animation: chuyển lưu tốc độ Animation từ cookie sang localStorage và sửa clearInterval → clearTimeout: xem src/anim/AnimationMain.jsx
+- Vô hiệu hoá highlight pseudocode trong animation (không còn hiệu ứng tô dòng giả mã): xem các hàm highlightCodeLine/unhighlightCodeLine trong src/anim/AnimationMain.jsx
+
+2) Việc cần làm tiếp (ưu tiên)
+- Loại bỏ UI/CSS liên quan pseudocode & BigO để đơn giản dự án local:
+	• Các selector trong src/css/AlgoScreen.css: *.pseudocode-*, .bigo*, .modal.pseudocode, v.v.
+	• Nếu có component UI hiển thị bảng Big-O/pseudocode, ẩn hoặc xóa render.
+- Kiểm tra và vô hiệu hoá mọi lệnh gọi pseudocode còn lại trong thuật toán:
+	• Tìm các lệnh gọi cmd liên quan highlight/unhighlight trong src/algo/Algorithm.js và các file algo/*, đảm bảo không gây tác dụng phụ.
+- Kiểm tra nested <Routes> trong trang: src/Page/Home.jsx đang tự render <Routes>. Có thể giữ hoặc đơn giản hoá nếu không cần route con.
+
+3) Chạy dự án (local-only)
+- Yêu cầu: Node.js 18+.
+- Lệnh chạy:
+	• npm install
+	• npm run dev
+- Nếu lỗi (exit code 1), vui lòng lưu log đầy đủ để xử lý tiếp.
+
+4) Gợi ý khắc phục khi npm run dev lỗi
+- Hiện package.json đang override Vite bằng "rolldown-vite@7.2.2". Nếu gặp lỗi, cân nhắc quay về Vite chính thức:
+	• npm pkg delete overrides.vite
+	• npm install -D vite@latest
+- Sau đó thử lại: npm run dev
+
+5) Cách mình tiếp tục sau khi mở lại dự án
+- Đọc file này (Note.txt) để nắm bối cảnh và tiến độ.
+- Chạy grep để tìm phần cần loại bỏ:
+	• Từ khoá: pseudo|pseudocode|BigO|bigo|highlightCodeLine|unhighlightCodeLine
+- Xoá/ẩn UI & CSS pseudocode/BigO, đảm bảo không còn sự kiện hay lệnh gọi không cần thiết.
+- Kiểm thử lại các thuật toán chính (ArrayList/LinkedList/Stack/Queue/BST/AVL/Sort/Graph) ở màn hình thuật toán.
+
+6) Việc có thể cân nhắc sau
+- Dọn CSS không dùng để giảm kích thước và độ phức tạp.
+- Tái cấu trúc Router cho đơn giản (nếu muốn một route layout chung).
+- Thêm kiểm thử tối thiểu cho các thao tác dữ liệu (không cần hiệu ứng pseudocode).
+
+7) Ghi chú khác
+- Khi cần lưu thiết lập người dùng (như tốc độ), ưu tiên localStorage thay vì cookie cho app local.
+- Tránh dùng API lỗi thời (như unescape), dùng decodeURIComponent khi cần.
