@@ -11,37 +11,531 @@ export default function Home({ theme, toggleTheme }) {
       <Route
         path="/*"
         element={
-          <div className="container">
-            {/* Hiển thị header */}
-            <Header theme={theme} toggleTheme={toggleTheme} />
+          // <div className="container">
+          //   {/* Hiển thị header */}
+          //   <Header theme={theme} toggleTheme={toggleTheme} />
 
-            {/* Hiển thị nội dung chính */}
-            <div className="content">
-            <div className="outer-flex">
-              {/* Side Navigator*/}
-              <div className="side-panel">
-                {/* Search Bar */}
-                <input
-                  className="dsa-filter"
-                  placeholder="Search..."
-                  type="search"
-                />
+          //   {/* Hiển thị nội dung chính */}
+          //   <div className="content">
+          //   <div className="outer-flex">
+          //     {/* Side Navigator*/}
+          //     <div className="side-panel">
+          //       {/* Search Bar */}
+          //       <input
+          //         className="dsa-filter"
+          //         placeholder="Search..."
+          //         type="search"
+          //       />
+          //     </div>
+
+          //       <div className="mid-flex">
+          //         <div className="inner-flex">
+          //           <SearchFilter />
+          //         </div>
+          //       </div>
+          //     </div>
+          //   </div>
+
+          //   {/* Hiển thị footer */}
+          //   <Footer />
+          // </div>
+          <>
+            <div class="bg-grid-container">
+              <div class="bg-grid-pattern"></div>
+              <div class="gradient-blob-1"></div>
+              <div class="gradient-blob-2"></div>
+            </div>
+            <nav>
+              <div class="nav-container">
+                <a class="nav-brand" href="#">
+                  <div class="nav-brand-icon">
+                    <div class="nav-brand-icon-inner">
+                      <span class="material-symbols-outlined">hub</span>
+                    </div>
+                  </div>
+                  <div class="nav-brand-text">
+                    <span class="nav-brand-text-main">
+                      DataStruct<span>Viz</span>
+                    </span>
+                    <span class="nav-brand-text-sub">Dashboard</span>
+                  </div>
+                </a>
+                <div class="nav-right">
+                  <button class="nav-notif-btn">
+                    <span
+                      class="material-symbols-outlined filled"
+                      style="font-size: 1.5rem"
+                    >
+                      notifications
+                    </span>
+                    <span class="nav-notif-dot"></span>
+                  </button>
+                  <div class="nav-divider"></div>
+                  <button class="nav-user-btn">
+                    <div class="nav-user-info">
+                      <p class="nav-user-name">Jane Doe</p>
+                      <p class="nav-user-role">Pro Member</p>
+                    </div>
+                    <div class="nav-user-avatar">
+                      <div class="nav-user-avatar-inner">JD</div>
+                    </div>
+                  </button>
+                </div>
+                <div class="nav-menu">
+                  <ul class="nav-menu-list">
+                    <li class="nav-menu-item">
+                      <a class="active" href="#">
+                        Dashboard
+                      </a>
+                    </li>
+                    <li class="nav-menu-item">
+                      <a href="#">Playground</a>
+                    </li>
+                    <li class="nav-menu-item">
+                      <a href="#">Learn</a>
+                    </li>
+                  </ul>
+                </div>
               </div>
+            </nav>
 
-                <div className="mid-flex">
-                  <div className="inner-flex">
-                    <SearchFilter />
+            <main>
+              <div class="container-max space-y-16">
+                <div class="hero-section">
+                  <div class="hero-header">
+                    <div class="hero-badge">v2.0 Refined</div>
+                    <h1 class="hero-title">
+                      Master
+                      <span class="hero-title-gradient">Data Structures</span>
+                    </h1>
+                    <p class="hero-subtitle">
+                      Interactive visualizations designed to build your
+                      intuition for algorithms and complexity analysis.
+                    </p>
+                  </div>
+                  <div class="search-container">
+                    <div class="search-wrapper"></div>
+                    <div class="search-box">
+                      <span class="search-icon">
+                        <span class="material-symbols-outlined">search</span>
+                      </span>
+                      <input
+                        class="search-input"
+                        placeholder="Search structures (e.g., 'BST', 'Hash Map')..."
+                        type="text"
+                      />
+                      <div class="search-kbd">
+                        <kbd>⌘ K</kbd>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="filter-buttons">
+                    <button class="btn-filter active">All</button>
+                    <button class="btn-filter">Linear</button>
+                    <button class="btn-filter">Trees</button>
+                    <button class="btn-filter">Graphs</button>
+                    <button class="btn-filter">Hashing</button>
+                  </div>
+                </div>
+
+                <div class="cards-grid">
+                  <a class="card" href="#">
+                    <div class="card-inner">
+                      <div class="card-header">
+                        <div class="card-icon-section">
+                          <div class="card-icon-wrapper icon-wrapper">
+                            <span class="material-symbols-outlined">
+                              data_array
+                            </span>
+                          </div>
+                          <div>
+                            <h3 class="card-title">ArrayList</h3>
+                            <p class="card-label">java.util.ArrayList</p>
+                          </div>
+                        </div>
+                        <div class="card-action">
+                          <span class="material-symbols-outlined">
+                            arrow_outward
+                          </span>
+                        </div>
+                      </div>
+                      <div class="card-visual">
+                        <div class="card-visual-dot-grid"></div>
+                        <div class="array-cells">
+                          <div class="array-cell-group">
+                            <div class="array-cell">0</div>
+                            <span class="array-index">0</span>
+                          </div>
+                          <div class="array-cell-group">
+                            <div class="array-cell">1</div>
+                            <span class="array-index">1</span>
+                          </div>
+                          <div class="array-cell-group">
+                            <div class="array-cell">2</div>
+                            <span class="array-index">2</span>
+                          </div>
+                          <div class="array-cell-group" style="opacity: 0.4">
+                            <div class="array-cell empty"></div>
+                            <span class="array-index">3</span>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="card-footer">
+                        <div class="card-stats">
+                          <div class="card-stat">
+                            <span class="card-stat-label">Access</span>
+                            <span class="card-stat-value">O(1)</span>
+                          </div>
+                          <div class="card-stat">
+                            <span class="card-stat-label">Resize</span>
+                            <span class="card-stat-value">O(n)</span>
+                          </div>
+                        </div>
+                        <span class="card-tag">Dynamic Arrays</span>
+                      </div>
+                    </div>
+                  </a>
+                  <a class="card emerald" href="#">
+                    <div class="card-inner">
+                      <div class="card-header">
+                        <div class="card-icon-section">
+                          <div class="card-icon-wrapper icon-wrapper">
+                            <span class="material-symbols-outlined">
+                              linear_scale
+                            </span>
+                          </div>
+                          <div>
+                            <h3 class="card-title">Singly LinkedList</h3>
+                            <p class="card-label">Node&lt;T&gt;</p>
+                          </div>
+                        </div>
+                        <div class="card-action">
+                          <span class="material-symbols-outlined">
+                            arrow_outward
+                          </span>
+                        </div>
+                      </div>
+                      <div class="card-visual">
+                        <div class="card-visual-dot-grid"></div>
+                        <div class="linked-list-nodes">
+                          <div class="ll-node">
+                            <div class="ll-node-circle">H</div>
+                            <div class="ll-node-shadow"></div>
+                          </div>
+                          <div class="ll-connector">
+                            <div class="ll-connector-arrow"></div>
+                          </div>
+                          <div class="ll-node-secondary">A</div>
+                          <div class="ll-connector">
+                            <div class="ll-connector-arrow"></div>
+                          </div>
+                          <div class="ll-node-null">null</div>
+                        </div>
+                      </div>
+                      <div class="card-footer">
+                        <div class="card-stats">
+                          <div class="card-stat">
+                            <span class="card-stat-label">Insert Head</span>
+                            <span class="card-stat-value">O(1)</span>
+                          </div>
+                          <div class="card-stat">
+                            <span class="card-stat-label">Search</span>
+                            <span class="card-stat-value">O(n)</span>
+                          </div>
+                        </div>
+                        <span class="card-tag">Chain Nodes</span>
+                      </div>
+                    </div>
+                  </a>
+                  <a class="card violet" href="#">
+                    <div class="card-inner">
+                      <div class="card-header">
+                        <div class="card-icon-section">
+                          <div class="card-icon-wrapper icon-wrapper">
+                            <span class="material-symbols-outlined">
+                              settings_ethernet
+                            </span>
+                          </div>
+                          <div>
+                            <h3 class="card-title">Doubly LinkedList</h3>
+                            <p class="card-label">prev &lt;-&gt; next</p>
+                          </div>
+                        </div>
+                        <div class="card-action">
+                          <span class="material-symbols-outlined">
+                            arrow_outward
+                          </span>
+                        </div>
+                      </div>
+                      <div class="card-visual">
+                        <div class="card-visual-dot-grid"></div>
+                        <div class="doubly-ll-nodes">
+                          <div class="dll-node">A</div>
+                          <div class="dll-arrows">
+                            <span class="dll-arrow dll-arrow-back">⟵</span>
+                            <span class="dll-arrow">⟹</span>
+                          </div>
+                          <div class="dll-node">B</div>
+                          <div class="dll-arrows">
+                            <span class="dll-arrow dll-arrow-back">⟵</span>
+                            <span class="dll-arrow">⟹</span>
+                          </div>
+                          <div class="dll-node">C</div>
+                        </div>
+                      </div>
+                      <div class="card-footer">
+                        <div class="card-stats">
+                          <div class="card-stat">
+                            <span class="card-stat-label">Delete</span>
+                            <span class="card-stat-value">O(1)</span>
+                          </div>
+                          <div class="card-stat">
+                            <span class="card-stat-label">Space</span>
+                            <span class="card-stat-value">O(n)</span>
+                          </div>
+                        </div>
+                        <span class="card-tag">Two-way Links</span>
+                      </div>
+                    </div>
+                  </a>
+                  <a class="card rose" href="#">
+                    <div class="card-inner">
+                      <div class="card-header">
+                        <div class="card-icon-section">
+                          <div class="card-icon-wrapper icon-wrapper">
+                            <span class="material-symbols-outlined">
+                              layers
+                            </span>
+                          </div>
+                          <div>
+                            <h3 class="card-title">Stack</h3>
+                            <p class="card-label">LIFO Principle</p>
+                          </div>
+                        </div>
+                        <div class="card-action">
+                          <span class="material-symbols-outlined">
+                            arrow_outward
+                          </span>
+                        </div>
+                      </div>
+                      <div class="card-visual">
+                        <div class="card-visual-dot-grid"></div>
+                        <div class="stack-visual">
+                          <div class="stack-base"></div>
+                          <div class="stack-border"></div>
+                          <div class="stack-item base">Base</div>
+                          <div class="stack-item mid">Mid</div>
+                          <div class="stack-item top">Top</div>
+                        </div>
+                      </div>
+                      <div class="card-footer">
+                        <div class="card-stats">
+                          <div class="card-stat">
+                            <span class="card-stat-label">Push/Pop</span>
+                            <span class="card-stat-value">O(1)</span>
+                          </div>
+                          <div class="card-stat">
+                            <span class="card-stat-label">Search</span>
+                            <span class="card-stat-value">O(n)</span>
+                          </div>
+                        </div>
+                        <span class="card-tag">Last In, First Out</span>
+                      </div>
+                    </div>
+                  </a>
+                  <a class="card cyan" href="#">
+                    <div class="card-inner">
+                      <div class="card-header">
+                        <div class="card-icon-section">
+                          <div class="card-icon-wrapper icon-wrapper">
+                            <span class="material-symbols-outlined">
+                              low_priority
+                            </span>
+                          </div>
+                          <div>
+                            <h3 class="card-title">Queue</h3>
+                            <p class="card-label">FIFO Principle</p>
+                          </div>
+                        </div>
+                        <div class="card-action">
+                          <span class="material-symbols-outlined">
+                            arrow_outward
+                          </span>
+                        </div>
+                      </div>
+                      <div class="card-visual">
+                        <div class="card-visual-dot-grid"></div>
+                        <div class="queue-visual">
+                          <div class="queue-label">
+                            Out
+                            <span class="material-symbols-outlined">
+                              keyboard_double_arrow_left
+                            </span>
+                          </div>
+                          <div class="queue-container">
+                            <div class="queue-cell">1</div>
+                            <div class="queue-cell">2</div>
+                            <div class="queue-cell">3</div>
+                            <div class="queue-cell empty"></div>
+                          </div>
+                          <div class="queue-label">
+                            In
+                            <span class="material-symbols-outlined">
+                              keyboard_double_arrow_left
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="card-footer">
+                        <div class="card-stats">
+                          <div class="card-stat">
+                            <span class="card-stat-label">Enqueue</span>
+                            <span class="card-stat-value">O(1)</span>
+                          </div>
+                          <div class="card-stat">
+                            <span class="card-stat-label">Dequeue</span>
+                            <span class="card-stat-value">O(1)</span>
+                          </div>
+                        </div>
+                        <span class="card-tag">First In, First Out</span>
+                      </div>
+                    </div>
+                  </a>
+                  <a class="card amber" href="#">
+                    <div class="card-inner">
+                      <div class="card-header">
+                        <div class="card-icon-section">
+                          <div class="card-icon-wrapper icon-wrapper">
+                            <span class="material-symbols-outlined">
+                              account_tree
+                            </span>
+                          </div>
+                          <div>
+                            <h3 class="card-title">Binary Tree</h3>
+                            <p class="card-label">Hierarchical</p>
+                          </div>
+                        </div>
+                        <div class="card-action">
+                          <span class="material-symbols-outlined">
+                            arrow_outward
+                          </span>
+                        </div>
+                      </div>
+                      <div class="card-visual">
+                        <div class="card-visual-dot-grid"></div>
+                        <div class="tree-visual">
+                          <div class="tree-root">8</div>
+                          <div class="tree-children">
+                            <svg
+                              class="tree-connectors"
+                              style="overflow: visible"
+                              width="128"
+                              height="48"
+                            >
+                              <path
+                                class="tree-connector-line"
+                                d="M64,0 Q64,15 30,48"
+                                fill="none"
+                                stroke="#64748b"
+                                stroke-width="2"
+                              ></path>
+                              <path
+                                class="tree-connector-line"
+                                d="M64,0 Q64,15 98,48"
+                                fill="none"
+                                stroke="#64748b"
+                                stroke-width="2"
+                              ></path>
+                            </svg>
+                            <div class="tree-child">3</div>
+                            <div class="tree-child">10</div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="card-footer">
+                        <div class="card-stats">
+                          <div class="card-stat">
+                            <span class="card-stat-label">Find</span>
+                            <span class="card-stat-value">O(log n)</span>
+                          </div>
+                          <div class="card-stat">
+                            <span class="card-stat-label">Insert</span>
+                            <span class="card-stat-value">O(log n)</span>
+                          </div>
+                        </div>
+                        <span class="card-tag">Node Relationships</span>
+                      </div>
+                    </div>
+                  </a>
+                </div>
+              </div>
+            </main>
+
+            <footer>
+              <div class="footer-container">
+                <div class="footer-grid">
+                  <div class="footer-col-logo">
+                    <a class="footer-brand" href="#">
+                      <div class="footer-brand-icon">
+                        <span class="material-symbols-outlined">hub</span>
+                      </div>
+                      <span class="footer-brand-text">
+                        DataStruct<span>Viz</span>
+                      </span>
+                    </a>
+                    <p class="footer-description">
+                      Building the next generation of computer science education
+                      tools. Visualizing complexity one node at a time.
+                    </p>
+                  </div>
+                  <div>
+                    <h4 class="footer-section-title">Resources</h4>
+                    <ul class="footer-section-links">
+                      <li>
+                        <a href="#">Documentation</a>
+                      </li>
+                      <li>
+                        <a href="#">Cheat Sheets</a>
+                      </li>
+                      <li>
+                        <a href="#">Community Forum</a>
+                      </li>
+                    </ul>
+                  </div>
+                  <div>
+                    <h4 class="footer-section-title">Legal</h4>
+                    <ul class="footer-section-links">
+                      <li>
+                        <a href="#">Privacy Policy</a>
+                      </li>
+                      <li>
+                        <a href="#">Terms of Service</a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="footer-bottom">
+                  <p class="footer-copyright">
+                    © 2023 DataStructViz Inc. All rights reserved.
+                  </p>
+                  <div class="footer-social">
+                    <a href="#">
+                      <span class="material-symbols-outlined">public</span>
+                    </a>
+                    <a href="#">
+                      <span class="material-symbols-outlined">mail</span>
+                    </a>
                   </div>
                 </div>
               </div>
-            </div>
-
-            {/* Hiển thị footer */}
-            <Footer />
-          </div>
+            </footer>
+          </>
         }
       />
-      <Route path="/about" element={<About theme={theme} toggleTheme={toggleTheme} />} />
+      <Route
+        path="/about"
+        element={<About theme={theme} toggleTheme={toggleTheme} />}
+      />
     </Routes>
   );
 }

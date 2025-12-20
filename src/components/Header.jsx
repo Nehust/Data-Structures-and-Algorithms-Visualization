@@ -1,9 +1,5 @@
 import {
-  BsEnvelopeFill,
-  BsFillHouseFill,
   BsFillSunFill,
-  BsGithub,
-  BsInfoCircleFill,
   BsMoonFill,
 } from "react-icons/bs";
 import { IconContext } from "react-icons";
