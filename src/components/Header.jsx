@@ -55,7 +55,7 @@ export default function Header({ theme, toggleTheme }) {
         </div>
       </div>
       {/*menu items */}
-      <div className={`menu ${menuClass[menuVisible]}`}>
+      {/* <div className={`menu ${menuClass[menuVisible]}`}>
         <ul>
           <li>
             <Link to="/" onClick={toggleMenu}>
@@ -90,7 +90,7 @@ export default function Header({ theme, toggleTheme }) {
             </a>
           </li>
         </ul> 
-      </div>
+      </div> */}
     </>
   );
 };

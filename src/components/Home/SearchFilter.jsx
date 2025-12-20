@@ -7,7 +7,7 @@ export default function SearchFilter() {
   // entries = [ ["AVL", ["AVL Tree", "Category", "ID1"]], ... ]
 
   const algoList = Object.entries(algoMap).map(([key, value]) => {
-    const id = value[2]; // Lấy ID ở vị trí thứ 3 trong mảng value (index 2)
+    const id = value[3]; // Lấy ID ở vị trí thứ 4 trong mảng value (index 3)
     return [key, id];
   });
 

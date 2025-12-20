@@ -17,16 +17,16 @@ export default function Home({ theme, toggleTheme }) {
 
             {/* Hiển thị nội dung chính */}
             <div className="content">
-              <div className="outer-flex">
-                {/* Side Navigator*/}
-                <div className="side-panel">
-                  {/* Search Bar */}
-                  <input
-                    className="dsa-filter"
-                    placeholder="Search..."
-                    type="search"
-                  />
-                </div>
+            <div className="outer-flex">
+              {/* Side Navigator*/}
+              <div className="side-panel">
+                {/* Search Bar */}
+                <input
+                  className="dsa-filter"
+                  placeholder="Search..."
+                  type="search"
+                />
+              </div>
 
                 <div className="mid-flex">
                   <div className="inner-flex">
@@ -40,7 +40,7 @@ export default function Home({ theme, toggleTheme }) {
             <Footer />
           </div>
         }
-       />
+      />
       <Route path="/about" element={<About theme={theme} toggleTheme={toggleTheme} />} />
     </Routes>
   );

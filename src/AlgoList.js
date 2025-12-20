@@ -39,7 +39,6 @@ export const algoMap = {
   BFS: ["Breadth-First Search", algo.BFS, false, "BFS"],
   DFS: ["Depth-First Search", algo.DFS, false, "DFS"],
   Dijkstra: ["Dijkstra's", algo.Dijkstras, false, "Dijkstra"],
-  //Prim: ["Prim's", null, "Prim"],
   Kruskal: ["Kruskal's", algo.Kruskals, false, "Kruskal"],
 };
 export const algoFilter = [

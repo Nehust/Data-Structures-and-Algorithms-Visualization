@@ -7,7 +7,7 @@ import Home from "./Page/Home";
 
 export default function App() {
   //
-  const [theme, setTheme] = useState("light");
+  const [theme, setTheme] = useState("dark");
 
   // Cập nhật DOM mỗi khi theme đổi
   useEffect(() => {
