@@ -7,32 +7,24 @@ import Home from "./Page/Home";
 
 export default function App() {
   //
-  const [theme, setTheme] = useState("dark");
-
   // Cập nhật DOM mỗi khi theme đổi
   useEffect(() => {
-    document.body.setAttribute("data-theme", theme);
-  }, [theme]);
-
-  // Toggle theme: hàm chuyển đổi theme là dark or light
-  const toggleTheme = () => {
-    const newTheme = theme === "light" ? "dark" : "light";
-    setTheme(newTheme);
-  };
+    document.body.setAttribute("data-theme", "dark");
+  }, []);
 
   return (
     <Routes>
       <Route
         path="about"
-        element={<About theme={theme} toggleTheme={toggleTheme} />}
+        element={<About />}
       />
       <Route
         path=":algo"
-        element={<Algo theme={theme} toggleTheme={toggleTheme} />}
+        element={<Algo />}
       />
       <Route
         path="/*"
-        element={<Home theme={theme} toggleTheme={toggleTheme} />}
+        element={<Home />}
       />
     </Routes>
   );

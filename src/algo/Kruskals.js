@@ -86,13 +86,7 @@ export default class Kruskals extends Graph {
     super.addControls(false);
   }
 
-  highlight() {
-    // Disable pseudocode highlight visuals
-  }
 
-  unhighlight() {
-    // Disable pseudocode highlight visuals
-  }
 
   setup(adjMatrix) {
     super.setup(adjMatrix);

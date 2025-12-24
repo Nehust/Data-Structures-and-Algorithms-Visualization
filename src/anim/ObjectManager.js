@@ -16,8 +16,7 @@ export default class ObjectManager {
 		this.backEdges = [];
 		this.activeLayers = [];
 		this.activeLayers[0] = true;
-		this.activeLayers[32] = true; // pseudocode english layer
-		this.activeLayers[33] = false; // pseudocode code layer
+
 		this.ctx = canvasRef.current.getContext('2d');
 		this.framenum = 0;
 		this.width = 0;
@@ -439,11 +438,9 @@ export default class ObjectManager {
 		return this.nodes[nodeID].x;
 	}
 
-	getTextWidth(text, isCode, isPointer) {
+	getTextWidth(text, isPointer) {
 		// TODO:  Need to make fonts more flexible, and less hardwired.
-		if (isCode) {
-			this.ctx.font = '13px "Source Code Pro", monospace';
-		} else if (isPointer) {
+		if (isPointer) {
 			this.ctx.font = '16px Arial';
 		} else {
 			this.ctx.font = '12px Arial';
@@ -711,7 +708,7 @@ export default class ObjectManager {
 		}
 	}
 
-	addLabelObject(objectID, objectLabel, centering, isCode, isPointer) {
+	addLabelObject(objectID, objectLabel, centering, isPointer) {
 		if (this.nodes[objectID] != null && this.nodes[objectID] !== undefined) {
 			throw new Error('addLabelObject: object already exists!');
 		}
@@ -720,8 +717,7 @@ export default class ObjectManager {
 			objectID,
 			objectLabel,
 			centering,
-			this.getTextWidth(objectLabel, isCode, isPointer),
-			isCode,
+			this.getTextWidth(objectLabel, isPointer),
 			isPointer,
 		);
 		this.nodes[objectID] = newLabel;

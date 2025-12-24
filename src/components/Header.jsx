@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function Header({ theme, toggleTheme }) {
+export default function Header() {
   return (
     <nav>
       <div className="nav-container">

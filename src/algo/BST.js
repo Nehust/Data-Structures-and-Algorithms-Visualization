@@ -180,7 +180,7 @@ export default class BST extends Algorithm {
 				.split(',')
 				.filter(item => item.trim() !== '');
 			dataList.forEach(dataEntry => {
-				this.implementAction(this.add.bind(this), parseInt(dataEntry), true);
+				this.implementAction(this.add.bind(this), parseInt(dataEntry));
 				this.animationManager.skipForward();
 				this.animationManager.clearHistory();
 			});
@@ -243,7 +243,6 @@ export default class BST extends Algorithm {
 			this.implementAction(
 				this.add.bind(this),
 				Math.floor(Math.random() * (UPPER_BOUND - LOWER_BOUND + 1)) + LOWER_BOUND,
-				true,
 			);
 			this.clearOldObjects();
 			this.animationManager.skipForward();
@@ -591,7 +590,7 @@ export default class BST extends Algorithm {
 
 
 				this.cmd(act.setText, 0, 'Found: ' + value);
-				this.cmd(act.setHighlight, tree.graphicID, 0, 'find');
+				this.cmd(act.setHighlight, tree.graphicID, 0);
 			} else {
 				// if (tree.data > value) {
 				if (this.compare(tree.data, value) > 0) {
@@ -610,7 +609,7 @@ export default class BST extends Algorithm {
 					);
 					this.cmd(act.step);
 
-					this.cmd(act.setHighlight, tree.graphicID, 0, 'find');
+					this.cmd(act.setHighlight, tree.graphicID, 0);
 					if (tree.left != null) {
 						this.cmd(
 							act.createHighlightCircle,
@@ -641,7 +640,7 @@ export default class BST extends Algorithm {
 							' (look to right subtree)',
 					);
 					this.cmd(act.step);
-					this.cmd(act.setHighlight, tree.graphicID, 0, 'find');
+					this.cmd(act.setHighlight, tree.graphicID, 0);
 					if (tree.right != null) {
 						this.cmd(
 							act.createHighlightCircle,
@@ -704,7 +703,7 @@ export default class BST extends Algorithm {
 		}
 	}
 
-	add(data, skipPseudocode) {
+	add(data) {
 		this.commands = [];
 		this.clearOldObjects();
 
@@ -786,7 +785,7 @@ export default class BST extends Algorithm {
 
 
 
-		this.cmd(act.setHighlight, curr.graphicID, 0, 'add');
+		this.cmd(act.setHighlight, curr.graphicID, 0);
 		this.cmd(act.setText, 0, '');
 		return curr;
 	}

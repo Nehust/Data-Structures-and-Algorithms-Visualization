@@ -263,8 +263,6 @@ export default class ArrayList extends Algorithm {
             addVal,
             this.size,
             false,
-            true,
-            false,
             true
           );
         }
@@ -486,7 +484,6 @@ export default class ArrayList extends Algorithm {
           this.add.bind(this),
           value,
           0,
-          true,
           false,
           false,
           true
@@ -559,7 +556,7 @@ export default class ArrayList extends Algorithm {
     return this.commands;
   }
 
-  add(elemToAdd, index, isAddFront, isAddBack, isAddIndex, skipPseudocode) {
+  add(elemToAdd, index, isAddFront, isAddBack, isAddIndex) {
     this.commands = [];
     this.setInfoText("");
 

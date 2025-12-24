@@ -5,7 +5,8 @@ import Footer from "../components/Footer";
 import AlgoCard from "../components/Home/AlgoCard";
 import { Router, Routes, Route } from "react-router-dom";
 import About from "./About";
-export default function Home({ theme, toggleTheme }) {
+export default function Home() {
+  const [filter, setFilter] = useState("All");
   return (
     <Routes>
       <Route
@@ -18,7 +19,7 @@ export default function Home({ theme, toggleTheme }) {
               <div className="gradient-blob-2"></div>
             </div>
             {/* Header component */}
-            <Header theme={theme} toggleTheme={toggleTheme} />
+            <Header />
             <main>
               <div className="container-max space-y-16">
                 <div className="hero-section">
@@ -53,15 +54,23 @@ export default function Home({ theme, toggleTheme }) {
                     </div>
                   </div>
                   <div className="filter-buttons">
-                    <button className="btn-filter active">All</button>
-                    <button className="btn-filter">Linear</button>
-                    <button className="btn-filter">Trees</button>
-                    <button className="btn-filter">Graphs</button>
-                    <button className="btn-filter">Hashing</button>
+                    {["All", "Linear", "Trees", "Graphs", "Sorting"].map(
+                      (category) => (
+                        <button
+                          key={category}
+                          className={`btn-filter ${
+                            filter === category ? "active" : ""
+                          }`}
+                          onClick={() => setFilter(category)}
+                        >
+                          {category}
+                        </button>
+                      )
+                    )}
                   </div>
                 </div>
 
-                <AlgoCard />
+                <AlgoCard filter={filter} />
               </div>
             </main>
 
@@ -71,7 +80,7 @@ export default function Home({ theme, toggleTheme }) {
       />
       <Route
         path="/about"
-        element={<About theme={theme} toggleTheme={toggleTheme} />}
+        element={<About />}
       />
     </Routes>
   );

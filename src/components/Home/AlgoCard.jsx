@@ -7,42 +7,59 @@ const categoryById = Object.fromEntries(
 );
 
 const variantByCategory = {
-  Lists: "emerald",
   "Linear Data Structures": "rose",
-  "Trees and SkipList": "amber",
+  Tree: "amber",
   "Graph Algorithms": "cyan",
-  "Sorting and Quickselect": "violet",
-  "Pattern Matching": "violet",
-  HashMaps: "cyan",
-  "DP & Extras": "violet",
+  Sorting: "violet",
 };
 
 const iconByCategory = {
-  Lists: "data_array",
-  "Linear Data Structures": "layers",
-  "Trees and SkipList": "account_tree",
-  "Graph Algorithms": "hub",
-  "Sorting and Quickselect": "sort",
-  "Pattern Matching": "search",
-  HashMaps: "grid_view",
-  "DP & Extras": "calculate",
+  "Linear Data Structures": "view_list",
+  Tree: "account_tree",
+  "Graph Algorithms": "share",
+  Sorting: "bar_chart",
 };
 
-export default function AlgoCard() {
+const operationsById = Object.fromEntries(
+  algoFilter.map((f) => [f.id, f.operations])
+);
+
+export default function AlgoCard({ filter = "All" }) {
   const algoList = Object.entries(algoMap).map(([key, value]) => {
     const id = value[3];
     const title = value[0];
     const category = categoryById[key] || "Algorithms";
+    const operations = operationsById[key] || [];
     const variant = variantByCategory[category] || "";
     const icon = iconByCategory[category] || "hub";
     const hasPseudo = value[2];
-    return { key, id, title, category, variant, icon, hasPseudo };
+    return { key, id, title, category, operations, variant, icon, hasPseudo };
+  });
+
+  const filteredList = algoList.filter((item) => {
+    if (!filter || filter === "All") return true;
+    const normalizedCategory = item.category.trim();
+    if (filter === "Linear")
+      return normalizedCategory === "Linear Data Structures";
+    if (filter === "Trees") return normalizedCategory === "Tree";
+    if (filter === "Graphs") return normalizedCategory === "Graph Algorithms";
+    if (filter === "Sorting") return normalizedCategory === "Sorting";
+    return true;
   });
 
   return (
     <div className="cards-grid">
-      {algoList.map(
-        ({ key, id, title, category, variant, icon, hasPseudo }) => (
+      {filteredList.map(
+        ({
+          key,
+          id,
+          title,
+          category,
+          operations,
+          variant,
+          icon,
+          hasPseudo,
+        }) => (
           <Link
             to={`/${key}`}
             className={`card ${variant}`}
@@ -91,20 +108,25 @@ export default function AlgoCard() {
 
               <div className="card-footer">
                 <div className="card-stats">
-                  <div className="card-stat">
-                    <span className="card-stat-label">Pseudo</span>
-                    <span className="card-stat-value">
-                      {hasPseudo ? "Yes" : "No"}
-                    </span>
-                  </div>
-                  <div className="card-stat">
-                    <span className="card-stat-label">Type</span>
-                    <span className="card-stat-value">
-                      {category.split(" ")[0]}
-                    </span>
-                  </div>
+                  {operations && operations.length > 0 ? (
+                    operations.slice(0, 3).map((op, idx) => (
+                      <div className="card-stat" key={idx}>
+                        <span className="card-stat-label">{op.name}</span>
+                        <span className="card-stat-value">{op.complexity}</span>
+                      </div>
+                    ))
+                  ) : (
+                    <div className="card-stat">
+                      <span className="card-stat-label">Pseudo</span>
+                      <span className="card-stat-value">
+                        {hasPseudo ? "Yes" : "No"}
+                      </span>
+                    </div>
+                  )}
                 </div>
-                <span className="card-tag">{category}</span>
+                {(!operations || operations.length === 0) && (
+                  <span className="card-tag">{category}</span>
+                )}
               </div>
             </div>
           </Link>

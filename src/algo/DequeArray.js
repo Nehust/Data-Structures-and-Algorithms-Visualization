@@ -148,7 +148,7 @@ export default class DequeArray extends Algorithm {
       if (this.size < this.arraySize && this.addField.value !== "") {
         const pushVal = this.addField.value;
         this.addField.value = "";
-        this.implementAction(this.addLast.bind(this), pushVal, true);
+        this.implementAction(this.addLast.bind(this), pushVal);
       } else if (
         this.size === this.arraySize &&
         this.addField.value !== "" &&
@@ -375,9 +375,9 @@ export default class DequeArray extends Algorithm {
       } else {
         set.add(val);
         if (randomNum === 0) {
-          this.implementAction(this.addFirst.bind(this), val, true);
+          this.implementAction(this.addFirst.bind(this), val);
         } else {
-          this.implementAction(this.addLast.bind(this), val, true);
+          this.implementAction(this.addLast.bind(this), val);
         }
       }
       this.animationManager.skipForward();
@@ -389,7 +389,7 @@ export default class DequeArray extends Algorithm {
     this.implementAction(this.clearAll.bind(this));
   }
 
-  addLast(elemToAddLast, skipPseudocode) {
+  addLast(elemToAddLast) {
     this.commands = [];
 
     const labAddLastID = this.nextIndex++;
@@ -474,7 +474,7 @@ export default class DequeArray extends Algorithm {
     return this.commands;
   }
 
-  addFirst(elemToAdd, skipPseudocode) {
+  addFirst(elemToAdd) {
     this.commands = [];
 
     const labelAddID = this.nextIndex++;

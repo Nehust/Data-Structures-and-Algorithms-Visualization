@@ -242,7 +242,6 @@ export default class DoublyLinkedList extends Algorithm {
         this.size,
         false,
         false,
-        true,
         true
       );
       this.animationManager.skipForward();
@@ -250,13 +249,7 @@ export default class DoublyLinkedList extends Algorithm {
     });
   }
 
-  highlight() {
-    // Disable pseudocode highlight visuals
-  }
 
-  unhighlight() {
-    // Disable pseudocode highlight visuals
-  }
 
   setup() {
     this.linkedListElemID = new Array(SIZE);
@@ -476,8 +469,7 @@ export default class DoublyLinkedList extends Algorithm {
           0,
           false,
           true,
-          false,
-          true
+          false
         );
       }
       this.animationManager.skipForward();
@@ -533,7 +525,7 @@ export default class DoublyLinkedList extends Algorithm {
     }
   }
 
-  add(elemToAdd, index, isAddFront, isAddBack, isAddIndex, skipPseudocode) {
+  add(elemToAdd, index, isAddFront, isAddBack, isAddIndex) {
     this.commands = [];
     this.setInfoText("");
 

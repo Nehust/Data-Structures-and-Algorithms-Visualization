@@ -47,7 +47,7 @@ const ARRAY_ELEM_HEIGHT = 50;
 const COMP_COUNT_X = 100;
 const COMP_COUNT_Y = 50;
 
-let lastSwapEnabled = true;
+
 
 export default class BubbleSort extends Algorithm {
   constructor(am, w, h) {
@@ -111,23 +111,11 @@ export default class BubbleSort extends Algorithm {
 
     addDivisorToAlgorithmBar();
 
-    // Last swap optimization toggle
-    this.lastSwapCheckbox = addCheckboxToAlgorithmBar(
-      "Enable last swap optimization",
-      true
-    );
-    this.lastSwapCheckbox.onclick = this.toggleLastSwap.bind(this);
-    this.controls.push(this.lastSwapCheckbox);
+
   }
 
   setURLData(searchParams) {
-    if (searchParams.has("lastSwap")) {
-      const lastSwap = searchParams.get("lastSwap");
-      if (lastSwap === "0") {
-        this.toggleLastSwap();
-        this.lastSwapCheckbox.checked = false;
-      }
-    }
+
 
     if (searchParams.has("data")) {
       const data = searchParams.get("data");
@@ -224,55 +212,7 @@ export default class BubbleSort extends Algorithm {
     this.implementAction(this.clear.bind(this));
   }
 
-  toggleLastSwap() {
-    this.implementAction(this.clear.bind(this));
-    if (lastSwapEnabled) {
-      this.cmd(
-        act.setText,
-        "find".code[3][0],
-        "  while start < end and sorted is false"
-      );
-      this.cmd(act.setText, "find".code[4][0], "    sorted ← true");
-      this.cmd(act.setText, "find".code[8][0], "        sorted ← false");
-      this.cmd(act.setText, "find".code[11][0], "    end ← end - 1");
 
-      this.cmd(
-        act.setText,
-        "find".english[3][0],
-        "  while (start < end and not sorted):"
-      );
-      this.cmd(act.setText, "find".english[4][0], "    mark sorted as true");
-      this.cmd(
-        act.setText,
-        "find".english[8][0],
-        "        mark sorted as false"
-      );
-      this.cmd(act.setText, "find".english[11][0], "    decrement end");
-    } else {
-      this.cmd(act.setText, "find".code[3][0], "  while start < end");
-      this.cmd(act.setText, "find".code[4][0], "    swapped ← start");
-      this.cmd(act.setText, "find".code[8][0], "        swapped ← j");
-      this.cmd(act.setText, "find".code[11][0], "    end ← swapped");
-
-      this.cmd(act.setText, "find".english[3][0], "  while (start < end):");
-      this.cmd(
-        act.setText,
-        "find".english[4][0],
-        "    lastSwapped points to start"
-      );
-      this.cmd(
-        act.setText,
-        "find".english[8][0],
-        "        lastSwapped points to j"
-      );
-      this.cmd(
-        act.setText,
-        "find".english[11][0],
-        "    end points to lastSwapped"
-      );
-    }
-    lastSwapEnabled = !lastSwapEnabled;
-  }
 
   clear(keepInput) {
     this.commands = [];
@@ -412,11 +352,7 @@ export default class BubbleSort extends Algorithm {
           lastSwapped = i;
         }
       }
-      if (lastSwapEnabled) {
-        end = lastSwapped;
-      } else {
-        end--;
-      }
+      end = lastSwapped;
       if (!sorted) {
         for (let i = end + 1; i < this.arrayData.length; i++) {
           this.cmd(act.setBackgroundColor, this.arrayID[i], "#2ECC71");

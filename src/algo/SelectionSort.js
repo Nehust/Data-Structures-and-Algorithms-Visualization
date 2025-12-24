@@ -215,39 +215,6 @@ export default class SelectionSort extends Algorithm {
   minCallback() {
     if (!this.isMin) {
       this.implementAction(this.clear.bind(this));
-      this.cmd(act.setText, "find".code[2][0], "  for i ← 0, length:");
-      this.cmd(act.setText, "find".code[3][0], "    min ← i");
-      this.cmd(act.setText, "find".code[4][0], "    for j ← i + 1, length:");
-      this.cmd(
-        act.setText,
-        "find".code[5][0],
-        "      if array[j] < array[min]:"
-      );
-      this.cmd(act.setText, "find".code[6][0], "        min ← j");
-      this.cmd(act.setText, "find".code[9][0], "    swap array[min], array[i]");
-
-      this.cmd(
-        act.setText,
-        "find".english[2][0],
-        "  for (i from start to end):"
-      );
-      this.cmd(act.setText, "find".english[3][0], "    initialize min value");
-      this.cmd(act.setText, "find".english[4][0], "    for (j from i to end):");
-      this.cmd(
-        act.setText,
-        "find".english[5][0],
-        "      if (array[j] < min value):"
-      );
-      this.cmd(
-        act.setText,
-        "find".english[6][0],
-        "        min value is array[j]"
-      );
-      this.cmd(
-        act.setText,
-        "find".english[9][0],
-        "    swap min value with array[i]"
-      );
       this.isMin = true;
     }
   }
@@ -255,43 +222,6 @@ export default class SelectionSort extends Algorithm {
   maxCallback() {
     if (this.isMin) {
       this.implementAction(this.clear.bind(this));
-      this.cmd(act.setText, "find".code[2][0], "  for i ← length - 1, 0:");
-      this.cmd(act.setText, "find".code[3][0], "    max ← i");
-      this.cmd(act.setText, "find".code[4][0], "    for j ← i - 1, 0:");
-      this.cmd(
-        act.setText,
-        "find".code[5][0],
-        "      if array[j] > array[max]:"
-      );
-      this.cmd(act.setText, "find".code[6][0], "        max ← j");
-      this.cmd(act.setText, "find".code[9][0], "    swap array[max], array[i]");
-
-      this.cmd(
-        act.setText,
-        "find".english[2][0],
-        "  for (i from end to start):"
-      );
-      this.cmd(act.setText, "find".english[3][0], "    initialize max value");
-      this.cmd(
-        act.setText,
-        "find".english[4][0],
-        "    for (j from start to i):"
-      );
-      this.cmd(
-        act.setText,
-        "find".english[5][0],
-        "      if (array[j] > max value):"
-      );
-      this.cmd(
-        act.setText,
-        "find".english[6][0],
-        "        max value is array[j]"
-      );
-      this.cmd(
-        act.setText,
-        "find".english[9][0],
-        "    swap max value with array[i]"
-      );
       this.isMin = false;
     }
   }
@@ -505,7 +435,6 @@ export default class SelectionSort extends Algorithm {
   }
 
   swap(i, j) {
-
     const iLabelID = this.nextIndex++;
     const iXPos = i * ARRAY_ELEM_WIDTH + ARRAY_START_X;
     const iYPos = ARRAY_START_Y;
@@ -532,7 +461,6 @@ export default class SelectionSort extends Algorithm {
     temp = this.displayData[i];
     this.displayData[i] = this.displayData[j];
     this.displayData[j] = temp;
-
   }
 
   disableUI() {

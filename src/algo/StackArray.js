@@ -1,5 +1,3 @@
-
-
 import Algorithm, {
   addControlToAlgorithmBar,
   addDivisorToAlgorithmBar,
@@ -144,7 +142,7 @@ export default class StackArray extends Algorithm {
         xpos,
         ypos + ARRAY_ELEM_HEIGHT
       );
-      this.cmd(act.setForegroundColor, this.arrayLabelID[i], "#0000FF");
+      this.cmd(act.setForegroundColor, this.arrayLabelID[i], "#e2e8f0");
     }
     this.cmd(
       act.createLabel,
@@ -276,8 +274,6 @@ export default class StackArray extends Algorithm {
     this.cmd(act.setText, this.leftoverLabelID, "");
     this.cmd(act.setText, this.leftoverValID, "");
 
-
-
     this.cmd(
       act.createLabel,
       labPushID,
@@ -298,7 +294,7 @@ export default class StackArray extends Algorithm {
     this.cmd(
       act.createHighlightCircle,
       this.highlight1ID,
-      "#0000FF",
+      "#ef4444",
       TOP_POS_X,
       TOP_POS_Y
     );
@@ -321,9 +317,6 @@ export default class StackArray extends Algorithm {
 
     this.cmd(act.delete, this.highlight1ID);
 
-
-
-
     this.cmd(act.setHighlight, this.topID, 1);
     this.cmd(act.step);
 
@@ -333,12 +326,9 @@ export default class StackArray extends Algorithm {
     this.cmd(act.step);
     this.cmd(act.setHighlight, this.topID, 0);
 
-
     if (elemToPush != null) {
       this.nextIndex = this.nextIndex - 2;
     }
-
-
 
     return this.commands;
   }
@@ -348,7 +338,6 @@ export default class StackArray extends Algorithm {
 
     const labPopID = this.nextIndex++;
     const labPopValID = this.nextIndex++;
-
 
     this.cmd(act.setText, this.leftoverLabelID, "");
     this.cmd(act.setText, this.leftoverValID, "");
@@ -362,7 +351,6 @@ export default class StackArray extends Algorithm {
       PUSH_LABEL_Y
     );
 
-
     this.cmd(act.setHighlight, this.topID, 1);
     this.cmd(act.step);
     this.top = this.top - 1;
@@ -374,12 +362,10 @@ export default class StackArray extends Algorithm {
     this.cmd(act.step);
     this.cmd(act.setHighlight, this.topID, 0);
 
-
-
     this.cmd(
       act.createHighlightCircle,
       this.highlight1ID,
-      "#0000FF",
+      "#ef4444",
       TOP_POS_X,
       TOP_POS_Y
     );
@@ -398,8 +384,6 @@ export default class StackArray extends Algorithm {
     this.cmd(act.move, labPopValID, PUSH_ELEMENT_X, PUSH_ELEMENT_Y);
     this.cmd(act.step);
 
-
-
     this.cmd(act.setText, this.arrayID[this.top], "");
     this.cmd(act.delete, labPopID);
     this.cmd(act.delete, this.highlight1ID);
@@ -408,9 +392,6 @@ export default class StackArray extends Algorithm {
     this.cmd(act.delete, labPopValID);
     this.cmd(act.step);
 
-
-
-
     this.nextIndex = this.nextIndex - 2;
 
     return this.commands;
@@ -418,8 +399,6 @@ export default class StackArray extends Algorithm {
 
   resize(elemToPush) {
     this.commands = [];
-
-
 
     const labPushID = this.nextIndex++;
     const labPushValID = this.nextIndex++;
@@ -457,8 +436,6 @@ export default class StackArray extends Algorithm {
 
     this.highlight1ID = this.nextIndex++;
 
-
-
     this.cmd(
       act.createLabel,
       labPushResizeID,
@@ -489,15 +466,13 @@ export default class StackArray extends Algorithm {
         xpos,
         ypos + ARRAY_ELEM_HEIGHT
       );
-      this.cmd(act.setForegroundColor, this.arrayLabelIDNew[i], "#0000FF");
+      this.cmd(act.setForegroundColor, this.arrayLabelIDNew[i], "#e2e8f0");
     }
     this.cmd(act.step);
 
     this.arrayMoveID = new Array(this.top);
 
     //Move old array elements to the new array
-
-
 
     for (let i = 0; i < this.top; i++) {
       const xposinit =
@@ -536,10 +511,6 @@ export default class StackArray extends Algorithm {
     }
     this.cmd(act.step);
 
-
-
-
-
     for (let i = 0; i < this.top; i++) {
       this.cmd(act.delete, this.arrayID[i]);
       this.cmd(act.delete, this.arrayLabelID[i]);
@@ -564,12 +535,10 @@ export default class StackArray extends Algorithm {
 
     //Add elemToPush at the index
 
-
-
     this.cmd(
       act.createHighlightCircle,
       this.highlight1ID,
-      "#0000FF",
+      "#ef4444",
       PUSH_ELEMENT_X,
       PUSH_ELEMENT_Y
     );
@@ -592,8 +561,6 @@ export default class StackArray extends Algorithm {
     this.cmd(act.delete, this.highlight1ID);
     this.cmd(act.step);
 
-
-
     this.cmd(act.setHighlight, this.topID, 1);
     this.cmd(act.step);
 
@@ -604,8 +571,6 @@ export default class StackArray extends Algorithm {
     this.cmd(act.step);
 
     this.cmd(act.setHighlight, this.topID, 0);
-
-
 
     this.arrayID = this.arrayIDNew;
     this.arrayLabelID = this.arrayLabelIDNew;

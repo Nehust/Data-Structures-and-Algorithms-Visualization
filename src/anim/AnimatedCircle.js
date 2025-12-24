@@ -86,8 +86,8 @@ export default class AnimatedCircle extends AnimatedObject {
 				);
 				const rightStr = this.label.substring(this.highlightIndex + 1);
 				context.fillText(leftStr, startingXForHighlight, this.y);
-				context.strokeStyle = '#FF0000';
-				context.fillStyle = '#FF0000';
+				context.strokeStyle = '#ef4444';
+				context.fillStyle = '#ef4444';
 				context.fillText(highlightStr, startingXForHighlight + this.leftWidth, this.y);
 
 				context.strokeStyle = this.labelColor;

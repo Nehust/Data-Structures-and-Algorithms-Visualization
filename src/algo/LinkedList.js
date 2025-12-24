@@ -55,24 +55,12 @@ export default class LinkedList extends Algorithm {
   addControls() {
     this.controls = [];
 
-    const addVerticalGroup = addGroupToAlgorithmBar(false);
-    const addTopHorizontalGroup = addGroupToAlgorithmBar(
-      true,
-      addVerticalGroup
-    );
-    const addBottomHorizontalGroup = addGroupToAlgorithmBar(
-      true,
-      addVerticalGroup
-    );
-
-    addLabelToAlgorithmBar("Add", addTopHorizontalGroup);
-
-    // Add's value text field
-    this.addValueField = addControlToAlgorithmBar(
-      "Text",
-      "",
-      addTopHorizontalGroup
-    );
+    // --- Group 1: Add Actions ---
+    const addGroup = addGroupToAlgorithmBar(true);
+    
+    // Value input
+    addLabelToAlgorithmBar("Value:", addGroup);
+    this.addValueField = addControlToAlgorithmBar("Text", "", addGroup);
     this.addValueField.style.textAlign = "center";
     this.addValueField.onkeydown = this.returnSubmit(
       this.addValueField,
@@ -82,14 +70,21 @@ export default class LinkedList extends Algorithm {
     );
     this.controls.push(this.addValueField);
 
-    addLabelToAlgorithmBar("at index", addTopHorizontalGroup);
+    // Add to Front/Back buttons
+    this.addFrontButton = addControlToAlgorithmBar("Button", "Add to Front", addGroup);
+    this.addFrontButton.onclick = this.addFrontCallback.bind(this);
+    this.controls.push(this.addFrontButton);
 
-    // Add's index text field
-    this.addIndexField = addControlToAlgorithmBar(
-      "Text",
-      "",
-      addTopHorizontalGroup
-    );
+    this.addBackButton = addControlToAlgorithmBar("Button", "Add to Back", addGroup);
+    this.addBackButton.onclick = () => this.addBackCallback();
+    this.controls.push(this.addBackButton);
+
+    // Separator
+    addLabelToAlgorithmBar("|", addGroup);
+
+    // Index input for Add
+    addLabelToAlgorithmBar("Index:", addGroup);
+    this.addIndexField = addControlToAlgorithmBar("Text", "", addGroup);
     this.addIndexField.style.textAlign = "center";
     this.addIndexField.onkeydown = this.returnSubmit(
       this.addIndexField,
@@ -99,55 +94,32 @@ export default class LinkedList extends Algorithm {
     );
     this.controls.push(this.addIndexField);
 
-    // Add to front button
-    this.addFrontButton = addControlToAlgorithmBar(
-      "Button",
-      "Add to Front",
-      addBottomHorizontalGroup
-    );
-    this.addFrontButton.onclick = this.addFrontCallback.bind(this);
-    this.controls.push(this.addFrontButton);
-
-    // Add to back button
-    this.addBackButton = addControlToAlgorithmBar(
-      "Button",
-      "Add to Back",
-      addBottomHorizontalGroup
-    );
-    this.addBackButton.onclick = () => this.addBackCallback();
-    this.controls.push(this.addBackButton);
-
-    addLabelToAlgorithmBar("or", addBottomHorizontalGroup);
-
-    // Add at index button
-    this.addIndexButton = addControlToAlgorithmBar(
-      "Button",
-      "Add at Index",
-      addBottomHorizontalGroup
-    );
+    // Add at Index button
+    this.addIndexButton = addControlToAlgorithmBar("Button", "Add at Index", addGroup);
     this.addIndexButton.onclick = this.addIndexCallback.bind(this);
     this.controls.push(this.addIndexButton);
 
+    // Global Separator
     addDivisorToAlgorithmBar();
 
-    const removeVerticalGroup = addGroupToAlgorithmBar(false);
-    const removeTopHorizontalGroup = addGroupToAlgorithmBar(
-      true,
-      removeVerticalGroup
-    );
-    const removeBottomHorizontalGroup = addGroupToAlgorithmBar(
-      true,
-      removeVerticalGroup
-    );
+    // --- Group 2: Remove Actions ---
+    const removeGroup = addGroupToAlgorithmBar(true);
 
-    addLabelToAlgorithmBar("Index", removeTopHorizontalGroup);
+    // Remove Front/Back
+    this.removeFrontButton = addControlToAlgorithmBar("Button", "Remove Front", removeGroup);
+    this.removeFrontButton.onclick = () => this.removeFrontCallback();
+    this.controls.push(this.removeFrontButton);
 
-    // Remove's index text field
-    this.removeField = addControlToAlgorithmBar(
-      "Text",
-      "",
-      removeTopHorizontalGroup
-    );
+    this.removeBackButton = addControlToAlgorithmBar("Button", "Remove Back", removeGroup);
+    this.removeBackButton.onclick = () => this.removeBackCallback();
+    this.controls.push(this.removeBackButton);
+
+    // Separator
+    addLabelToAlgorithmBar("|", removeGroup);
+
+    // Index input for Remove
+    addLabelToAlgorithmBar("Index:", removeGroup);
+    this.removeField = addControlToAlgorithmBar("Text", "", removeGroup);
     this.removeField.style.textAlign = "center";
     this.removeField.onkeydown = this.returnSubmit(
       this.removeField,
@@ -157,60 +129,31 @@ export default class LinkedList extends Algorithm {
     );
     this.controls.push(this.removeField);
 
-    // Remove from index button
-    this.removeIndexButton = addControlToAlgorithmBar(
-      "Button",
-      "Remove from Index",
-      removeTopHorizontalGroup
-    );
+    // Remove at Index button
+    this.removeIndexButton = addControlToAlgorithmBar("Button", "Remove at Index", removeGroup);
     this.removeIndexButton.onclick = () => this.removeIndexCallback();
     this.controls.push(this.removeIndexButton);
 
-    addLabelToAlgorithmBar("or", removeBottomHorizontalGroup);
-
-    // Remove from front button
-    this.removeFrontButton = addControlToAlgorithmBar(
-      "Button",
-      "Remove from Front",
-      removeBottomHorizontalGroup
-    );
-    this.removeFrontButton.onclick = () => this.removeFrontCallback();
-    this.controls.push(this.removeFrontButton);
-
-    // Remove from back button
-    this.removeBackButton = addControlToAlgorithmBar(
-      "Button",
-      "Remove from Back",
-      removeBottomHorizontalGroup
-    );
-    this.removeBackButton.onclick = () => this.removeBackCallback();
-    this.controls.push(this.removeBackButton);
-
+    // Global Separator
     addDivisorToAlgorithmBar();
 
-    this.tailCheckbox = addCheckboxToAlgorithmBar("Tail pointer", false);
+    // --- Group 3: Configuration & Standard Controls ---
+    const miscGroup = addGroupToAlgorithmBar(true);
+
+    // Tail Pointer
+    this.tailCheckbox = addCheckboxToAlgorithmBar("Tail pointer", false, miscGroup);
     this.tailCheckbox.onclick = this.toggleTailPointer.bind(this);
     this.controls.push(this.tailCheckbox);
 
-    addDivisorToAlgorithmBar();
+    // Separator
+    addLabelToAlgorithmBar("|", miscGroup);
 
-    const verticalGroup2 = addGroupToAlgorithmBar(false);
-
-    // Random data button
-    this.randomButton = addControlToAlgorithmBar(
-      "Button",
-      "Random",
-      verticalGroup2
-    );
+    // Random & Clear
+    this.randomButton = addControlToAlgorithmBar("Button", "Random", miscGroup);
     this.randomButton.onclick = this.randomCallback.bind(this);
     this.controls.push(this.randomButton);
 
-    // Clear button
-    this.clearButton = addControlToAlgorithmBar(
-      "Button",
-      "Clear",
-      verticalGroup2
-    );
+    this.clearButton = addControlToAlgorithmBar("Button", "Clear", miscGroup);
     this.clearButton.onclick = () => this.clearCallback();
     this.controls.push(this.clearButton);
   }
@@ -260,7 +203,6 @@ export default class LinkedList extends Algorithm {
           this.size,
           false,
           false,
-          true,
           true
         );
         this.animationManager.skipForward();
@@ -355,9 +297,7 @@ export default class LinkedList extends Algorithm {
     }
   }
 
-  // Disable pseudocode highlighting effects
-  highlight() {}
-  unhighlight() {}
+
 
   setInfoText(text) {
     this.commands = [];
@@ -378,8 +318,7 @@ export default class LinkedList extends Algorithm {
           index,
           false,
           false,
-          true,
-          false
+          true
         );
       } else {
         this.implementAction(
@@ -409,7 +348,6 @@ export default class LinkedList extends Algorithm {
         0,
         true,
         false,
-        false,
         false
       );
     } else {
@@ -428,7 +366,6 @@ export default class LinkedList extends Algorithm {
         this.size,
         false,
         true,
-        false,
         false
       );
     } else {
@@ -514,8 +451,7 @@ export default class LinkedList extends Algorithm {
           0,
           false,
           true,
-          false,
-          true
+          false
         );
       }
       this.animationManager.skipForward();
@@ -544,21 +480,12 @@ export default class LinkedList extends Algorithm {
         this.cmd(act.setHighlight, this.linkedListElemID[i - 1], 0);
       }
 
-      if (runningBack) {
-        runningRemove
-          ? this.highlight(6, 0, "removeBack")
-          : this.highlight(6, 0, "addBack");
-      } else {
-        runningRemove
-          ? this.highlight(8, 0, "removeIndex")
-          : this.highlight(8, 0, "addIndex");
-      }
       this.cmd(act.step);
     }
     this.cmd(act.step);
   }
 
-  add(elemToAdd, index, isAddFront, isAddBack, isAddIndex, skipPseudocode) {
+  add(elemToAdd, index, isAddFront, isAddBack, isAddIndex) {
     this.commands = [];
     this.setInfoText("");
 
@@ -934,11 +861,7 @@ export default class LinkedList extends Algorithm {
 
 
 
-    runningRemoveIndexOnly
-      ? this.highlight(12, 0, "removeIndex")
-      : runningRemoveBack
-      ? this.highlight(10, 0, "removeBack")
-      : this.highlight(3, 0, "removeFront");
+
 
     this.cmd(act.step);
     this.cmd(act.delete, this.linkedListElemID[index]);
@@ -959,11 +882,7 @@ export default class LinkedList extends Algorithm {
 
 
 
-    runningRemoveIndexOnly
-      ? this.highlight(13, 0, "removeIndex")
-      : runningRemoveBack
-      ? this.highlight(11, 0, "removeBack")
-      : this.highlight(4, 0, "removeFront");
+
     this.cmd(act.step);
 
     return this.commands;
