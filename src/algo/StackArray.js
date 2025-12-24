@@ -1,28 +1,4 @@
-// Copyright 2011 David Galles, University of San Francisco. All rights reserved.
-//
-// Redistribution and use in source and binary forms, with or without modification, are
-// permitted provided that the following conditions are met:
-//
-// 1. Redistributions of source code must retain the above copyright notice, this list of
-// conditions and the following disclaimer.
-//
-// 2. Redistributions in binary form must reproduce the above copyright notice, this list
-// of conditions and the following disclaimer in the documentation and/or other materials
-// provided with the distribution.
-//
-// THIS SOFTWARE IS PROVIDED BY <COPYRIGHT HOLDER> ``AS IS'' AND ANY EXPRESS OR IMPLIED
-// WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
-// FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL <COPYRIGHT HOLDER> OR
-// CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
-// CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-// SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
-// ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
-// NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
-// ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-//
-// The views and conclusions contained in the software and documentation are those of the
-// authors and should not be interpreted as representing official policies, either expressed
-// or implied, of the University of San Francisco
+
 
 import Algorithm, {
   addControlToAlgorithmBar,
@@ -300,7 +276,7 @@ export default class StackArray extends Algorithm {
     this.cmd(act.setText, this.leftoverLabelID, "");
     this.cmd(act.setText, this.leftoverValID, "");
 
-    this.highlight(0, 0, "push");
+
 
     this.cmd(
       act.createLabel,
@@ -318,7 +294,7 @@ export default class StackArray extends Algorithm {
     );
 
     this.cmd(act.step);
-    this.highlight(6, 0, "push");
+
     this.cmd(
       act.createHighlightCircle,
       this.highlight1ID,
@@ -345,8 +321,8 @@ export default class StackArray extends Algorithm {
 
     this.cmd(act.delete, this.highlight1ID);
 
-    this.unhighlight(6, 0, "push");
-    this.highlight(7, 0, "push");
+
+
 
     this.cmd(act.setHighlight, this.topID, 1);
     this.cmd(act.step);
@@ -356,13 +332,13 @@ export default class StackArray extends Algorithm {
     this.cmd(act.delete, labPushID);
     this.cmd(act.step);
     this.cmd(act.setHighlight, this.topID, 0);
-    this.unhighlight(7, 0, "push");
+
 
     if (elemToPush != null) {
       this.nextIndex = this.nextIndex - 2;
     }
 
-    this.unhighlight(0, 0, "push");
+
 
     return this.commands;
   }
@@ -373,7 +349,7 @@ export default class StackArray extends Algorithm {
     const labPopID = this.nextIndex++;
     const labPopValID = this.nextIndex++;
 
-    this.highlight(0, 0, "pop");
+
     this.cmd(act.setText, this.leftoverLabelID, "");
     this.cmd(act.setText, this.leftoverValID, "");
     this.cmd(act.step);
@@ -386,7 +362,7 @@ export default class StackArray extends Algorithm {
       PUSH_LABEL_Y
     );
 
-    this.highlight(1, 0, "pop");
+
     this.cmd(act.setHighlight, this.topID, 1);
     this.cmd(act.step);
     this.top = this.top - 1;
@@ -398,8 +374,8 @@ export default class StackArray extends Algorithm {
     this.cmd(act.step);
     this.cmd(act.setHighlight, this.topID, 0);
 
-    this.unhighlight(1, 0, "pop");
-    this.highlight(2, 0, "pop");
+
+
     this.cmd(
       act.createHighlightCircle,
       this.highlight1ID,
@@ -422,8 +398,8 @@ export default class StackArray extends Algorithm {
     this.cmd(act.move, labPopValID, PUSH_ELEMENT_X, PUSH_ELEMENT_Y);
     this.cmd(act.step);
 
-    this.unhighlight(2, 0, "pop");
-    this.highlight(3, 0, "pop");
+
+
     this.cmd(act.setText, this.arrayID[this.top], "");
     this.cmd(act.delete, labPopID);
     this.cmd(act.delete, this.highlight1ID);
@@ -432,8 +408,8 @@ export default class StackArray extends Algorithm {
     this.cmd(act.delete, labPopValID);
     this.cmd(act.step);
 
-    this.unhighlight(3, 0, "pop");
-    this.unhighlight(0, 0, "pop");
+
+
 
     this.nextIndex = this.nextIndex - 2;
 
@@ -443,7 +419,7 @@ export default class StackArray extends Algorithm {
   resize(elemToPush) {
     this.commands = [];
 
-    this.highlight(0, 0, "push");
+
 
     const labPushID = this.nextIndex++;
     const labPushValID = this.nextIndex++;
@@ -481,8 +457,8 @@ export default class StackArray extends Algorithm {
 
     this.highlight1ID = this.nextIndex++;
 
-    this.highlight(1, 0, "push");
-    this.highlight(2, 0, "push");
+
+
     this.cmd(
       act.createLabel,
       labPushResizeID,
@@ -520,9 +496,9 @@ export default class StackArray extends Algorithm {
     this.arrayMoveID = new Array(this.top);
 
     //Move old array elements to the new array
-    this.unhighlight(2, 0, "push");
-    this.highlight(3, 0, "push");
-    this.highlight(4, 0, "push");
+
+
+
     for (let i = 0; i < this.top; i++) {
       const xposinit =
         (i % ARRAY_ELEMS_PER_LINE) * ARRAY_ELEM_WIDTH + ARRAY_START_X;
@@ -560,9 +536,9 @@ export default class StackArray extends Algorithm {
     }
     this.cmd(act.step);
 
-    this.unhighlight(3, 0, "push");
-    this.unhighlight(4, 0, "push");
-    this.highlight(5, 0, "push");
+
+
+
 
     for (let i = 0; i < this.top; i++) {
       this.cmd(act.delete, this.arrayID[i]);
@@ -587,9 +563,9 @@ export default class StackArray extends Algorithm {
     this.cmd(act.step);
 
     //Add elemToPush at the index
-    this.unhighlight(1, 0, "push");
-    this.unhighlight(5, 0, "push");
-    this.highlight(6, 0, "push");
+
+
+
     this.cmd(
       act.createHighlightCircle,
       this.highlight1ID,
@@ -616,8 +592,8 @@ export default class StackArray extends Algorithm {
     this.cmd(act.delete, this.highlight1ID);
     this.cmd(act.step);
 
-    this.unhighlight(6, 0, "push");
-    this.highlight(7, 0, "push");
+
+
     this.cmd(act.setHighlight, this.topID, 1);
     this.cmd(act.step);
 
@@ -628,8 +604,8 @@ export default class StackArray extends Algorithm {
     this.cmd(act.step);
 
     this.cmd(act.setHighlight, this.topID, 0);
-    this.unhighlight(7, 0, "push");
-    this.unhighlight(0, 0, "push");
+
+
 
     this.arrayID = this.arrayIDNew;
     this.arrayLabelID = this.arrayLabelIDNew;

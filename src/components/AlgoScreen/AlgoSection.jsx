@@ -70,7 +70,6 @@ const AlgoSection = ({ theme }) => {
     <div id="mainContent">
       <div id="algoControlSection">
         <table id="AlgorithmSpecificControls"></table>
-        <div id="toggles"></div>
       </div>
 
       <div className="viewport">

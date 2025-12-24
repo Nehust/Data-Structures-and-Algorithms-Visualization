@@ -1,93 +1,64 @@
-import {
-  BsFillSunFill,
-  BsMoonFill,
-} from "react-icons/bs";
-import { IconContext } from "react-icons";
-import { Link } from "react-router-dom";
-import {useState, useEffect } from "react";
-import { RxHamburgerMenu } from "react-icons/rx";  
+import React from "react";
 
 export default function Header({ theme, toggleTheme }) {
-  const [menuVisible, setMenuVisible] = useState('hide');
-  const toggleMenu = () => {setMenuVisible(prevMenuVisible => prevMenuVisible === 'show' ? 'hidden' : 'show')};
-  const menuClass = {
-    show: "show",
-    hidden: "hidden",
-  };
-
   return (
-    <>
-      <div className="header">
-        {/*menu */}
-        <div id="menu">
-          <IconContext.Provider value={{ className: "menu-bar" }}>
-            <RxHamburgerMenu onClick={toggleMenu} size={20} />
-          </IconContext.Provider>
-        </div>
-
-        {/*title*/}
-        <div id="title">
-          <h1>Data Structures & Algorithms Visualization</h1>
-        </div>
-        {/*gimmicks */}
-        <div className="gimmicks">
-          <div id="theme">
-            {theme === "light" ? (
-              <BsFillSunFill
-                size={22}
-                onClick={toggleTheme}
-                color="#f9c333"
-                className="rotate-effect"
-              />
-            ) : (
-              <BsMoonFill
-                size={20}
-                onClick={toggleTheme}
-                color="#3498db"
-                className="rotate-effect"
-              />
-            )}
+    <nav>
+      <div className="nav-container">
+        <a className="nav-brand" href="#">
+          <div className="nav-brand-icon">
+            <div className="nav-brand-icon-inner">
+              <span className="material-symbols-outlined">hub</span>
+            </div>
           </div>
+          <div className="nav-brand-text">
+            <span className="nav-brand-text-main">
+              <span>DataStruct</span>{" "}
+              <span
+                style={{ color: "var(--text-primary)", fontSize: "0.8rem" }}
+              >
+                and
+              </span>{" "}
+              <span>Algorithms</span> <span>Viz</span>
+            </span>
+          </div>
+        </a>
+        <div className="nav-menu">
+          <ul className="nav-menu-list">
+            <li className="nav-menu-item">
+              <a className="active" href="#">
+                Dashboard
+              </a>
+            </li>
+            <li className="nav-menu-item">
+              <a href="#">Playground</a>
+            </li>
+            <li className="nav-menu-item">
+              <a href="#">About</a>
+            </li>
+          </ul>
+        </div>
+        <div className="nav-right">
+          <button className="nav-notif-btn">
+            <span
+              className="material-symbols-outlined filled"
+              style={{ fontSize: "1.5rem" }}
+            >
+              notifications
+            </span>
+            <span className="nav-notif-dot"></span>
+          </button>
+          <div className="nav-divider"></div>
+          <button className="nav-user-btn">
+            <div className="nav-user-info">
+              <p className="nav-user-name">Nehut</p>
+              <p className="nav-user-role">Pro Member</p>
+            </div>
+            <div className="nav-user-avatar">
+              <div className="nav-user-avatar-inner">JD</div>
+            </div>
+          </button>
         </div>
       </div>
-      {/*menu items */}
-      {/* <div className={`menu ${menuClass[menuVisible]}`}>
-        <ul>
-          <li>
-            <Link to="/" onClick={toggleMenu}>
-              <BsFillHouseFill size={20} />
-              &nbsp;&nbsp;Home
-            </Link>
-          </li>
-          <li>
-            <Link to="/about" onClick={toggleMenu}>
-              <BsInfoCircleFill size={20} />
-              &nbsp;&nbsp;About
-            </Link>
-          </li>
-          <li>
-            <a
-              href="https://github.com/csvistool/visualization-tool"
-              target="_blank"
-              rel="noreferrer"
-            >
-              <BsGithub size={20} />
-              &nbsp;&nbsp;Source Code
-            </a>
-          </li>
-          <li>
-            <a
-              href="https://forms.gle/j9iMhFi8drjf2PU86"
-              target="_blank"
-              rel="noreferrer"
-            >
-              <BsEnvelopeFill size={20} />
-              &nbsp;&nbsp;Feedback
-            </a>
-          </li>
-        </ul> 
-      </div> */}
-    </>
+    </nav>
   );
-};
-  
+}

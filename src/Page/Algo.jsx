@@ -6,22 +6,12 @@ import { Link, useLocation } from "react-router-dom";
 import { algoMap } from "../AlgoList";
 import AlgoSection from "../components/AlgoScreen/AlgoSection";
 
-// component footer
-function AlgoFooter() {
-  return (
-    <div id="footer">
-      <p>
-        <Link to="/">Return to Home Page</Link>
-      </p>
-    </div>
-  );
-}
 
 // component header
 function AlgoHeader({ header, theme, toggleTheme }) {
   return (
     <div id="header">
-      <h1>
+      <h2>
         <Link to="/">&#x3008;</Link>&nbsp;&nbsp;
         <>{header}</>
         <div id="toggle">
@@ -41,7 +31,7 @@ function AlgoHeader({ header, theme, toggleTheme }) {
             />
           )}
         </div>
-      </h1>
+      </h2>
     </div>
   );
 }
@@ -63,7 +53,6 @@ export default function Algo({ theme, toggleTheme }) {
       <div id="container">
         <AlgoHeader header={header} theme={theme} toggleTheme={toggleTheme} />
         <AlgoSection theme={theme} />
-        <AlgoFooter />
       </div>
     </div>
   );

@@ -1,29 +1,3 @@
-// Copyright 2011 David Galles, University of San Francisco. All rights reserved.
-//
-// Redistribution and use in source and binary forms, with or without modification, are
-// permitted provided that the following conditions are met:
-//
-// 1. Redistributions of source code must retain the above copyright notice, this list of
-// conditions and the following disclaimer.
-//
-// 2. Redistributions in binary form must reproduce the above copyright notice, this list
-// of conditions and the following disclaimer in the documentation and/or other materials
-// provided with the distribution.
-//
-// THIS SOFTWARE IS PROVIDED BY David Galles ``AS IS'' AND ANY EXPRESS OR IMPLIED
-// WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
-// FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL <COPYRIGHT HOLDER> OR
-// CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
-// CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-// SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
-// ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
-// NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
-// ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-//
-// The views and conclusions contained in the software and documentation are those of the
-// authors and should not be interpreted as representing official policies, either expressed
-// or implied, of the University of San Francisco
-
 import Algorithm, {
   addControlToAlgorithmBar,
   addDivisorToAlgorithmBar,
@@ -47,20 +21,20 @@ const ARRAY_ELEM_HEIGHT = 50;
 const COMP_COUNT_X = 100;
 const COMP_COUNT_Y = 50;
 
-// const ARRRAY_ELEMS_PER_LINE = 15;
-// const ARRAY_LINE_SPACING = 130;
+const ARRRAY_ELEMS_PER_LINE = 15;
+const ARRAY_LINE_SPACING = 130;
 
-// const TOP_POS_X = 180;
-// const TOP_POS_Y = 100;
-// const TOP_LABEL_X = 130;
-// const TOP_LABEL_Y = 100;
+const TOP_POS_X = 180;
+const TOP_POS_Y = 100;
+const TOP_LABEL_X = 130;
+const TOP_LABEL_Y = 100;
 
-// const PUSH_LABEL_X = 50;
-// const PUSH_LABEL_Y = 30;
-// const PUSH_ELEMENT_X = 120;
-// const PUSH_ELEMENT_Y = 30;
+const PUSH_LABEL_X = 50;
+const PUSH_LABEL_Y = 30;
+const PUSH_ELEMENT_X = 120;
+const PUSH_ELEMENT_Y = 30;
 
-// const SIZE = 10;
+const SIZE = 10;
 
 export default class SelectionSort extends Algorithm {
   constructor(am, w, h) {
@@ -338,7 +312,6 @@ export default class SelectionSort extends Algorithm {
     for (let i = 0; i < this.arrayID.length; i++) {
       this.cmd(act.delete, this.arrayID[i]);
     }
-
     this.arrayData = [];
     this.arrayID = [];
     this.compCount = 0;
@@ -386,8 +359,6 @@ export default class SelectionSort extends Algorithm {
       );
       return this.commands;
     }
-
-    this.highlight(1, 0, "find");
 
     this.arrayID = [];
     this.arrayData = list
@@ -461,12 +432,9 @@ export default class SelectionSort extends Algorithm {
       ARRAY_START_Y
     );
     this.cmd(act.step);
-    this.unhighlight(1, 0, "find");
     this.cmd(act.setHighlight, this.jPointerID, 1);
-    this.highlight(2, 0, "find");
     this.cmd(act.step);
     for (let i = 0; i < this.arrayData.length - 1; i++) {
-      this.highlight(3, 0, "find");
       let k = i;
       if (!this.isMin) {
         k = this.arrayData.length - 1 - i;
@@ -475,8 +443,6 @@ export default class SelectionSort extends Algorithm {
       let toSwap = k;
       this.cmd(act.setBackgroundColor, this.arrayID[toSwap], "#FFFF00");
       this.cmd(act.step);
-      this.unhighlight(3, 0, "find");
-      this.highlight(4, 0, "find");
       this.cmd(act.step);
       for (let j = i + 1; j < this.arrayData.length; j++) {
         let w = j;
@@ -487,23 +453,19 @@ export default class SelectionSort extends Algorithm {
         this.movePointers(toSwap, w);
         if (this.compare(this.arrayData[w], this.arrayData[toSwap])) {
           this.cmd(act.setBackgroundColor, this.arrayID[toSwap], "#FFFFFF");
-          this.highlight(6, 0, "find");
           this.cmd(act.step);
           toSwap = w;
           this.movePointers(toSwap, w);
           this.cmd(act.setBackgroundColor, this.arrayID[toSwap], "#FFFF00");
           this.cmd(act.step);
-          this.unhighlight(6, 0, "find");
         }
       }
-      this.unhighlight(4, 0, "find");
       this.swap(k, toSwap);
       this.cmd(act.setBackgroundColor, this.arrayID[toSwap], "#FFFFFF");
       this.cmd(act.step);
       this.cmd(act.setBackgroundColor, this.arrayID[k], "#2ECC71");
       this.cmd(act.step);
     }
-    this.unhighlight(2, 0, "find");
 
     this.cmd(act.delete, this.iPointerID);
     this.cmd(act.delete, this.jPointerID);
@@ -519,14 +481,12 @@ export default class SelectionSort extends Algorithm {
   }
 
   compare(i, j) {
-    this.highlight(5, 0, "find");
     this.cmd(
       act.setText,
       this.comparisonCountID,
       "Comparison Count: " + ++this.compCount
     );
     this.cmd(act.step);
-    this.unhighlight(5, 0, "find");
     if (this.isMin) {
       return i < j;
     } else {
@@ -545,7 +505,7 @@ export default class SelectionSort extends Algorithm {
   }
 
   swap(i, j) {
-    this.highlight(9, 0, "find");
+
     const iLabelID = this.nextIndex++;
     const iXPos = i * ARRAY_ELEM_WIDTH + ARRAY_START_X;
     const iYPos = ARRAY_START_Y;
@@ -572,7 +532,7 @@ export default class SelectionSort extends Algorithm {
     temp = this.displayData[i];
     this.displayData[i] = this.displayData[j];
     this.displayData[j] = temp;
-    this.unhighlight(9, 0, "find");
+
   }
 
   disableUI() {

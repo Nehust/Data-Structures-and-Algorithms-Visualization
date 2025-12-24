@@ -1,29 +1,3 @@
-// Copyright 2011 David Galles, University of San Francisco. All rights reserved.
-//
-// Redistribution and use in source and binary forms, with or without modification, are
-// permitted provided that the following conditions are met:
-//
-// 1. Redistributions of source code must retain the above copyright notice, this list of
-// conditions and the following disclaimer.
-//
-// 2. Redistributions in binary form must reproduce the above copyright notice, this list
-// of conditions and the following disclaimer in the documentation and/or other materials
-// provided with the distribution.
-//
-// THIS SOFTWARE IS PROVIDED BY David Galles ``AS IS'' AND ANY EXPRESS OR IMPLIED
-// WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
-// FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL <COPYRIGHT HOLDER> OR
-// CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
-// CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-// SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
-// ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
-// NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
-// ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-//
-// The views and conclusions contained in the software and documentation are those of the
-// authors and should not be interpreted as representing official policies, either expressed
-// or implied, of the University of San Francisco
-
 import Algorithm, {
   addControlToAlgorithmBar,
   addDivisorToAlgorithmBar,
@@ -413,27 +387,21 @@ export default class Quicksort extends Algorithm {
   helper(left, right) {
     if (left > right) return;
 
-    this.highlight(0, 0, "find");
-
     // Hightlight cells in the current sub-array
     for (let i = left; i <= right; i++) {
       this.cmd(act.setBackgroundColor, this.arrayID[i], "#99CCFF");
     }
     this.cmd(act.step);
-    this.unhighlight(0, 0);
 
     if (left === right) {
       this.cmd(act.setBackgroundColor, this.arrayID[left], "#2ECC71");
       this.cmd(act.step);
-      this.unhighlight(0, 0, "find");
       return;
     }
 
     // Create pivot pointer and swap with left-most element
     // To make things more interesting (and clearer), we don't pick the left-most element as pivot
     let pivot;
-    this.highlight(1, 0, "find");
-    this.highlight(2, 0, "find");
     if (this.pivotType === "min") {
       let min = left;
       for (let i = left + 1; i <= right; i++) {
@@ -461,13 +429,10 @@ export default class Quicksort extends Algorithm {
       ARRAY_START_Y
     );
     this.cmd(act.step);
-    this.unhighlight(1, 0, "find");
-    this.unhighlight(2, 0, "find");
-    this.highlight(3, 0, "find");
+
     this.swapPivot(pivot, left);
     this.cmd(act.step);
-    this.unhighlight(3, 0, "find");
-    this.highlight(4, 0, "find");
+
     // Partition
     let i = left + 1;
     let j = right;
@@ -515,20 +480,12 @@ export default class Quicksort extends Algorithm {
       this.cmd(act.setText, this.jLabel, "j");
     }
     this.cmd(act.step);
-    this.unhighlight(4, 0, "find");
-    this.highlight(5, 0, "find");
+
 
     while (i <= j) {
       this.cmd(act.step);
-      this.highlight(6, 0, "find");
-      this.highlight(6, 2, "find");
-      this.cmd(act.step);
-      this.unhighlight(6, 2, "find");
-      this.highlight(6, 4, "find");
       this.cmd(act.step);
       while (i <= j && this.arrayData[left] >= this.arrayData[i]) {
-        this.unhighlight(6, 4, "find");
-        this.highlight(7, 0, "find");
         i++;
         this.cmd(
           act.setText,
@@ -536,18 +493,14 @@ export default class Quicksort extends Algorithm {
           "Comparison Count: " + ++this.compCount
         );
         this.movePointers(i, j);
-        this.unhighlight(7, 0, "find");
-        this.highlight(6, 2, "find");
+
         if (i <= j) {
           this.cmd(act.step);
-          this.unhighlight(6, 2, "find");
-          this.highlight(6, 4, "find");
+
         }
         this.cmd(act.step);
       }
-      this.unhighlight(6, 0, "find");
-      this.unhighlight(6, 2, "find");
-      this.unhighlight(6, 4, "find");
+
       if (i <= j) {
         this.cmd(act.setForegroundColor, this.iPointerID, "#FF0000");
         // One additional comparison will be made in the above loop if i <= j
@@ -558,19 +511,14 @@ export default class Quicksort extends Algorithm {
         );
       }
 
-      this.highlight(9, 0, "find");
       this.cmd(act.step);
-      this.highlight(9, 2, "find");
       if (i <= j) {
         this.cmd(act.step);
-        this.unhighlight(9, 2, "find");
-        this.highlight(9, 4, "find");
+
       }
 
       this.cmd(act.step);
       while (i <= j && this.arrayData[left] <= this.arrayData[j]) {
-        this.unhighlight(9, 4, "find");
-        this.highlight(10, 0, "find");
         j--;
         this.cmd(
           act.setText,
@@ -578,18 +526,13 @@ export default class Quicksort extends Algorithm {
           "Comparison Count: " + ++this.compCount
         );
         this.movePointers(i, j);
-        this.unhighlight(10, 0, "find");
-        this.highlight(9, 2, "find");
+
         if (i <= j) {
           this.cmd(act.step);
-          this.unhighlight(9, 2, "find");
-          this.highlight(9, 4, "find");
+
         }
         this.cmd(act.step);
       }
-      this.unhighlight(9, 0, "find");
-      this.unhighlight(9, 2, "find");
-      this.unhighlight(9, 4, "find");
       if (i <= j) {
         this.cmd(act.setForegroundColor, this.jPointerID, "#FF0000");
         this.cmd(
@@ -600,22 +543,17 @@ export default class Quicksort extends Algorithm {
         this.cmd(act.step);
       }
       if (i <= j) {
-        this.highlight(13, 0, "find");
         this.swap(i, j);
-        this.unhighlight(13, 0, "find");
-        this.highlight(14, 0, "find");
         i++;
         j--;
         this.movePointers(i, j);
-        this.unhighlight(14, 0, "find");
       }
     }
-    this.unhighlight(5, 0, "find");
 
-    this.highlight(17, 0, "find");
+
     // Move pivot back and delete pivot pointer
     this.swapPivot(left, j, true);
-    this.unhighlight(17, 0, "find");
+
 
     // Delete i and j pointers
     this.cmd(act.delete, this.iPointerID);
@@ -632,15 +570,7 @@ export default class Quicksort extends Algorithm {
     this.cmd(act.setBackgroundColor, this.arrayID[j], "#2ECC71");
     this.cmd(act.step);
 
-    this.highlight(18, 0, "find");
-    this.cmd(act.step);
-    this.unhighlight(18, 0, "find");
-
     this.helper(left, j - 1);
-
-    this.highlight(19, 0, "find");
-    this.cmd(act.step);
-    this.unhighlight(19, 0, "find");
 
     this.helper(j + 1, right);
   }

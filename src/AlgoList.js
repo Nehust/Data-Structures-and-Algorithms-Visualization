@@ -22,9 +22,9 @@ export const algoMap = {
   QueueLL: ["Queue (LinkedList)", algo.QueueLL, false, "QueueLL"],
   DequeArray: ["Deque (Array)", algo.DequeArray, false, "DequeArray"],
   DequeLL: ["Deque (LinkedList)", algo.DequeLL, false, "DequeLL"],
-  BST: ["Binary Search Tree", null, false, "BST"],
-  Heap: ["Heap (PriorityQueue)", null, false, "Heap"],
-  AVL: ["AVL", null, false, "AVL"],
+  BST: ["Binary Search Tree", algo.BST, false, "BST"],
+  Heap: ["Heap (PriorityQueue)", algo.Heap, false, "Heap"],
+  AVL: ["AVL", algo.AVL, false, "AVL"],
   BubbleSort: ["Bubble Sort", algo.BubbleSort, false, "BubbleSort"],
   InsertionSort: ["Insertion Sort", algo.InsertionSort, false, "InsertionSort"],
   SelectionSort: ["Selection Sort", algo.SelectionSort, false, "SelectionSort"],
@@ -44,39 +44,39 @@ export const algoMap = {
 export const algoFilter = [
   {
     id: "ArrayList",
-    category: "Lists",
+    category: " Linear Data Structures",
   },
   {
     id: "LinkedList",
-    category: "Lists",
+    category: " Linear Data Structures",
   },
   {
     id: "DoublyLinkedList",
-    category: "Lists",
+    category: " Linear Data Structures",
   },
   {
     id: "CircularlyLinkedList",
-    category: "Lists",
+    category: " Linear Data Structures",
   },
   {
     id: "StackArray",
-    category: "Linear Data Structures",
+    category: " Linear Data Structures",
   },
   {
     id: "StackLL",
-    category: "Linear Data Structures",
+    category: " Linear Data Structures",
   },
   {
     id: "QueueArray",
-    category: "Linear Data Structures",
+    category: " Linear Data Structures",
   },
   {
     id: "QueueLL",
-    category: "Linear Data Structures",
+    category: " Linear Data Structures",
   },
   {
     id: "DequeArray",
-    category: "Linear Data Structures",
+    category: " Linear Data Structures",
   },
   {
     id: "DequeLL",
@@ -84,83 +84,35 @@ export const algoFilter = [
   },
   {
     id: "BST",
-    category: "Trees and SkipList",
+    category: "Tree",
   },
   {
     id: "Heap",
-    category: "Trees and SkipList",
+    category: "Tree",
   },
   {
     id: "AVL",
-    category: "Trees and SkipList",
-  },
-  {
-    id: "BTree",
-    category: "Trees and SkipList",
-  },
-  {
-    id: "SkipList",
-    category: "Trees and SkipList",
-  },
-  {
-    id: "OpenHash",
-    category: "HashMaps",
-  },
-  {
-    id: "ClosedHash",
-    category: "HashMaps",
+    category: "Tree",
   },
   {
     id: "BubbleSort",
-    category: "Sorting and Quickselect",
-  },
-  {
-    id: "CocktailSort",
-    category: "Sorting and Quickselect",
+    category: "Sorting",
   },
   {
     id: "SelectionSort",
-    category: "Sorting and Quickselect",
+    category: "Sorting",
   },
   {
     id: "InsertionSort",
-    category: "Sorting and Quickselect",
+    category: "Sorting",
   },
   {
     id: "Quicksort",
-    category: "Sorting and Quickselect",
-  },
-  {
-    id: "Quickselect",
-    category: "Sorting and Quickselect",
+    category: "Sorting",
   },
   {
     id: "MergeSort",
-    category: "Sorting and Quickselect",
-  },
-  {
-    id: "LSDRadix",
-    category: "Sorting and Quickselect",
-  },
-  {
-    id: "HeapSort",
-    category: "Sorting and Quickselect",
-  },
-  {
-    id: "BruteForce",
-    category: "Pattern Matching",
-  },
-  {
-    id: "BoyerMoore",
-    category: "Pattern Matching",
-  },
-  {
-    id: "KMP",
-    category: "Pattern Matching",
-  },
-  {
-    id: "RabinKarp",
-    category: "Pattern Matching",
+    category: "Sorting",
   },
   {
     id: "BFS",
@@ -175,47 +127,11 @@ export const algoFilter = [
     category: "Graph Algorithms",
   },
   {
-    id: "Prim",
+    id: "CreateGraph",
     category: "Graph Algorithms",
   },
   {
     id: "Kruskal",
     category: "Graph Algorithms",
-  },
-  {
-    id: "LCS",
-    category: "DP & Extras",
-  },
-  {
-    id: "Floyd",
-    category: "DP & Extras",
-  },
-  {
-    id: "CreateGraph",
-    category: "DP & Extras",
-  },
-  {
-    id: "DisjointSet",
-    category: "DP & Extras",
-  },
-  {
-    id: "SplayTree",
-    category: "DP & Extras",
-  },
-  {
-    id: "FredSort",
-    category: "DP & Extras",
-  },
-  {
-    id: "SleepSort",
-    category: "DP & Extras",
-  },
-  {
-    id: "MiracleSort",
-    category: "DP & Extras",
-  },
-  {
-    id: "DropSort",
-    category: "DP & Extras",
   },
 ];

@@ -1,28 +1,4 @@
-// Copyright 2011 David Galles, University of San Francisco. All rights reserved.
-//
-// Redistribution and use in source and binary forms, with or without modification, are
-// permitted provided that the following conditions are met:
-//
-// 1. Redistributions of source code must retain the above copyright notice, this list of
-// conditions and the following disclaimer.
-//
-// 2. Redistributions in binary form must reproduce the above copyright notice, this list
-// of conditions and the following disclaimer in the documentation and/or other materials
-// provided with the distribution.
-//
-// THIS SOFTWARE IS PROVIDED BY <COPYRIGHT HOLDER> ``AS IS'' AND ANY EXPRESS OR IMPLIED
-// WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
-// FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL <COPYRIGHT HOLDER> OR
-// CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
-// CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-// SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
-// ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
-// NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
-// ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-//
-// The views and conclusions contained in the software and documentation are those of the
-// authors and should not be interpreted as representing official policies, either expressed
-// or implied, of the University of San Francisco
+
 
 import Algorithm, {
   addControlToAlgorithmBar,
@@ -254,7 +230,7 @@ export default class StackLL extends Algorithm {
 
     this.cmd(act.setText, this.leftoverLabelID, "");
     this.cmd(act.setText, this.leftoverValID, "");
-    this.highlight(1, 0, "push");
+
 
     this.cmd(
       act.createLinkedListNode,
@@ -297,7 +273,7 @@ export default class StackLL extends Algorithm {
     this.cmd(act.setText, this.linkedListElemID[this.top], elemToPush);
     this.cmd(act.delete, labPushValID);
 
-    this.unhighlight(1, 0, "push");
+
     if (this.top === 0) {
       this.cmd(act.setNull, this.topID, 0);
       this.cmd(act.setNull, this.linkedListElemID[this.top], 1);
@@ -311,18 +287,18 @@ export default class StackLL extends Algorithm {
       this.cmd(act.disconnect, this.topID, this.linkedListElemID[this.top - 1]);
     }
     this.cmd(act.connect, this.topID, this.linkedListElemID[this.top]);
-    this.highlight(2, 0, "push", "english");
-    this.highlight(3, 0, "push", "english");
+
+
 
     this.cmd(act.step);
     this.top = this.top + 1;
-    this.unhighlight(2, 0, "push", "english");
-    this.unhighlight(3, 0, "push", "english");
-    this.highlight(4, 0, "push", "english");
+
+
+
     this.resetLinkedListPositions();
     this.cmd(act.delete, labPushID);
     this.cmd(act.step);
-    this.unhighlight(4, 0, "push", "english");
+
 
     return this.commands;
   }
@@ -351,28 +327,28 @@ export default class StackLL extends Algorithm {
       LINKED_LIST_START_Y
     );
 
-    this.highlight(1, 0, "pop");
+
     this.cmd(act.move, labPopValID, PUSH_ELEMENT_X, PUSH_ELEMENT_Y);
     this.cmd(act.step);
     this.cmd(act.disconnect, this.topID, this.linkedListElemID[this.top - 1]);
-    this.unhighlight(1, 0, "pop");
+
 
     if (this.top === 1) {
       this.cmd(act.setNull, this.topID, 1);
     } else {
       this.cmd(act.connect, this.topID, this.linkedListElemID[this.top - 2]);
     }
-    this.highlight(2, 0, "pop");
+
     this.cmd(act.step);
-    this.unhighlight(2, 0, "pop");
+
     this.cmd(act.delete, this.linkedListElemID[this.top - 1]);
-    this.highlight(3, 0, "pop");
-    this.highlight(4, 0, "pop", "english");
+
+
     this.top = this.top - 1;
     this.resetLinkedListPositions();
     this.cmd(act.step);
-    this.unhighlight(3, 0, "pop");
-    this.unhighlight(4, 0, "pop", "english");
+
+
 
     this.cmd(act.delete, labPopValID);
     this.cmd(act.delete, labPopID);

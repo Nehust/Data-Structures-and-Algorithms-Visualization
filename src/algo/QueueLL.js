@@ -1,28 +1,3 @@
-// Copyright 2011 David Galles, University of San Francisco. All rights reserved.
-//
-// Redistribution and use in source and binary forms, with or without modification, are
-// permitted provided that the following conditions are met:
-//
-// 1. Redistributions of source code must retain the above copyright notice, this list of
-// conditions and the following disclaimer.
-//
-// 2. Redistributions in binary form must reproduce the above copyright notice, this list
-// of conditions and the following disclaimer in the documentation and/or other materials
-// provided with the distribution.
-//
-// THIS SOFTWARE IS PROVIDED BY <COPYRIGHT HOLDER> ``AS IS'' AND ANY EXPRESS OR IMPLIED
-// WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
-// FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL <COPYRIGHT HOLDER> OR
-// CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
-// CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-// SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
-// ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
-// NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
-// ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-//
-// The views and conclusions contained in the software and documentation are those of the
-// authors and should not be interpreted as representing official policies, either expressed
-// or implied, of the University of San Francisco
 
 import Algorithm, {
   addControlToAlgorithmBar,
@@ -277,7 +252,7 @@ export default class QueueLL extends Algorithm {
 
     this.arrayData[this.top] = elemToPush;
 
-    this.highlight(0, 0, "enqueue");
+
     this.cmd(act.setText, this.leftoverLabelID, "");
     this.cmd(act.setText, this.leftoverValID, "");
     this.cmd(act.step);
@@ -291,7 +266,7 @@ export default class QueueLL extends Algorithm {
 
     const labPushID = this.nextIndex++;
     const labPushValID = this.nextIndex++;
-    this.highlight(1, 0, "enqueue");
+
     this.cmd(
       act.createLinkedListNode,
       this.linkedListElemID[0],
@@ -332,18 +307,18 @@ export default class QueueLL extends Algorithm {
     this.cmd(act.delete, labPushValID);
     this.cmd(act.step);
 
-    this.unhighlight(1, 0, "enqueue");
+
     if (this.top === 0) {
-      this.highlight(2, 0, "enqueue");
-      this.highlight(3, 0, "enqueue");
+
+
       this.cmd(act.setNull, this.headID, 0);
       this.cmd(act.setNull, this.tailID, 0);
       this.cmd(act.connect, this.headID, this.linkedListElemID[this.top]);
       this.cmd(act.connect, this.tailID, this.linkedListElemID[this.top]);
       this.cmd(act.step);
     } else {
-      this.highlight(4, 0, "enqueue");
-      this.highlight(5, 0, "enqueue");
+
+
       this.cmd(act.setNull, this.linkedListElemID[1], 0);
       this.cmd(act.connect, this.linkedListElemID[1], this.linkedListElemID[0]);
       this.cmd(act.step);
@@ -352,22 +327,22 @@ export default class QueueLL extends Algorithm {
     this.top = this.top + 1;
     this.resetLinkedListPositions();
     this.cmd(act.step);
-    this.unhighlight(2, 0, "enqueue");
-    this.unhighlight(3, 0, "enqueue");
-    this.unhighlight(4, 0, "enqueue");
-    this.unhighlight(5, 0, "enqueue");
-    this.highlight(6, 0, "enqueue");
+
+
+
+
+
 
     this.cmd(act.disconnect, this.tailID, this.linkedListElemID[1]);
     this.cmd(act.connect, this.tailID, this.linkedListElemID[0]);
     this.cmd(act.step);
-    this.unhighlight(6, 0, "enqueue");
-    this.highlight(7, 0, "enqueue");
+
+
     this.cmd(act.step);
 
     this.cmd(act.delete, labPushID);
-    this.unhighlight(7, 0, "enqueue");
-    this.unhighlight(0, 0, "enqueue");
+
+
     return this.commands;
   }
 
@@ -377,11 +352,11 @@ export default class QueueLL extends Algorithm {
     const labPopID = this.nextIndex++;
     const labPopValID = this.nextIndex++;
 
-    this.highlight(0, 0, "dequeue");
+
     this.cmd(act.setText, this.leftoverLabelID, "");
     this.cmd(act.step);
 
-    this.highlight(1, 0, "dequeue");
+
     this.cmd(
       act.createLabel,
       labPopID,
@@ -400,13 +375,13 @@ export default class QueueLL extends Algorithm {
     this.cmd(act.move, labPopValID, QUEUE_ELEMENT_X, QUEUE_ELEMENT_Y);
     this.cmd(act.step);
 
-    this.unhighlight(1, 0, "dequeue");
+
     this.cmd(act.disconnect, this.headID, this.linkedListElemID[this.top - 1]);
 
     if (this.top === 1) {
-      this.highlight(2, 0, "dequeue");
-      this.highlight(3, 0, "dequeue");
-      this.highlight(4, 0, "dequeue");
+
+
+
       this.cmd(act.setNull, this.headID, 1);
       this.cmd(act.setNull, this.tailID, 1);
       this.cmd(
@@ -415,27 +390,27 @@ export default class QueueLL extends Algorithm {
         this.linkedListElemID[this.top - 1]
       );
     } else {
-      this.highlight(5, 0, "dequeue");
-      this.highlight(6, 0, "dequeue");
+
+
       this.cmd(act.connect, this.headID, this.linkedListElemID[this.top - 2]);
     }
     this.cmd(act.step);
 
-    this.unhighlight(2, 0, "dequeue");
-    this.unhighlight(3, 0, "dequeue");
-    this.unhighlight(4, 0, "dequeue");
-    this.unhighlight(5, 0, "dequeue");
-    this.unhighlight(6, 0, "dequeue");
-    this.highlight(7, 0, "dequeue");
-    this.highlight(8, 0, "dequeue");
+
+
+
+
+
+
+
     this.cmd(act.delete, this.linkedListElemID[this.top - 1]);
     this.top = this.top - 1;
     this.resetLinkedListPositions();
     this.cmd(act.step);
 
-    this.unhighlight(8, 0, "dequeue");
-    this.unhighlight(7, 0, "dequeue");
-    this.unhighlight(0, 0, "dequeue");
+
+
+
     this.cmd(act.delete, labPopValID);
     this.cmd(act.delete, labPopID);
 

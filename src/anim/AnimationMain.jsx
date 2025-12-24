@@ -30,8 +30,6 @@
 /* global canvas */
 
 import {
-	UndoCodeHighlight,
-	UndoCodeUnhighlight,
 	UndoCreate,
 	UndoHighlight,
 	UndoHighlightEdge,

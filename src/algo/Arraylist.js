@@ -720,7 +720,7 @@ export default class ArrayList extends Algorithm {
     }
     this.cmd(act.step);
 
-    this.unhighlight(0, 0, "removeIndex");
+
 
     if (index != null) {
       this.nextIndex = this.nextIndex - (this.size - index);
@@ -742,17 +742,17 @@ export default class ArrayList extends Algorithm {
     const labPushResizeID = this.nextIndex++;
 
     if (isAddFront) {
-      this.highlight(0, 0, "addFB");
-      this.highlight(1, 0, "addFB");
-      this.highlight(0, 0, "addIndex");
+
+
+
     }
     if (isAddBack) {
-      this.highlight(4, 0, "addFB");
-      this.highlight(5, 0, "addFB");
-      this.highlight(0, 0, "addIndex");
+
+
+
     }
     if (isAddIndex) {
-      this.highlight(0, 0, "addIndex");
+
     }
     this.cmd(act.step);
 
@@ -934,9 +934,9 @@ export default class ArrayList extends Algorithm {
       this.cmd(act.delete, this.arrayLabelID[i]);
     }
 
-    this.unhighlight(6, 0, "addIndex");
-    this.unhighlight(7, 0, "addIndex");
-    this.highlight(8, 0, "addIndex");
+
+
+
     for (let i = 0; i < this.size * 2; i++) {
       const xpos =
         (i % ARRAY_ELEMS_PER_LINE) * ARRAY_ELEM_WIDTH + ARRAY_START_X;
@@ -952,23 +952,23 @@ export default class ArrayList extends Algorithm {
       );
     }
     this.cmd(act.step);
-    this.unhighlight(8, 0, "addIndex");
-    this.highlight(13, 0, "addIndex");
+
+
     this.cmd(act.step);
-    this.unhighlight(13, 0, "addIndex");
+
 
     if (isAddFront) {
-      this.unhighlight(0, 0, "addFB");
-      this.unhighlight(1, 0, "addFB");
-      this.unhighlight(0, 0, "addIndex");
+
+
+
     }
     if (isAddBack) {
-      this.unhighlight(4, 0, "addFB");
-      this.unhighlight(5, 0, "addFB");
-      this.unhighlight(0, 0, "addIndex");
+
+
+
     }
     if (isAddIndex) {
-      this.unhighlight(0, 0, "addIndex");
+
     }
 
     this.arrayID = this.arrayIDNew;

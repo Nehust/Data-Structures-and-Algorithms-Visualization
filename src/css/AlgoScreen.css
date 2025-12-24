@@ -70,7 +70,7 @@
 	background: var(--control);
 	color: var(--primary);
 	display: flex;
-	justify-content: space-between;
+	justify-content: flex-start;
 	align-items: center;
 	border-bottom: 1px var(--border) solid;
 	transition: all 0.3s ease;
