@@ -13,6 +13,7 @@ export { default as InsertionSort } from "./InsertionSort";
 export { default as SelectionSort } from "./SelectionSort";
 export { default as Quicksort } from "./Quicksort";
 export { default as MergeSort } from "./MergeSort";
+export { default as AVL } from "./AVL";
 export { default as BST } from "./BST";
 export { default as BFS } from "./BFS";
 export { default as DFS } from "./DFS";

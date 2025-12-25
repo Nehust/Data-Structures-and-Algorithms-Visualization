@@ -1,28 +1,3 @@
-// Copyright 2011 David Galles, University of San Francisco. All rights reserved.
-//
-// Redistribution and use in source and binary forms, with or without modification, are
-// permitted provided that the following conditions are met:
-//
-// 1. Redistributions of source code must retain the above copyright notice, this list of
-// conditions and the following disclaimer.
-//
-// 2. Redistributions in binary form must reproduce the above copyright notice, this list
-// of conditions and the following disclaimer in the documentation and/or other materials
-// provided with the distribution.
-//
-// THIS SOFTWARE IS PROVIDED BY <COPYRIGHT HOLDER> ``AS IS'' AND ANY EXPRESS OR IMPLIED
-// WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
-// FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL <COPYRIGHT HOLDER> OR
-// CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
-// CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-// SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
-// ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
-// NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
-// ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-//
-// The views and conclusions contained in the software and documentation are those of the
-// authors and should not be interpreted as representing official policies, either expressed
-// or implied, of the University of San Francisco
 
 import Algorithm, {
   addControlToAlgorithmBar,
@@ -254,8 +229,7 @@ export default class CircularlyLinkedList extends Algorithm {
         this.size,
         false,
         false,
-        true,
-        true
+        false
       );
       this.animationManager.skipForward();
       this.animationManager.clearHistory();
@@ -337,7 +311,7 @@ export default class CircularlyLinkedList extends Algorithm {
           index,
           false,
           false,
-          true
+          false
         );
       } else {
         this.implementAction(
@@ -463,8 +437,7 @@ export default class CircularlyLinkedList extends Algorithm {
           0,
           false,
           true,
-          false,
-          true
+          false
         );
       }
       this.animationManager.skipForward();
@@ -487,39 +460,39 @@ export default class CircularlyLinkedList extends Algorithm {
     this.cmd(act.step);
   }
 
-  add(elemToAdd, index, isAddFront, isAddBack, isAddIndex, skipPseudocode) {
+  add(elemToAdd, index, isAddFront, isAddBack, isAddIndex) {
     this.commands = [];
     this.setInfoText("");
 
     if (isAddFront || (isAddIndex && index === 0)) {
-      this.highlight(0, 0, "addFront");
+
     } else if (isAddBack || (isAddIndex && index === this.size)) {
-      this.highlight(0, 0, "addFront");
-      this.highlight(0, 0, "addBack");
-      this.highlight(1, 0, "addBack");
+
+
+
     }
 
     if (isAddIndex && index === 0) {
-      this.highlight(0, 0, "addIndex");
-      this.highlight(1, 0, "addIndex");
-      this.highlight(2, 0, "addIndex");
+
+
+
       isAddFront = true;
     } else if (isAddIndex && index === this.size) {
-      this.highlight(0, 0, "addIndex");
-      this.highlight(3, 0, "addIndex");
-      this.highlight(4, 0, "addIndex");
+
+
+
       isAddBack = true;
     } else if (isAddIndex) {
-      this.highlight(0, 0, "addIndex");
+
     }
 
     if (index < this.size) {
       if (isAddIndex && index > 0) {
         this.cmd(act.step);
-        this.highlight(5, 0, "addIndex");
-        this.highlight(6, 0, "addIndex");
-        this.highlight(7, 0, "addIndex");
-        this.highlight(8, 0, "addIndex");
+
+
+
+
       }
       this.traverse(index - 1);
     }
@@ -592,8 +565,8 @@ export default class CircularlyLinkedList extends Algorithm {
 
     if (this.size === 0) {
       if (isAddFront || isAddBack) {
-        this.highlight(1, 0, "addFront");
-        this.highlight(2, 0, "addFront");
+
+
       }
       this.cmd(
         act.move,
@@ -606,8 +579,8 @@ export default class CircularlyLinkedList extends Algorithm {
       this.cmd(act.step);
 
       if (isAddFront || isAddBack) {
-        this.unhighlight(2, 0, "addFront");
-        this.highlight(3, 0, "addFront");
+
+
       }
       this.cmd(act.delete, labPushValID);
       this.cmd(
@@ -622,18 +595,18 @@ export default class CircularlyLinkedList extends Algorithm {
       this.resetNodePositions();
       this.cmd(act.step);
       if (isAddFront || isAddBack) {
-        this.unhighlight(1, 0, "addFront");
-        this.unhighlight(3, 0, "addFront");
+
+
       }
       if (isAddBack) {
-        this.highlight(9, 0, "addFront");
+
       }
     } else {
       if (index === 0 || index === this.size) {
         // Move label from first node to new node
         if (isAddFront || isAddBack) {
-          this.highlight(4, 0, "addFront");
-          this.highlight(5, 0, "addFront");
+
+
         }
         const labCopiedValID = this.nextIndex++;
         const copiedData = index === 0 ? this.arrayData[1] : this.arrayData[0];
@@ -657,8 +630,8 @@ export default class CircularlyLinkedList extends Algorithm {
 
         // Move label for new data to the first node
         if (isAddFront || isAddBack) {
-          this.unhighlight(5, 0, "addFront");
-          this.highlight(6, 0, "addFront");
+
+
         }
         this.cmd(
           act.move,
@@ -671,9 +644,9 @@ export default class CircularlyLinkedList extends Algorithm {
         this.cmd(act.step);
 
         if (isAddFront || isAddBack) {
-          this.unhighlight(6, 0, "addFront");
-          this.highlight(7, 0, "addFront");
-          this.highlight(8, 0, "addFront");
+
+
+
         }
 
         // Change pointers
@@ -721,10 +694,10 @@ export default class CircularlyLinkedList extends Algorithm {
         this.cmd(act.step);
 
         if (isAddBack) {
-          this.unhighlight(4, 0, "addFront");
-          this.unhighlight(7, 0, "addFront");
-          this.unhighlight(8, 0, "addFront");
-          this.highlight(9, 0, "addFront");
+
+
+
+
           this.cmd(act.step);
         }
 
@@ -733,10 +706,10 @@ export default class CircularlyLinkedList extends Algorithm {
           // We increment size above, so subtract one to check if adding to back
           let i;
           if (isAddBack) {
-            this.unhighlight(9, 0, "addFront");
-            this.unhighlight(0, 0, "addFront");
-            this.unhighlight(1, 0, "addBack");
-            this.highlight(2, 0, "addBack");
+
+
+
+
           }
           this.cmd(act.disconnect, this.headID, this.linkedListElemID[0]);
           const firstNodeID = this.linkedListElemID[0];
@@ -799,12 +772,12 @@ export default class CircularlyLinkedList extends Algorithm {
         }
       } else {
         if (isAddIndex) {
-          this.unhighlight(5, 0, "addIndex");
-          this.unhighlight(6, 0, "addIndex");
-          this.unhighlight(7, 0, "addIndex");
-          this.unhighlight(8, 0, "addIndex");
+
+
+
+
           if (index !== 0) {
-            this.highlight(9, 0, "addIndex");
+
           }
         }
         this.cmd(
@@ -818,9 +791,9 @@ export default class CircularlyLinkedList extends Algorithm {
         this.cmd(act.step);
 
         if (isAddIndex) {
-          this.unhighlight(9, 0, "addIndex");
-          this.highlight(10, 0, "addIndex");
-          this.highlight(11, 0, "addIndex");
+
+
+
         }
         this.cmd(
           act.disconnect,
@@ -848,48 +821,48 @@ export default class CircularlyLinkedList extends Algorithm {
     this.cmd(act.delete, labPushID);
 
     if (isAddFront) {
-      this.unhighlight(4, 0, "addFront");
-      this.unhighlight(7, 0, "addFront");
-      this.unhighlight(8, 0, "addFront");
+
+
+
     } else if (isAddBack) {
-      this.unhighlight(2, 0, "addBack");
+
     }
 
     this.cmd(act.step);
 
     if (isAddFront) {
-      this.highlight(9, 0, "addFront");
+
     }
 
     if (isAddIndex) {
-      this.unhighlight(10, 0, "addIndex");
-      this.unhighlight(11, 0, "addIndex");
+
+
       if (index !== 0 && index !== this.size - 1) {
-        this.highlight(12, 0, "addIndex");
+
       }
     }
 
     if (isAddBack) {
-      this.unhighlight(9, 0, "addFront");
-      this.unhighlight(1, 0, "addBack");
+
+
       if (this.size === 1) {
-        this.highlight(2, 0, "addBack");
+
       }
     }
 
     this.cmd(act.step);
 
-    this.unhighlight(0, 0, "addIndex");
-    this.unhighlight(0, 0, "addFront");
-    this.unhighlight(9, 0, "addFront");
-    this.unhighlight(2, 0, "addBack");
-    this.unhighlight(0, 0, "addBack");
-    this.unhighlight(0, 0, "addIndex");
-    this.unhighlight(1, 0, "addIndex");
-    this.unhighlight(2, 0, "addIndex");
-    this.unhighlight(3, 0, "addIndex");
-    this.unhighlight(4, 0, "addIndex");
-    this.unhighlight(12, 0, "addIndex");
+
+
+
+
+
+
+
+
+
+
+
 
     return this.commands;
   }
@@ -901,22 +874,22 @@ export default class CircularlyLinkedList extends Algorithm {
     index = parseInt(index);
 
     if (isRemoveFront) {
-      this.highlight(0, 0, "removeFront");
+
     } else if (isRemoveBack) {
-      this.highlight(0, 0, "removeBack");
+
     } else if (isRemoveIndex) {
-      this.highlight(0, 0, "removeIndex");
+
     }
 
     if (isRemoveIndex && index === 0) {
-      this.highlight(1, 0, "removeIndex");
-      this.highlight(2, 0, "removeIndex");
-      this.highlight(0, 0, "removeFront");
+
+
+
       isRemoveFront = true;
     } else if (isRemoveIndex && index === this.size - 1) {
-      this.highlight(3, 0, "removeIndex");
-      this.highlight(4, 0, "removeIndex");
-      this.highlight(0, 0, "removeBack");
+
+
+
       isRemoveBack = true;
     }
 
@@ -925,16 +898,16 @@ export default class CircularlyLinkedList extends Algorithm {
 
     if (isRemoveBack && this.size > 1) {
       this.cmd(act.step);
-      this.highlight(5, 0, "removeBack");
-      this.highlight(6, 0, "removeBack");
-      this.highlight(7, 0, "removeBack");
-      this.highlight(8, 0, "removeBack");
+
+
+
+
     } else if (isRemoveIndex && index > 0) {
       this.cmd(act.step);
-      this.highlight(5, 0, "removeIndex");
-      this.highlight(6, 0, "removeIndex");
-      this.highlight(7, 0, "removeIndex");
-      this.highlight(8, 0, "removeIndex");
+
+
+
+
     }
     this.traverse(index - 1);
 
@@ -958,40 +931,40 @@ export default class CircularlyLinkedList extends Algorithm {
     );
 
     if (isRemoveFront) {
-      this.highlight(1, 0, "removeFront");
+
     } else if (isRemoveBack) {
-      this.unhighlight(5, 0, "removeBack");
-      this.unhighlight(6, 0, "removeBack");
-      this.unhighlight(7, 0, "removeBack");
-      this.unhighlight(8, 0, "removeBack");
+
+
+
+
       if (this.size !== 1) {
-        this.highlight(9, 0, "removeBack");
+
       }
     } else if (isRemoveIndex) {
-      this.unhighlight(5, 0, "removeIndex");
-      this.unhighlight(6, 0, "removeIndex");
-      this.unhighlight(7, 0, "removeIndex");
-      this.unhighlight(8, 0, "removeIndex");
-      this.highlight(9, 0, "removeIndex");
+
+
+
+
+
     }
 
     this.cmd(act.move, labPopValID, PUSH_ELEMENT_X, PUSH_ELEMENT_Y);
     this.cmd(act.step);
 
     if (isRemoveFront) {
-      this.unhighlight(1, 0, "removeFront");
+
     } else if (isRemoveBack) {
-      this.unhighlight(9, 0, "removeBack");
+
     } else if (isRemoveIndex) {
-      this.unhighlight(9, 0, "removeIndex");
+
     }
 
     if (this.size !== 1) {
       if (index === 0) {
         // O(1) remove from front trick
         if (isRemoveFront) {
-          this.highlight(4, 0, "removeFront");
-          this.highlight(5, 0, "removeFront");
+
+
         }
         const labCopiedValID = this.nextIndex++;
         const secondNodeX = LINKED_LIST_START_X + LINKED_LIST_ELEM_SPACING;
@@ -1014,8 +987,8 @@ export default class CircularlyLinkedList extends Algorithm {
         this.cmd(act.step);
 
         if (isRemoveFront) {
-          this.unhighlight(5, 0, "removeFront");
-          this.highlight(6, 0, "removeFront");
+
+
         }
         this.cmd(
           act.move,
@@ -1047,7 +1020,7 @@ export default class CircularlyLinkedList extends Algorithm {
         }
       } else if (index === this.size - 1) {
         if (isRemoveBack) {
-          this.highlight(10, 0, "removeBack");
+
         }
         this.cmd(
           act.disconnect,
@@ -1073,7 +1046,7 @@ export default class CircularlyLinkedList extends Algorithm {
         }
       } else {
         if (isRemoveIndex) {
-          this.highlight(10, 0, "removeIndex");
+
         }
         const xPos =
           (index % LINKED_LIST_ELEMS_PER_LINE) * LINKED_LIST_ELEM_SPACING +
@@ -1100,12 +1073,12 @@ export default class CircularlyLinkedList extends Algorithm {
       }
     } else {
       if (isRemoveFront) {
-        this.highlight(2, 0, "removeFront");
-        this.highlight(3, 0, "removeFront");
+
+
       } else if (isRemoveBack) {
-        this.highlight(2, 0, "removeBack");
-        this.highlight(3, 0, "removeBack");
-        this.highlight(4, 0, "removeBack");
+
+
+
       }
       this.cmd(act.delete, this.linkedListElemID[0]);
       this.cmd(act.setNull, this.headID, 1);
@@ -1120,20 +1093,20 @@ export default class CircularlyLinkedList extends Algorithm {
     this.cmd(act.step);
 
     if (isRemoveFront) {
-      this.unhighlight(2, 0, "removeFront");
-      this.unhighlight(3, 0, "removeFront");
-      this.unhighlight(4, 0, "removeFront");
-      this.unhighlight(6, 0, "removeFront");
-      this.highlight(7, 0, "removeFront");
+
+
+
+
+
     } else if (isRemoveBack) {
-      this.unhighlight(10, 0, "removeBack");
-      this.unhighlight(2, 0, "removeBack");
-      this.unhighlight(3, 0, "removeBack");
-      this.unhighlight(4, 0, "removeBack");
-      this.highlight(11, 0, "removeBack");
+
+
+
+
+
     } else if (isRemoveIndex) {
-      this.unhighlight(10, 0, "removeIndex");
-      this.highlight(11, 0, "removeIndex");
+
+
     }
 
     this.cmd(act.setHighlight, this.linkedListElemID[index - 1], 0);
@@ -1143,25 +1116,25 @@ export default class CircularlyLinkedList extends Algorithm {
     this.cmd(act.step);
 
     if (isRemoveFront) {
-      this.unhighlight(0, 0, "removeFront");
-      this.unhighlight(7, 0, "removeFront");
+
+
     } else if (isRemoveBack) {
-      this.unhighlight(11, 0, "removeBack");
-      this.unhighlight(0, 0, "removeBack");
+
+
     }
     if (isRemoveIndex) {
-      this.unhighlight(0, 0, "removeIndex");
-      this.unhighlight(11, 0, "removeIndex");
+
+
     }
 
     if (isRemoveIndex && index === 0) {
-      this.unhighlight(1, 0, "removeIndex");
-      this.unhighlight(2, 0, "removeIndex");
-      this.unhighlight(0, 0, "removeFront");
+
+
+
     } else if (isRemoveIndex && index === this.size) {
-      this.unhighlight(3, 0, "removeIndex");
-      this.unhighlight(4, 0, "removeIndex");
-      this.unhighlight(0, 0, "removeBack");
+
+
+
     }
 
     this.cmd(act.step);

@@ -207,21 +207,21 @@ export default class BFS extends Graph {
       QUEUE_START_X,
       QUEUE_START_Y
     );
-    this.highlight(1, 0, "run");
-    this.highlight(2, 0, "run");
-    this.highlight(3, 0, "run");
-    this.highlight(4, 0, "run");
-    this.highlight(5, 0, "run");
+
+
+
+
+
     this.cmd(act.step);
-    this.unhighlight(1, 0, "run");
-    this.unhighlight(2, 0, "run");
-    this.unhighlight(3, 0, "run");
-    this.unhighlight(4, 0, "run");
-    this.unhighlight(5, 0, "run");
+
+
+
+
+
     while (this.queue.length > 0 && this.listID.length < this.size) {
       vertex = this.queue.shift();
-      this.highlight(6, 0, "run");
-      this.highlight(7, 0, "run");
+
+
       this.cmd(
         act.setText,
         this.infoLabelID,
@@ -250,22 +250,22 @@ export default class BFS extends Graph {
 
       this.visitVertex(vertex);
       this.cmd(act.step);
-      this.unhighlight(7, 0, "run");
-      this.highlight(8, 0, "run");
+
+
       this.cmd(act.step);
-      this.unhighlight(8, 0, "run");
+
 
       for (let neighbor = 0; neighbor < this.size; neighbor++) {
         if (this.adj_matrix[vertex][neighbor] > 0) {
           this.highlightEdge(vertex, neighbor, 1);
-          this.highlight(9, 0, "run");
+
           this.cmd(act.step);
-          this.highlight(10, 0, "run");
+
           this.cmd(act.step);
           if (!this.visited[neighbor]) {
-            this.unhighlight(10, 0, "run");
-            this.highlight(11, 0, "run");
-            this.highlight(12, 0, "run");
+
+
+
             this.visited[neighbor] = true;
             this.visitedID.push(this.nextIndex);
             this.cmd(
@@ -302,21 +302,21 @@ export default class BFS extends Graph {
               this.toStr(neighbor) + " has already been visited, skipping"
             );
           }
-          this.unhighlight(10, 0, "run");
+
           this.cmd(act.step);
-          this.unhighlight(11, 0, "run");
-          this.unhighlight(12, 0, "run");
+
+
           this.highlightEdge(vertex, neighbor, 0);
         }
-        this.unhighlight(9, 0, "run");
+
       }
-      this.unhighlight(8, 0, "run");
+
 
       this.cmd(act.delete, this.queueID.shift());
 
       this.leaveVertex();
     }
-    this.unhighlight(6, 0, "run");
+
 
     if (this.queue.length > 0) {
       this.cmd(

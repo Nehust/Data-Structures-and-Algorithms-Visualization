@@ -86,13 +86,7 @@ export default class Kruskals extends Graph {
     super.addControls(false);
   }
 
-  highlight() {
-    // Disable pseudocode highlight visuals
-  }
 
-  unhighlight() {
-    // Disable pseudocode highlight visuals
-  }
 
   setup(adjMatrix) {
     super.setup(adjMatrix);
@@ -224,8 +218,8 @@ export default class Kruskals extends Graph {
 
     this.recolorGraph();
 
-    this.highlight(1, 0, "run");
-    this.highlight(2, 0, "run");
+
+
 
     // Create edge list
     this.cmd(
@@ -276,8 +270,8 @@ export default class Kruskals extends Graph {
       }
     }
     this.cmd(act.step);
-    this.unhighlight(1, 0, "run");
-    this.unhighlight(2, 0, "run");
+
+
 
     // Sort edge list based on edge cost
     const edgeCount = this.edgesListLeftID.length;
@@ -326,9 +320,9 @@ export default class Kruskals extends Graph {
           (i % EDGE_LIST_MAX_PER_COLUMN) * EDGE_LIST_ELEM_HEIGHT
       );
     }
-    this.highlight(3, 0, "run");
+
     this.cmd(act.step);
-    this.unhighlight(3, 0, "run");
+
 
     const findLabelLeft = this.nextIndex++;
     const findLabelRight = this.nextIndex++;
@@ -356,7 +350,7 @@ export default class Kruskals extends Graph {
     );
 
     // Run algorithm
-    this.highlight(4, 0, "run");
+
     while (edgesAdded < this.size - 1 && nextListIndex < edgeCount) {
       this.cmd(
         act.setText,
@@ -407,11 +401,11 @@ export default class Kruskals extends Graph {
         this.edgesListRight[nextListIndex],
         1
       );
-      this.highlight(5, 0, "run");
-      this.cmd(act.step);
-      this.unhighlight(5, 0, "run");
 
-      this.highlight(6, 0, "run");
+      this.cmd(act.step);
+
+
+
 
       this.cmd(act.setText, this.messageLabelID, "Looking at disjoint set");
 
@@ -484,10 +478,10 @@ export default class Kruskals extends Graph {
           rightRoot
       );
       this.cmd(act.step);
-      this.unhighlight(6, 0, "run");
+
 
       if (leftRoot !== rightRoot) {
-        this.highlight(6, 0, "run");
+
 
         this.cmd(
           act.setText,
@@ -510,11 +504,11 @@ export default class Kruskals extends Graph {
           this.edgesListRight[nextListIndex],
           MST_EDGE_THICKNESS
         );
-        this.highlight(7, 0, "run");
-        this.cmd(act.step);
-        this.unhighlight(7, 0, "run");
 
-        this.highlight(8, 0, "run");
+        this.cmd(act.step);
+
+
+
         this.cmd(
           act.setText,
           this.messageLabelID,
@@ -563,9 +557,9 @@ export default class Kruskals extends Graph {
             this.cmd(act.step);
           }
         }
-        this.unhighlight(8, 0, "run");
+
         this.cmd(act.delete, highlightCircle3);
-        this.unhighlight(6, 0, "run");
+
       } else {
         this.cmd(
           act.setText,
@@ -590,7 +584,7 @@ export default class Kruskals extends Graph {
       this.cmd(act.setText, findLabelRight, "");
       nextListIndex++;
     }
-    this.unhighlight(4, 0, "run");
+
     this.cmd(act.delete, findLabelLeft);
     this.cmd(act.delete, findLabelRight);
 

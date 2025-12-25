@@ -1,4 +1,4 @@
-import "../../css/AlgoScreen.css";
+
 import "../../css/App.css";
 
 import React, { useEffect, useRef } from "react";
@@ -6,7 +6,7 @@ import { useLocation, useSearchParams } from "react-router-dom";
 import AnimationManager from "../../anim/AnimationMain";
 import { algoMap } from "../../AlgoList";
 
-const AlgoSection = ({ theme }) => {
+const AlgoSection = () => {
   const [searchParams] = useSearchParams();
 
   const location = useLocation();
@@ -26,8 +26,7 @@ const AlgoSection = ({ theme }) => {
 
     initializedRef.current = true;
 
-    const [_menuDisplayName, AlgoClass, _hasPseudoCode, _verboseDisplayName] =
-      algoDetails;
+    const [_menuDisplayName, AlgoClass, _verboseDisplayName] = algoDetails;
 
     // Tạo đối tượng animation
     const animManager = new AnimationManager(canvasRef, animBarRef);
@@ -70,7 +69,6 @@ const AlgoSection = ({ theme }) => {
     <div id="mainContent">
       <div id="algoControlSection">
         <table id="AlgorithmSpecificControls"></table>
-        <div id="toggles"></div>
       </div>
 
       <div className="viewport">

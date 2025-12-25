@@ -47,7 +47,7 @@ const ARRAY_ELEM_HEIGHT = 50;
 const COMP_COUNT_X = 100;
 const COMP_COUNT_Y = 50;
 
-let lastSwapEnabled = true;
+
 
 export default class BubbleSort extends Algorithm {
   constructor(am, w, h) {
@@ -111,23 +111,11 @@ export default class BubbleSort extends Algorithm {
 
     addDivisorToAlgorithmBar();
 
-    // Last swap optimization toggle
-    this.lastSwapCheckbox = addCheckboxToAlgorithmBar(
-      "Enable last swap optimization",
-      true
-    );
-    this.lastSwapCheckbox.onclick = this.toggleLastSwap.bind(this);
-    this.controls.push(this.lastSwapCheckbox);
+
   }
 
   setURLData(searchParams) {
-    if (searchParams.has("lastSwap")) {
-      const lastSwap = searchParams.get("lastSwap");
-      if (lastSwap === "0") {
-        this.toggleLastSwap();
-        this.lastSwapCheckbox.checked = false;
-      }
-    }
+
 
     if (searchParams.has("data")) {
       const data = searchParams.get("data");
@@ -224,55 +212,7 @@ export default class BubbleSort extends Algorithm {
     this.implementAction(this.clear.bind(this));
   }
 
-  toggleLastSwap() {
-    this.implementAction(this.clear.bind(this));
-    if (lastSwapEnabled) {
-      this.cmd(
-        act.setText,
-        "find".code[3][0],
-        "  while start < end and sorted is false"
-      );
-      this.cmd(act.setText, "find".code[4][0], "    sorted ← true");
-      this.cmd(act.setText, "find".code[8][0], "        sorted ← false");
-      this.cmd(act.setText, "find".code[11][0], "    end ← end - 1");
 
-      this.cmd(
-        act.setText,
-        "find".english[3][0],
-        "  while (start < end and not sorted):"
-      );
-      this.cmd(act.setText, "find".english[4][0], "    mark sorted as true");
-      this.cmd(
-        act.setText,
-        "find".english[8][0],
-        "        mark sorted as false"
-      );
-      this.cmd(act.setText, "find".english[11][0], "    decrement end");
-    } else {
-      this.cmd(act.setText, "find".code[3][0], "  while start < end");
-      this.cmd(act.setText, "find".code[4][0], "    swapped ← start");
-      this.cmd(act.setText, "find".code[8][0], "        swapped ← j");
-      this.cmd(act.setText, "find".code[11][0], "    end ← swapped");
-
-      this.cmd(act.setText, "find".english[3][0], "  while (start < end):");
-      this.cmd(
-        act.setText,
-        "find".english[4][0],
-        "    lastSwapped points to start"
-      );
-      this.cmd(
-        act.setText,
-        "find".english[8][0],
-        "        lastSwapped points to j"
-      );
-      this.cmd(
-        act.setText,
-        "find".english[11][0],
-        "    end points to lastSwapped"
-      );
-    }
-    lastSwapEnabled = !lastSwapEnabled;
-  }
 
   clear(keepInput) {
     this.commands = [];
@@ -328,9 +268,6 @@ export default class BubbleSort extends Algorithm {
       );
       return this.commands;
     }
-
-    this.highlight(1, 0, "find");
-    this.highlight(2, 0, "find");
 
     this.arrayID = [];
     this.arrayData = list
@@ -393,55 +330,39 @@ export default class BubbleSort extends Algorithm {
     );
     this.cmd(act.setHighlight, this.jPointerID, 1);
     this.cmd(act.step);
-    this.unhighlight(1, 0, "find");
-    this.unhighlight(2, 0, "find");
 
     let sorted = true;
     let end = this.arrayData.length - 1;
     let lastSwapped = 0;
-    this.highlight(3, 0, "find");
     this.cmd(act.step);
     do {
-      this.highlight(4, 0, "find");
       this.cmd(act.step);
-      this.unhighlight(4, 0, "find");
       sorted = true;
-      this.highlight(5, 0, "find");
       for (let i = 0; i < end; i++) {
         this.movePointers(i, i + 1);
-        this.highlight(6, 0, "find");
         this.cmd(
           act.setText,
           this.comparisonCountID,
           "Comparison Count: " + ++this.compCount
         );
         this.cmd(act.step);
-        this.unhighlight(6, 0, "find");
         if (this.arrayData[i] > this.arrayData[i + 1]) {
           this.swap(i, i + 1);
           sorted = false;
           lastSwapped = i;
         }
       }
-      this.unhighlight(5, 0, "find");
-      this.highlight(11, 0, "find");
-      if (lastSwapEnabled) {
-        end = lastSwapped;
-      } else {
-        end--;
-      }
+      end = lastSwapped;
       if (!sorted) {
         for (let i = end + 1; i < this.arrayData.length; i++) {
           this.cmd(act.setBackgroundColor, this.arrayID[i], "#2ECC71");
         }
       }
       this.cmd(act.step);
-      this.unhighlight(11, 0, "find");
     } while (!sorted);
 
     this.cmd(act.delete, this.iPointerID);
     this.cmd(act.delete, this.jPointerID);
-    this.unhighlight(3, 0, "find");
     this.cmd(act.step);
 
     for (let i = 0; i < this.arrayData.length; i++) {
@@ -461,8 +382,6 @@ export default class BubbleSort extends Algorithm {
   }
 
   swap(i, j) {
-    this.highlight(7, 0, "find");
-    this.highlight(8, 0, "find");
     // Change pointer colors to red
     this.cmd(act.setForegroundColor, this.iPointerID, "#FF0000");
     this.cmd(act.setForegroundColor, this.jPointerID, "#FF0000");
@@ -508,8 +427,6 @@ export default class BubbleSort extends Algorithm {
     // Reset pointer colors back to blue
     this.cmd(act.setForegroundColor, this.iPointerID, "#0000FF");
     this.cmd(act.setForegroundColor, this.jPointerID, "#0000FF");
-    this.unhighlight(7, 0, "find");
-    this.unhighlight(8, 0, "find");
     this.cmd(act.step);
   }
 

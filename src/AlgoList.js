@@ -1,221 +1,249 @@
 import * as algo from "./algo";
 
-// AlgorithmName: ['Menu Display Name', ClassName, hasPseudoCode, 'Verbose Display Name (optional)'],
+// AlgorithmName: ['Menu Display Name', ClassName, 'Verbose Display Name (optional)'],
 export const algoMap = {
-  ArrayList: ["ArrayList", algo.ArrayList, false, "ArrayList"],
-  LinkedList: ["Singly LinkedList", algo.LinkedList, false, "SinglyLinkedList"],
+  ArrayList: ["ArrayList", algo.ArrayList, "ArrayList"],
+  LinkedList: ["Singly LinkedList", algo.LinkedList, "SinglyLinkedList"],
   DoublyLinkedList: [
     "Doubly LinkedList",
     algo.DoublyLinkedList,
-    false,
     "DoublyLinkedList",
   ],
   CircularlyLinkedList: [
     "Circularly LinkedList",
     algo.CircularlyLinkedList,
-    false,
     "CircularlyLinkedList",
   ],
-  StackArray: ["Stack (Array)", algo.StackArray, false, "StackArray"],
-  StackLL: ["Stack (LinkedList)", algo.StackLL, false, "StackLL"],
-  QueueArray: ["Queue (Array)", algo.QueueArray, false, "QueueArray"],
-  QueueLL: ["Queue (LinkedList)", algo.QueueLL, false, "QueueLL"],
-  DequeArray: ["Deque (Array)", algo.DequeArray, false, "DequeArray"],
-  DequeLL: ["Deque (LinkedList)", algo.DequeLL, false, "DequeLL"],
-  BST: ["Binary Search Tree", null, false, "BST"],
-  Heap: ["Heap (PriorityQueue)", null, false, "Heap"],
-  AVL: ["AVL", null, false, "AVL"],
-  BubbleSort: ["Bubble Sort", algo.BubbleSort, false, "BubbleSort"],
-  InsertionSort: ["Insertion Sort", algo.InsertionSort, false, "InsertionSort"],
-  SelectionSort: ["Selection Sort", algo.SelectionSort, false, "SelectionSort"],
-  Quicksort: ["Quicksort", algo.Quicksort, false, "Quicksort"],
-  MergeSort: ["MergeSort", algo.MergeSort, false, "MergeSort"],
-  CreateGraph: [
-    "Graph Representations",
-    algo.CreateGraph,
-    false,
-    "CreateGraph",
-  ],
-  BFS: ["Breadth-First Search", algo.BFS, false, "BFS"],
-  DFS: ["Depth-First Search", algo.DFS, false, "DFS"],
-  Dijkstra: ["Dijkstra's", algo.Dijkstras, false, "Dijkstra"],
-  Kruskal: ["Kruskal's", algo.Kruskals, false, "Kruskal"],
+  StackArray: ["Stack (Array)", algo.StackArray, "StackArray"],
+  StackLL: ["Stack (LinkedList)", algo.StackLL, "StackLL"],
+  QueueArray: ["Queue (Array)", algo.QueueArray, "QueueArray"],
+  QueueLL: ["Queue (LinkedList)", algo.QueueLL, "QueueLL"],
+  DequeArray: ["Deque (Array)", algo.DequeArray, "DequeArray"],
+  DequeLL: ["Deque (LinkedList)", algo.DequeLL, "DequeLL"],
+  BST: ["Binary Search Tree", algo.BST, "BST"],
+  Heap: ["Heap (PriorityQueue)", algo.Heap, "Heap"],
+  AVL: ["AVL", algo.AVL, "AVL"],
+  BubbleSort: ["Bubble Sort", algo.BubbleSort, "BubbleSort"],
+  InsertionSort: ["Insertion Sort", algo.InsertionSort, "InsertionSort"],
+  SelectionSort: ["Selection Sort", algo.SelectionSort, "SelectionSort"],
+  Quicksort: ["Quicksort", algo.Quicksort, "Quicksort"],
+  MergeSort: ["MergeSort", algo.MergeSort, "MergeSort"],
+  CreateGraph: ["Graph Representations", algo.CreateGraph, "CreateGraph"],
+  BFS: ["Breadth-First Search", algo.BFS, "BFS"],
+  DFS: ["Depth-First Search", algo.DFS, "DFS"],
+  Dijkstra: ["Dijkstra's", algo.Dijkstras, "Dijkstra"],
+  Kruskal: ["Kruskal's", algo.Kruskals, "Kruskal"],
 };
 export const algoFilter = [
   {
     id: "ArrayList",
-    category: "Lists",
+    category: "Linear Data Structures",
+    operations: [
+      { name: "Get", complexity: "O(1)" },
+      { name: "Add (Back)", complexity: "O(1)" },
+      { name: "Add (Index)", complexity: "O(n)" },
+      { name: "Remove (Back)", complexity: "O(1)" },
+      { name: "Remove (Index)", complexity: "O(n)" },
+    ],
   },
   {
     id: "LinkedList",
-    category: "Lists",
+    category: "Linear Data Structures",
+    operations: [
+      { name: "Add Front", complexity: "O(1)" },
+      { name: "Add Back", complexity: "O(n)" },
+      { name: "Add Index", complexity: "O(n)" },
+      { name: "Remove Front", complexity: "O(1)" },
+      { name: "Remove Back", complexity: "O(n)" },
+      { name: "Remove Index", complexity: "O(n)" },
+    ],
   },
   {
     id: "DoublyLinkedList",
-    category: "Lists",
+    category: "Linear Data Structures",
+    operations: [
+      { name: "Add Front", complexity: "O(1)" },
+      { name: "Add Back", complexity: "O(1)" },
+      { name: "Add Index", complexity: "O(n)" },
+      { name: "Remove Front", complexity: "O(1)" },
+      { name: "Remove Back", complexity: "O(1)" },
+      { name: "Remove Index", complexity: "O(n)" },
+    ],
   },
   {
     id: "CircularlyLinkedList",
-    category: "Lists",
+    category: "Linear Data Structures",
+    operations: [
+      { name: "Add Front", complexity: "O(1)" },
+      { name: "Add Back", complexity: "O(1)" },
+      { name: "Remove Front", complexity: "O(1)" },
+      { name: "Remove Back", complexity: "O(1)" },
+    ],
   },
   {
     id: "StackArray",
     category: "Linear Data Structures",
+    operations: [
+      { name: "Push", complexity: "O(1)" },
+      { name: "Pop", complexity: "O(1)" },
+      { name: "Peek", complexity: "O(1)" },
+    ],
   },
   {
     id: "StackLL",
     category: "Linear Data Structures",
+    operations: [
+      { name: "Push", complexity: "O(1)" },
+      { name: "Pop", complexity: "O(1)" },
+      { name: "Peek", complexity: "O(1)" },
+    ],
   },
   {
     id: "QueueArray",
     category: "Linear Data Structures",
+    operations: [
+      { name: "Enqueue", complexity: "O(1)" },
+      { name: "Dequeue", complexity: "O(1)" },
+      { name: "Peek", complexity: "O(1)" },
+    ],
   },
   {
     id: "QueueLL",
     category: "Linear Data Structures",
+    operations: [
+      { name: "Enqueue", complexity: "O(1)" },
+      { name: "Dequeue", complexity: "O(1)" },
+      { name: "Peek", complexity: "O(1)" },
+    ],
   },
   {
     id: "DequeArray",
     category: "Linear Data Structures",
+    operations: [
+      { name: "Add Front", complexity: "O(1)" },
+      { name: "Add Back", complexity: "O(1)" },
+      { name: "Remove Front", complexity: "O(1)" },
+      { name: "Remove Back", complexity: "O(1)" },
+    ],
   },
   {
     id: "DequeLL",
     category: "Linear Data Structures",
+    operations: [
+      { name: "Add Front", complexity: "O(1)" },
+      { name: "Add Back", complexity: "O(1)" },
+      { name: "Remove Front", complexity: "O(1)" },
+      { name: "Remove Back", complexity: "O(1)" },
+    ],
   },
   {
     id: "BST",
-    category: "Trees and SkipList",
+    category: "Tree",
+    operations: [
+      { name: "Search", complexity: "O(h)" },
+      { name: "Insert", complexity: "O(h)" },
+      { name: "Delete", complexity: "O(h)" },
+    ],
   },
   {
     id: "Heap",
-    category: "Trees and SkipList",
+    category: "Tree",
+    operations: [
+      { name: "Insert", complexity: "O(log n)" },
+      { name: "Extract Max/Min", complexity: "O(log n)" },
+      { name: "Peek", complexity: "O(1)" },
+    ],
   },
   {
     id: "AVL",
-    category: "Trees and SkipList",
-  },
-  {
-    id: "BTree",
-    category: "Trees and SkipList",
-  },
-  {
-    id: "SkipList",
-    category: "Trees and SkipList",
-  },
-  {
-    id: "OpenHash",
-    category: "HashMaps",
-  },
-  {
-    id: "ClosedHash",
-    category: "HashMaps",
+    category: "Tree",
+    operations: [
+      { name: "Search", complexity: "O(log n)" },
+      { name: "Insert", complexity: "O(log n)" },
+      { name: "Delete", complexity: "O(log n)" },
+    ],
   },
   {
     id: "BubbleSort",
-    category: "Sorting and Quickselect",
-  },
-  {
-    id: "CocktailSort",
-    category: "Sorting and Quickselect",
+    category: "Sorting",
+    operations: [
+      { name: "Best Case", complexity: "O(n)" },
+      { name: "Average Case", complexity: "O(n²)" },
+      { name: "Worst Case", complexity: "O(n²)" },
+    ],
   },
   {
     id: "SelectionSort",
-    category: "Sorting and Quickselect",
+    category: "Sorting",
+    operations: [
+      { name: "Best Case", complexity: "O(n²)" },
+      { name: "Average Case", complexity: "O(n²)" },
+      { name: "Worst Case", complexity: "O(n²)" },
+    ],
   },
   {
     id: "InsertionSort",
-    category: "Sorting and Quickselect",
+    category: "Sorting",
+    operations: [
+      { name: "Best Case", complexity: "O(n)" },
+      { name: "Average Case", complexity: "O(n²)" },
+      { name: "Worst Case", complexity: "O(n²)" },
+    ],
   },
   {
     id: "Quicksort",
-    category: "Sorting and Quickselect",
-  },
-  {
-    id: "Quickselect",
-    category: "Sorting and Quickselect",
+    category: "Sorting",
+    operations: [
+      { name: "Best Case", complexity: "O(n log n)" },
+      { name: "Average Case", complexity: "O(n log n)" },
+      { name: "Worst Case", complexity: "O(n²)" },
+    ],
   },
   {
     id: "MergeSort",
-    category: "Sorting and Quickselect",
-  },
-  {
-    id: "LSDRadix",
-    category: "Sorting and Quickselect",
-  },
-  {
-    id: "HeapSort",
-    category: "Sorting and Quickselect",
-  },
-  {
-    id: "BruteForce",
-    category: "Pattern Matching",
-  },
-  {
-    id: "BoyerMoore",
-    category: "Pattern Matching",
-  },
-  {
-    id: "KMP",
-    category: "Pattern Matching",
-  },
-  {
-    id: "RabinKarp",
-    category: "Pattern Matching",
+    category: "Sorting",
+    operations: [
+      { name: "Best Case", complexity: "O(n log n)" },
+      { name: "Average Case", complexity: "O(n log n)" },
+      { name: "Worst Case", complexity: "O(n log n)" },
+    ],
   },
   {
     id: "BFS",
     category: "Graph Algorithms",
+    operations: [
+      { name: "Traversal", complexity: "O(V + E)" },
+      { name: "Space", complexity: "O(V)" },
+    ],
   },
   {
     id: "DFS",
     category: "Graph Algorithms",
+    operations: [
+      { name: "Traversal", complexity: "O(V + E)" },
+      { name: "Space", complexity: "O(V)" },
+    ],
   },
   {
     id: "Dijkstra",
     category: "Graph Algorithms",
+    operations: [
+      { name: "Adj Matrix", complexity: "O(V²)" },
+      { name: "Adj List + Heap", complexity: "O(E log V)" },
+    ],
   },
   {
-    id: "Prim",
+    id: "CreateGraph",
     category: "Graph Algorithms",
+    operations: [
+      { name: "Add Vertex", complexity: "O(1)" },
+      { name: "Add Edge", complexity: "O(1)" },
+      { name: "Remove Edge", complexity: "O(E)" },
+    ],
   },
   {
     id: "Kruskal",
     category: "Graph Algorithms",
-  },
-  {
-    id: "LCS",
-    category: "DP & Extras",
-  },
-  {
-    id: "Floyd",
-    category: "DP & Extras",
-  },
-  {
-    id: "CreateGraph",
-    category: "DP & Extras",
-  },
-  {
-    id: "DisjointSet",
-    category: "DP & Extras",
-  },
-  {
-    id: "SplayTree",
-    category: "DP & Extras",
-  },
-  {
-    id: "FredSort",
-    category: "DP & Extras",
-  },
-  {
-    id: "SleepSort",
-    category: "DP & Extras",
-  },
-  {
-    id: "MiracleSort",
-    category: "DP & Extras",
-  },
-  {
-    id: "DropSort",
-    category: "DP & Extras",
+    operations: [{ name: "Complexity", complexity: "O(E log E)" }],
   },
 ];
