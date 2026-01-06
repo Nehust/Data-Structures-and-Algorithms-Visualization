@@ -1,29 +1,3 @@
-// Copyright 2011 David Galles, University of San Francisco. All rights reserved.
-//
-// Redistribution and use in source and binary forms, with or without modification, are
-// permitted provided that the following conditions are met:
-//
-// 1. Redistributions of source code must retain the above copyright notice, this list of
-// conditions and the following disclaimer.
-//
-// 2. Redistributions in binary form must reproduce the above copyright notice, this list
-// of conditions and the following disclaimer in the documentation and/or other materials
-// provided with the distribution.
-//
-// THIS SOFTWARE IS PROVIDED BY <COPYRIGHT HOLDER> ``AS IS'' AND ANY EXPRESS OR IMPLIED
-// WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
-// FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL <COPYRIGHT HOLDER> OR
-// CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
-// CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-// SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
-// ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
-// NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
-// ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-//
-// The views and conclusions contained in the software and documentation are those of the
-// authors and should not be interpreted as representing official policies, either expressed
-// or implied, of the University of San Francisco
-
 import {
   addControlToAlgorithmBar,
   addDivisorToAlgorithmBar,
@@ -33,27 +7,27 @@ import { BFS_DFS_ADJ_LIST } from "./util/GraphValues";
 import Graph from "./Graph.js";
 import { act } from "../anim/AnimationMain";
 
-const BFS_QUEUE_HEAD_COLOR = "#0000FF";
+const BFS_QUEUE_HEAD_COLOR = "#4bd741ff";
 const VISITED_COLOR = "#99CCFF";
 
-const INFO_MSG_X = 25;
+const INFO_MSG_X = 60;
 const INFO_MSG_Y = 15;
 
-const LIST_START_X = 30;
+const LIST_START_X = 60;
 const LIST_START_Y = 65;
-const LIST_SPACING = 20;
+const LIST_SPACING = 25;
 
-const VISITED_START_X = 30;
-const VISITED_START_Y = 115;
+const VISITED_START_X = 60;
+const VISITED_START_Y = 125;
 
-const CURRENT_VERTEX_LABEL_X = 25;
-const CURRENT_VERTEX_LABEL_Y = 140;
-const CURRENT_VERTEX_X = 115;
-const CURRENT_VERTEX_Y = 146;
+const CURRENT_VERTEX_LABEL_X = 60;
+const CURRENT_VERTEX_LABEL_Y = 150;
+const CURRENT_VERTEX_X = 200;
+const CURRENT_VERTEX_Y = 160;
 
-const QUEUE_START_X = 30;
-const QUEUE_START_Y = 190;
-const QUEUE_SPACING = 20;
+const QUEUE_START_X = 60;
+const QUEUE_START_Y = 215;
+const QUEUE_SPACING = 25;
 
 export default class BFS extends Graph {
   constructor(am, w, h) {

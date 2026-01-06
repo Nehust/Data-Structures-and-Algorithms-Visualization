@@ -4,24 +4,24 @@ import Algorithm, {
 } from "./Algorithm.js";
 import { act } from "../anim/AnimationMain";
 
-const ARRAY_START_X = 100;
+const ARRAY_START_X = 500;
 const ARRAY_START_Y = 225;
 const ARRAY_ELEM_WIDTH = 50;
 const ARRAY_ELEM_HEIGHT = 50;
-const RESIZE_ARRAY_START_X = 100;
+const RESIZE_ARRAY_START_X = 500;
 const RESIZE_ARRAY_START_Y = 325;
 
 const ARRAY_ELEMS_PER_LINE = 14;
 const ARRAY_LINE_SPACING = 130;
 
-const TOP_POS_X = 180;
+const TOP_POS_X = 450;
 const TOP_POS_Y = 100;
-const TOP_LABEL_X = 130;
+const TOP_LABEL_X = 400;
 const TOP_LABEL_Y = 100;
 
-const PUSH_LABEL_X = 50;
+const PUSH_LABEL_X = 600;
 const PUSH_LABEL_Y = 30;
-const PUSH_ELEMENT_X = 120;
+const PUSH_ELEMENT_X = 700;
 const PUSH_ELEMENT_Y = 30;
 const PUSH_RESIZE_LABEL_X = 60;
 const PUSH_RESIZE_LABEL_Y = 60;
@@ -142,7 +142,7 @@ export default class StackArray extends Algorithm {
         xpos,
         ypos + ARRAY_ELEM_HEIGHT
       );
-      this.cmd(act.setForegroundColor, this.arrayLabelID[i], "#e2e8f0");
+      this.cmd(act.setForegroundColor, this.arrayLabelID[i], "#ffffffff");
     }
     this.cmd(
       act.createLabel,
@@ -294,7 +294,7 @@ export default class StackArray extends Algorithm {
     this.cmd(
       act.createHighlightCircle,
       this.highlight1ID,
-      "#ef4444",
+      "#f32222ff",
       TOP_POS_X,
       TOP_POS_Y
     );
@@ -365,7 +365,7 @@ export default class StackArray extends Algorithm {
     this.cmd(
       act.createHighlightCircle,
       this.highlight1ID,
-      "#ef4444",
+      "#f32222ff",
       TOP_POS_X,
       TOP_POS_Y
     );
@@ -466,7 +466,7 @@ export default class StackArray extends Algorithm {
         xpos,
         ypos + ARRAY_ELEM_HEIGHT
       );
-      this.cmd(act.setForegroundColor, this.arrayLabelIDNew[i], "#e2e8f0");
+      this.cmd(act.setForegroundColor, this.arrayLabelIDNew[i], "#ffffffff");
     }
     this.cmd(act.step);
 
@@ -538,7 +538,7 @@ export default class StackArray extends Algorithm {
     this.cmd(
       act.createHighlightCircle,
       this.highlight1ID,
-      "#ef4444",
+      "#f32222ff",
       PUSH_ELEMENT_X,
       PUSH_ELEMENT_Y
     );

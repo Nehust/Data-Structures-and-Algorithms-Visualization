@@ -7,7 +7,7 @@ import AlgoSection from "../components/AlgoScreen/AlgoSection";
 // component header
 function AlgoHeader({ header }) {
   return (
-    <div id="header">
+    <div id="header" style={{ color: "var(--color-indigo-700)" }}>
       <h2>
         <Link to="/">&#x3008;</Link>&nbsp;&nbsp;
         <>{header}</>

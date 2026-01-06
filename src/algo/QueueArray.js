@@ -1,12 +1,10 @@
-
-
 import Algorithm, {
   addControlToAlgorithmBar,
   addDivisorToAlgorithmBar,
 } from "./Algorithm.js";
 import { act } from "../anim/AnimationMain";
 
-const ARRAY_START_X = 100;
+const ARRAY_START_X = 300;
 const ARRAY_START_Y = 240;
 const ARRAY_ELEM_WIDTH = 50;
 const ARRAY_ELEM_HEIGHT = 50;
@@ -14,29 +12,29 @@ const ARRAY_ELEM_HEIGHT = 50;
 const ARRAY_ELEMS_PER_LINE = 14;
 const ARRAY_LINE_SPACING = 130;
 
-const FRONT_POS_X = 180;
+const FRONT_POS_X = 380;
 const FRONT_POS_Y = 100;
-const FRONT_LABEL_X = 130;
+const FRONT_LABEL_X = 330;
 const FRONT_LABEL_Y = 100;
 
-const SIZE_POS_X = 280;
+const SIZE_POS_X = 480;
 const SIZE_POS_Y = 100;
-const SIZE_LABEL_X = 230;
+const SIZE_LABEL_X = 430;
 const SIZE_LABEL_Y = 100;
 
-const QUEUE_LABEL_X = 60;
+const QUEUE_LABEL_X = 260;
 const QUEUE_LABEL_Y = 30;
-const QUEUE_ELEMENT_X = 130;
+const QUEUE_ELEMENT_X = 330;
 const QUEUE_ELEMENT_Y = 30;
 
-const QUEUE_INDEX_X = 129;
+const QUEUE_INDEX_X = 329;
 const QUEUE_INDEX_Y = 50;
-const QUEUE_INDEXVAL_X = 260;
+const QUEUE_INDEXVAL_X = 460;
 const QUEUE_INDEXVAL_Y = 50;
 
-const RESIZE_ARRAY_START_X = 100;
+const RESIZE_ARRAY_START_X = 300;
 const RESIZE_ARRAY_START_Y = 345;
-const QUEUE_RESIZE_LABEL_X = 60;
+const QUEUE_RESIZE_LABEL_X = 260;
 const QUEUE_RESIZE_LABEL_Y = 60;
 
 const INDEX_COLOR = "#0000FF";
@@ -314,7 +312,6 @@ export default class QueueArray extends Algorithm {
 
     // TODO: HANDLE CODE/ENGLISH VARIANTS
 
-
     this.cmd(
       act.createLabel,
       labEnqueueID,
@@ -377,19 +374,12 @@ export default class QueueArray extends Algorithm {
 
     this.cmd(act.delete, this.highlight1ID);
 
-
-
-
-
     this.cmd(act.setHighlight, this.sizeID, 1);
     this.cmd(act.step);
 
     this.size = this.size + 1;
     this.cmd(act.setText, this.sizeID, this.size);
     this.cmd(act.step);
-
-
-
 
     this.cmd(act.setHighlight, this.sizeID, 0);
     this.cmd(act.delete, labEnqueueID);
@@ -406,11 +396,9 @@ export default class QueueArray extends Algorithm {
     const labDequeueID = this.nextIndex++;
     const labDequeueValID = this.nextIndex++;
 
-
     this.cmd(act.setText, this.leftoverLabelID, "");
     this.cmd(act.setText, this.leftoverValID, "");
     this.cmd(act.step);
-
 
     this.cmd(
       act.createLabel,
@@ -437,8 +425,6 @@ export default class QueueArray extends Algorithm {
     this.cmd(act.move, this.highlight1ID, xpos, ypos + ARRAY_ELEM_HEIGHT);
     this.cmd(act.step);
 
-
-
     this.cmd(act.delete, this.highlight1ID);
 
     const dequeuedVal = this.arrayData[this.front];
@@ -446,8 +432,6 @@ export default class QueueArray extends Algorithm {
     this.cmd(act.setText, this.arrayID[this.front], "");
     this.cmd(act.move, labDequeueValID, QUEUE_ELEMENT_X, QUEUE_ELEMENT_Y);
     this.cmd(act.step);
-
-
 
     this.cmd(act.setHighlight, this.frontID, 1);
     this.cmd(act.setHighlight, this.frontPointerID, 1);
@@ -474,15 +458,12 @@ export default class QueueArray extends Algorithm {
     this.cmd(act.delete, labDequeueValID);
     this.cmd(act.step);
 
-
     this.cmd(act.setHighlight, this.sizeID, 1);
     this.cmd(act.step);
 
     this.size = this.size - 1;
     this.cmd(act.setText, this.sizeID, this.size);
     this.cmd(act.step);
-
-
 
     this.cmd(act.setHighlight, this.sizeID, 0);
 
@@ -513,7 +494,6 @@ export default class QueueArray extends Algorithm {
 
     this.arrayDataNew[this.size] = elemToEnqueue;
 
-
     this.cmd(
       act.createLabel,
       labEnqueueID,
@@ -529,7 +509,6 @@ export default class QueueArray extends Algorithm {
       QUEUE_ELEMENT_Y
     );
     this.cmd(act.step);
-
 
     this.cmd(
       act.createLabel,
@@ -572,9 +551,6 @@ export default class QueueArray extends Algorithm {
     this.arrayMoveID = new Array(this.size);
 
     //Move old elements to new array
-
-
-
 
     for (let i = 0; i < this.size; i++) {
       const xposinit =
@@ -622,9 +598,6 @@ export default class QueueArray extends Algorithm {
     //Move new array
     this.arraySize = this.size * 2;
 
-
-
-
     for (let i = 0; i < this.size * 2; i++) {
       const xpos =
         (i % ARRAY_ELEMS_PER_LINE) * ARRAY_ELEM_WIDTH + ARRAY_START_X;
@@ -646,9 +619,6 @@ export default class QueueArray extends Algorithm {
     this.arrayID = this.arrayIDNew;
     this.arrayLabelID = this.arrayLabelIDNew;
     this.arrayData = this.arrayDataNew;
-
-
-
 
     this.cmd(act.setHighlight, this.frontID, 1);
     this.cmd(act.setHighlight, this.frontPointerID, 1);
@@ -684,9 +654,6 @@ export default class QueueArray extends Algorithm {
       QUEUE_ELEMENT_X,
       QUEUE_ELEMENT_Y
     );
-
-
-
 
     this.cmd(
       act.createLabel,
@@ -737,15 +704,12 @@ export default class QueueArray extends Algorithm {
 
     this.cmd(act.setHighlight, this.sizeID, 1);
 
-
     this.cmd(act.step);
 
     this.size++;
 
     this.cmd(act.setText, this.sizeID, this.size);
     this.cmd(act.step);
-
-
 
     this.cmd(act.setHighlight, this.sizeID, 0);
     this.cmd(act.delete, labEnqueueID);

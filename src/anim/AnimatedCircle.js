@@ -63,7 +63,7 @@ export default class AnimatedCircle extends AnimatedObject {
 		context.font = '12px Arial';
 		context.textBaseline = 'middle';
 		context.lineWidth = 2;
-		context.fillStyle = this.foregroundColor;
+		context.fillStyle = this.labelColor;
 		const strList = this.label.split('\n');
 		if (strList.length === 1) {
 			if (this.highlightIndexDirty && this.highlightIndex !== -1) {

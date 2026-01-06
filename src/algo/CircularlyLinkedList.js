@@ -1,4 +1,3 @@
-
 import Algorithm, {
   addControlToAlgorithmBar,
   addDivisorToAlgorithmBar,
@@ -7,30 +6,30 @@ import Algorithm, {
 } from "./Algorithm";
 import { act } from "../anim/AnimationMain";
 
-const INFO_MSG_X = 25;
+const INFO_MSG_X = 225;
 const INFO_MSG_Y = 15;
 
-const LINKED_LIST_START_X = 75;
+const LINKED_LIST_START_X = 275;
 const LINKED_LIST_START_Y = 275;
 const LINKED_LIST_ELEM_WIDTH = 70;
 const LINKED_LIST_ELEM_HEIGHT = 30;
 
-const LINKED_LIST_INSERT_X = 165;
+const LINKED_LIST_INSERT_X = 365;
 const LINKED_LIST_INSERT_Y = 170;
 
 const LINKED_LIST_ELEMS_PER_LINE = 12;
 const LINKED_LIST_ELEM_SPACING = 100;
 const LINKED_LIST_LINE_SPACING = 100;
 
-const PUSH_LABEL_X = 75;
+const PUSH_LABEL_X = 275;
 const PUSH_LABEL_Y = 30;
-const PUSH_ELEMENT_X = 150;
+const PUSH_ELEMENT_X = 350;
 const PUSH_ELEMENT_Y = 30;
 
-const HEAD_POS_X = 50;
+const HEAD_POS_X = 250;
 const HEAD_POS_Y = 195;
 
-const POINTER_LABEL_X = 50;
+const POINTER_LABEL_X = 250;
 const HEAD_LABEL_Y = 165;
 
 const POINTER_ELEM_WIDTH = 30;
@@ -71,28 +70,11 @@ export default class CircularlyLinkedList extends Algorithm {
     this.addValueField.style.textAlign = "center";
     this.addValueField.onkeydown = this.returnSubmit(
       this.addValueField,
-      () => this.addIndexCallback(),
+      () => this.addFrontCallback(),
       4,
       false
     );
     this.controls.push(this.addValueField);
-
-    addLabelToAlgorithmBar("at index", addTopHorizontalGroup);
-
-    // Add's index text field
-    this.addIndexField = addControlToAlgorithmBar(
-      "Text",
-      "",
-      addTopHorizontalGroup
-    );
-    this.addIndexField.style.textAlign = "center";
-    this.addIndexField.onkeydown = this.returnSubmit(
-      this.addIndexField,
-      () => this.addIndexCallback(),
-      4,
-      true
-    );
-    this.controls.push(this.addIndexField);
 
     // Add to front button
     this.addFrontButton = addControlToAlgorithmBar(
@@ -111,17 +93,6 @@ export default class CircularlyLinkedList extends Algorithm {
     );
     this.addBackButton.onclick = () => this.addBackCallback();
     this.controls.push(this.addBackButton);
-
-    addLabelToAlgorithmBar("or", addBottomHorizontalGroup);
-
-    // Add at index button
-    this.addIndexButton = addControlToAlgorithmBar(
-      "Button",
-      "Add at Index",
-      addBottomHorizontalGroup
-    );
-    this.addIndexButton.onclick = this.addIndexCallback.bind(this);
-    this.controls.push(this.addIndexButton);
 
     addDivisorToAlgorithmBar();
 
@@ -294,43 +265,6 @@ export default class CircularlyLinkedList extends Algorithm {
     return this.commands;
   }
 
-  addIndexCallback() {
-    if (
-      this.addValueField.value !== "" &&
-      this.addIndexField.value !== "" &&
-      this.size < SIZE
-    ) {
-      const addVal = this.addValueField.value;
-      const index = parseInt(this.addIndexField.value);
-      if (index >= 0 && index <= this.size) {
-        this.addValueField.value = "";
-        this.addIndexField.value = "";
-        this.implementAction(
-          this.add.bind(this),
-          addVal,
-          index,
-          false,
-          false,
-          false
-        );
-      } else {
-        this.implementAction(
-          this.setInfoText.bind(this),
-          this.size === 0
-            ? "Index must be 0 when the list is empty."
-            : `Index must be between 0 and ${this.size}.`
-        );
-        this.shake(this.addIndexButton);
-      }
-    } else {
-      this.implementAction(
-        this.setInfoText.bind(this),
-        "Missing input data or index."
-      );
-      this.shake(this.addIndexButton);
-    }
-  }
-
   addFrontCallback() {
     if (this.addValueField.value !== "" && this.size < SIZE) {
       const addVal = this.addValueField.value;
@@ -431,14 +365,7 @@ export default class CircularlyLinkedList extends Algorithm {
         i--;
       } else {
         set.add(val);
-        this.implementAction(
-          this.add.bind(this),
-          val,
-          0,
-          false,
-          true,
-          false
-        );
+        this.implementAction(this.add.bind(this), val, 0, false, true, false);
       }
       this.animationManager.skipForward();
       this.animationManager.clearHistory();
@@ -465,34 +392,19 @@ export default class CircularlyLinkedList extends Algorithm {
     this.setInfoText("");
 
     if (isAddFront || (isAddIndex && index === 0)) {
-
     } else if (isAddBack || (isAddIndex && index === this.size)) {
-
-
-
     }
 
     if (isAddIndex && index === 0) {
-
-
-
       isAddFront = true;
     } else if (isAddIndex && index === this.size) {
-
-
-
       isAddBack = true;
     } else if (isAddIndex) {
-
     }
 
     if (index < this.size) {
       if (isAddIndex && index > 0) {
         this.cmd(act.step);
-
-
-
-
       }
       this.traverse(index - 1);
     }
@@ -565,8 +477,6 @@ export default class CircularlyLinkedList extends Algorithm {
 
     if (this.size === 0) {
       if (isAddFront || isAddBack) {
-
-
       }
       this.cmd(
         act.move,
@@ -579,8 +489,6 @@ export default class CircularlyLinkedList extends Algorithm {
       this.cmd(act.step);
 
       if (isAddFront || isAddBack) {
-
-
       }
       this.cmd(act.delete, labPushValID);
       this.cmd(
@@ -595,18 +503,13 @@ export default class CircularlyLinkedList extends Algorithm {
       this.resetNodePositions();
       this.cmd(act.step);
       if (isAddFront || isAddBack) {
-
-
       }
       if (isAddBack) {
-
       }
     } else {
       if (index === 0 || index === this.size) {
         // Move label from first node to new node
         if (isAddFront || isAddBack) {
-
-
         }
         const labCopiedValID = this.nextIndex++;
         const copiedData = index === 0 ? this.arrayData[1] : this.arrayData[0];
@@ -630,8 +533,6 @@ export default class CircularlyLinkedList extends Algorithm {
 
         // Move label for new data to the first node
         if (isAddFront || isAddBack) {
-
-
         }
         this.cmd(
           act.move,
@@ -644,9 +545,6 @@ export default class CircularlyLinkedList extends Algorithm {
         this.cmd(act.step);
 
         if (isAddFront || isAddBack) {
-
-
-
         }
 
         // Change pointers
@@ -694,10 +592,6 @@ export default class CircularlyLinkedList extends Algorithm {
         this.cmd(act.step);
 
         if (isAddBack) {
-
-
-
-
           this.cmd(act.step);
         }
 
@@ -706,10 +600,6 @@ export default class CircularlyLinkedList extends Algorithm {
           // We increment size above, so subtract one to check if adding to back
           let i;
           if (isAddBack) {
-
-
-
-
           }
           this.cmd(act.disconnect, this.headID, this.linkedListElemID[0]);
           const firstNodeID = this.linkedListElemID[0];
@@ -772,12 +662,7 @@ export default class CircularlyLinkedList extends Algorithm {
         }
       } else {
         if (isAddIndex) {
-
-
-
-
           if (index !== 0) {
-
           }
         }
         this.cmd(
@@ -791,9 +676,6 @@ export default class CircularlyLinkedList extends Algorithm {
         this.cmd(act.step);
 
         if (isAddIndex) {
-
-
-
         }
         this.cmd(
           act.disconnect,
@@ -821,48 +703,25 @@ export default class CircularlyLinkedList extends Algorithm {
     this.cmd(act.delete, labPushID);
 
     if (isAddFront) {
-
-
-
     } else if (isAddBack) {
-
     }
 
     this.cmd(act.step);
 
     if (isAddFront) {
-
     }
 
     if (isAddIndex) {
-
-
       if (index !== 0 && index !== this.size - 1) {
-
       }
     }
 
     if (isAddBack) {
-
-
       if (this.size === 1) {
-
       }
     }
 
     this.cmd(act.step);
-
-
-
-
-
-
-
-
-
-
-
-
 
     return this.commands;
   }
@@ -874,22 +733,13 @@ export default class CircularlyLinkedList extends Algorithm {
     index = parseInt(index);
 
     if (isRemoveFront) {
-
     } else if (isRemoveBack) {
-
     } else if (isRemoveIndex) {
-
     }
 
     if (isRemoveIndex && index === 0) {
-
-
-
       isRemoveFront = true;
     } else if (isRemoveIndex && index === this.size - 1) {
-
-
-
       isRemoveBack = true;
     }
 
@@ -898,16 +748,8 @@ export default class CircularlyLinkedList extends Algorithm {
 
     if (isRemoveBack && this.size > 1) {
       this.cmd(act.step);
-
-
-
-
     } else if (isRemoveIndex && index > 0) {
       this.cmd(act.step);
-
-
-
-
     }
     this.traverse(index - 1);
 
@@ -931,40 +773,24 @@ export default class CircularlyLinkedList extends Algorithm {
     );
 
     if (isRemoveFront) {
-
     } else if (isRemoveBack) {
-
-
-
-
       if (this.size !== 1) {
-
       }
     } else if (isRemoveIndex) {
-
-
-
-
-
     }
 
     this.cmd(act.move, labPopValID, PUSH_ELEMENT_X, PUSH_ELEMENT_Y);
     this.cmd(act.step);
 
     if (isRemoveFront) {
-
     } else if (isRemoveBack) {
-
     } else if (isRemoveIndex) {
-
     }
 
     if (this.size !== 1) {
       if (index === 0) {
         // O(1) remove from front trick
         if (isRemoveFront) {
-
-
         }
         const labCopiedValID = this.nextIndex++;
         const secondNodeX = LINKED_LIST_START_X + LINKED_LIST_ELEM_SPACING;
@@ -987,8 +813,6 @@ export default class CircularlyLinkedList extends Algorithm {
         this.cmd(act.step);
 
         if (isRemoveFront) {
-
-
         }
         this.cmd(
           act.move,
@@ -1020,7 +844,6 @@ export default class CircularlyLinkedList extends Algorithm {
         }
       } else if (index === this.size - 1) {
         if (isRemoveBack) {
-
         }
         this.cmd(
           act.disconnect,
@@ -1046,7 +869,6 @@ export default class CircularlyLinkedList extends Algorithm {
         }
       } else {
         if (isRemoveIndex) {
-
         }
         const xPos =
           (index % LINKED_LIST_ELEMS_PER_LINE) * LINKED_LIST_ELEM_SPACING +
@@ -1073,12 +895,7 @@ export default class CircularlyLinkedList extends Algorithm {
       }
     } else {
       if (isRemoveFront) {
-
-
       } else if (isRemoveBack) {
-
-
-
       }
       this.cmd(act.delete, this.linkedListElemID[0]);
       this.cmd(act.setNull, this.headID, 1);
@@ -1093,20 +910,8 @@ export default class CircularlyLinkedList extends Algorithm {
     this.cmd(act.step);
 
     if (isRemoveFront) {
-
-
-
-
-
     } else if (isRemoveBack) {
-
-
-
-
-
     } else if (isRemoveIndex) {
-
-
     }
 
     this.cmd(act.setHighlight, this.linkedListElemID[index - 1], 0);
@@ -1116,25 +921,13 @@ export default class CircularlyLinkedList extends Algorithm {
     this.cmd(act.step);
 
     if (isRemoveFront) {
-
-
     } else if (isRemoveBack) {
-
-
     }
     if (isRemoveIndex) {
-
-
     }
 
     if (isRemoveIndex && index === 0) {
-
-
-
     } else if (isRemoveIndex && index === this.size) {
-
-
-
     }
 
     this.cmd(act.step);

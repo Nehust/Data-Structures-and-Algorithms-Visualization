@@ -70,7 +70,7 @@ export default function AlgoCard({ filter = "All" }) {
               <div className="card-header">
                 <div className="card-icon-section">
                   <div className="card-icon-wrapper icon-wrapper">
-                    <span className="material-symbols-outlined">{icon}</span>
+                    <span className="material-symbols-outlined">{icon }</span>
                   </div>
                   <div className="card-info">
                     <h3 className="card-title">{title}</h3>

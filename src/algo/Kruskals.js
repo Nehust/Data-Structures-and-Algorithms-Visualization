@@ -1,29 +1,3 @@
-// Copyright 2011 David Galles, University of San Francisco. All rights reserved.
-//
-// Redistribution and use in source and binary forms, with or without modification, are
-// permitted provided that the following conditions are met:
-//
-// 1. Redistributions of source code must retain the above copyright notice, this list of
-// conditions and the following disclaimer.
-//
-// 2. Redistributions in binary form must reproduce the above copyright notice, this list
-// of conditions and the following disclaimer in the documentation and/or other materials
-// provided with the distribution.
-//
-// THIS SOFTWARE IS PROVIDED BY <COPYRIGHT HOLDER> ``AS IS'' AND ANY EXPRESS OR IMPLIED
-// WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
-// FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL <COPYRIGHT HOLDER> OR
-// CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
-// CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-// SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
-// ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
-// NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
-// ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-//
-// The views and conclusions contained in the software and documentation are those of the
-// authors and should not be interpreted as representing official policies, either expressed
-// or implied, of the University of San Francisco
-
 import Graph, { EDGE_COLOR, VERTEX_INDEX_COLOR } from "./Graph.js";
 import {
   KRUSKALS_DS_COLORS,
@@ -35,32 +9,32 @@ import {
 } from "./Algorithm.js";
 import { act } from "../anim/AnimationMain";
 
-const MESSAGE_LABEL_X = 30;
+const MESSAGE_LABEL_X = 60;
 const MESSAGE_LABEL_Y = 15;
 
-const FIND_LABEL_1_X = 30;
-const FIND_LABEL_2_X = 100;
+const FIND_LABEL_1_X = 60;
+const FIND_LABEL_2_X = 140;
 const FIND_LABEL_1_Y = 40;
 const FIND_LABEL_2_Y = FIND_LABEL_1_Y;
 
-const CURRENT_LABEL_X = 145;
-const CURRENT_LABEL_Y = 67;
+const CURRENT_LABEL_X = 60;
+const CURRENT_LABEL_Y = 100;
 
-const PQ_LABEL_X = 145;
-const PQ_LABEL_Y = 92;
+const PQ_LABEL_X = 300;
+const PQ_LABEL_Y = 145;
 
 const SET_ARRAY_ELEM_WIDTH = 50;
 const SET_ARRAY_ELEM_HEIGHT = 20;
-const SET_ARRAY_START_X = 52;
-const SET_ARRAY_START_Y = 110;
+const SET_ARRAY_START_X = 60;
+const SET_ARRAY_START_Y = 250;
 
 const EDGE_LIST_ELEM_WIDTH = 40;
 const EDGE_LIST_ELEM_HEIGHT = 40;
 const EDGE_LIST_COLUMN_WIDTH = 100;
 const EDGE_LIST_MAX_PER_COLUMN = 9;
 
-const EDGE_LIST_START_X = 150;
-const EDGE_LIST_START_Y = 135;
+const EDGE_LIST_START_X = 300;
+const EDGE_LIST_START_Y = 175;
 
 const HIGHLIGHT_CIRCLE_COLOR_1 = "#FF9999";
 const HIGHLIGHT_CIRCLE_COLOR_2 = "#FF0000";
@@ -85,8 +59,6 @@ export default class Kruskals extends Graph {
 
     super.addControls(false);
   }
-
-
 
   setup(adjMatrix) {
     super.setup(adjMatrix);
@@ -120,7 +92,8 @@ export default class Kruskals extends Graph {
         SET_ARRAY_START_X + SET_ARRAY_ELEM_WIDTH,
         SET_ARRAY_START_Y + i * SET_ARRAY_ELEM_HEIGHT
       );
-      this.cmd(act.setTextColor, this.setIndexID[i], VERTEX_INDEX_COLOR);
+      this.cmd(act.setTextColor, this.setIndexID[i], "#FFFFFF");
+      this.cmd(act.setTextColor, this.setID[i], "#FFFFFF");
     }
 
     this.messageLabelID = this.nextIndex++;
@@ -218,9 +191,6 @@ export default class Kruskals extends Graph {
 
     this.recolorGraph();
 
-
-
-
     // Create edge list
     this.cmd(
       act.setText,
@@ -270,8 +240,6 @@ export default class Kruskals extends Graph {
       }
     }
     this.cmd(act.step);
-
-
 
     // Sort edge list based on edge cost
     const edgeCount = this.edgesListLeftID.length;
@@ -323,7 +291,6 @@ export default class Kruskals extends Graph {
 
     this.cmd(act.step);
 
-
     const findLabelLeft = this.nextIndex++;
     const findLabelRight = this.nextIndex++;
     const highlightCircle1 = this.nextIndex++;
@@ -363,13 +330,13 @@ export default class Kruskals extends Graph {
       this.cmd(
         act.move,
         this.edgesListLeftID[nextListIndex],
-        CURRENT_LABEL_X + 90,
+        CURRENT_LABEL_X + 120,
         CURRENT_LABEL_Y + 6
       );
       this.cmd(
         act.move,
         this.edgesListRightID[nextListIndex],
-        CURRENT_LABEL_X + EDGE_LIST_ELEM_WIDTH + 90,
+        CURRENT_LABEL_X + EDGE_LIST_ELEM_WIDTH + 120,
         CURRENT_LABEL_Y + 6
       );
 
@@ -404,9 +371,6 @@ export default class Kruskals extends Graph {
 
       this.cmd(act.step);
 
-
-
-
       this.cmd(act.setText, this.messageLabelID, "Looking at disjoint set");
 
       this.cmd(
@@ -419,7 +383,7 @@ export default class Kruskals extends Graph {
         act.createHighlightCircle,
         highlightCircle1,
         HIGHLIGHT_CIRCLE_COLOR_1,
-        CURRENT_LABEL_X + 88,
+        CURRENT_LABEL_X + 118,
         CURRENT_LABEL_Y + 6,
         HIGHLIGHT_CIRCLE_RADIUS
       );
@@ -454,7 +418,7 @@ export default class Kruskals extends Graph {
         act.createHighlightCircle,
         highlightCircle2,
         HIGHLIGHT_CIRCLE_COLOR_2,
-        CURRENT_LABEL_X + EDGE_LIST_ELEM_WIDTH + 91,
+        CURRENT_LABEL_X + EDGE_LIST_ELEM_WIDTH + 121,
         CURRENT_LABEL_Y + 6,
         HIGHLIGHT_CIRCLE_RADIUS
       );
@@ -479,10 +443,7 @@ export default class Kruskals extends Graph {
       );
       this.cmd(act.step);
 
-
       if (leftRoot !== rightRoot) {
-
-
         this.cmd(
           act.setText,
           this.messageLabelID,
@@ -506,8 +467,6 @@ export default class Kruskals extends Graph {
         );
 
         this.cmd(act.step);
-
-
 
         this.cmd(
           act.setText,
@@ -559,7 +518,6 @@ export default class Kruskals extends Graph {
         }
 
         this.cmd(act.delete, highlightCircle3);
-
       } else {
         this.cmd(
           act.setText,

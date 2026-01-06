@@ -1,37 +1,36 @@
-
 import Algorithm, {
   addControlToAlgorithmBar,
   addDivisorToAlgorithmBar,
 } from "./Algorithm.js";
 import { act } from "../anim/AnimationMain";
 
-const LINKED_LIST_START_X = 100;
+const LINKED_LIST_START_X = 300;
 const LINKED_LIST_START_Y = 225;
 const LINKED_LIST_ELEM_WIDTH = 70;
 const LINKED_LIST_ELEM_HEIGHT = 30;
 
-const LINKED_LIST_INSERT_X = 250;
+const LINKED_LIST_INSERT_X = 450;
 const LINKED_LIST_INSERT_Y = 100;
 
 const LINKED_LIST_ELEMS_PER_LINE = 12;
 const LINKED_LIST_ELEM_SPACING = 100;
 const LINKED_LIST_LINE_SPACING = 100;
 
-const TOP_POS_X = 180;
+const TOP_POS_X = 380;
 const TOP_POS_Y = 100;
-const TOP_LABEL_X = 130;
+const TOP_LABEL_X = 330;
 const TOP_LABEL_Y = 100;
 
 const TOP_ELEM_WIDTH = 30;
 const TOP_ELEM_HEIGHT = 30;
 
-const TAIL_POS_X = 180;
+const TAIL_POS_X = 380;
 const TAIL_POS_Y = 335;
-const TAIL_LABEL_X = 130;
+const TAIL_LABEL_X = 330;
 
-const QUEUE_LABEL_X = 60;
+const QUEUE_LABEL_X = 260;
 const QUEUE_LABEL_Y = 30;
-const QUEUE_ELEMENT_X = 130;
+const QUEUE_ELEMENT_X = 330;
 const QUEUE_ELEMENT_Y = 30;
 
 const SIZE = 32;
@@ -252,7 +251,6 @@ export default class QueueLL extends Algorithm {
 
     this.arrayData[this.top] = elemToPush;
 
-
     this.cmd(act.setText, this.leftoverLabelID, "");
     this.cmd(act.setText, this.leftoverValID, "");
     this.cmd(act.step);
@@ -307,18 +305,13 @@ export default class QueueLL extends Algorithm {
     this.cmd(act.delete, labPushValID);
     this.cmd(act.step);
 
-
     if (this.top === 0) {
-
-
       this.cmd(act.setNull, this.headID, 0);
       this.cmd(act.setNull, this.tailID, 0);
       this.cmd(act.connect, this.headID, this.linkedListElemID[this.top]);
       this.cmd(act.connect, this.tailID, this.linkedListElemID[this.top]);
       this.cmd(act.step);
     } else {
-
-
       this.cmd(act.setNull, this.linkedListElemID[1], 0);
       this.cmd(act.connect, this.linkedListElemID[1], this.linkedListElemID[0]);
       this.cmd(act.step);
@@ -328,20 +321,13 @@ export default class QueueLL extends Algorithm {
     this.resetLinkedListPositions();
     this.cmd(act.step);
 
-
-
-
-
-
     this.cmd(act.disconnect, this.tailID, this.linkedListElemID[1]);
     this.cmd(act.connect, this.tailID, this.linkedListElemID[0]);
     this.cmd(act.step);
 
-
     this.cmd(act.step);
 
     this.cmd(act.delete, labPushID);
-
 
     return this.commands;
   }
@@ -352,10 +338,8 @@ export default class QueueLL extends Algorithm {
     const labPopID = this.nextIndex++;
     const labPopValID = this.nextIndex++;
 
-
     this.cmd(act.setText, this.leftoverLabelID, "");
     this.cmd(act.step);
-
 
     this.cmd(
       act.createLabel,
@@ -375,13 +359,9 @@ export default class QueueLL extends Algorithm {
     this.cmd(act.move, labPopValID, QUEUE_ELEMENT_X, QUEUE_ELEMENT_Y);
     this.cmd(act.step);
 
-
     this.cmd(act.disconnect, this.headID, this.linkedListElemID[this.top - 1]);
 
     if (this.top === 1) {
-
-
-
       this.cmd(act.setNull, this.headID, 1);
       this.cmd(act.setNull, this.tailID, 1);
       this.cmd(
@@ -390,26 +370,14 @@ export default class QueueLL extends Algorithm {
         this.linkedListElemID[this.top - 1]
       );
     } else {
-
-
       this.cmd(act.connect, this.headID, this.linkedListElemID[this.top - 2]);
     }
     this.cmd(act.step);
-
-
-
-
-
-
-
 
     this.cmd(act.delete, this.linkedListElemID[this.top - 1]);
     this.top = this.top - 1;
     this.resetLinkedListPositions();
     this.cmd(act.step);
-
-
-
 
     this.cmd(act.delete, labPopValID);
     this.cmd(act.delete, labPopID);

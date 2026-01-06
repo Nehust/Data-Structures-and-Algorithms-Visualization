@@ -9,31 +9,31 @@ import { act } from "../anim/AnimationMain";
 const INFO_MSG_X = 25;
 const INFO_MSG_Y = 15;
 
-const LINKED_LIST_START_X = 170;
-const LINKED_LIST_START_Y = 130;
+const LINKED_LIST_START_X = 650;
+const LINKED_LIST_START_Y = 150;
 const LINKED_LIST_ELEM_WIDTH = 70;
 const LINKED_LIST_ELEM_HEIGHT = 30;
 
-const LINKED_LIST_INSERT_X = 330;
+const LINKED_LIST_INSERT_X = 500;
 const LINKED_LIST_INSERT_Y = 60;
 
 const LINKED_LIST_ELEMS_PER_LINE = 12;
 const LINKED_LIST_ELEM_SPACING = 125;
 const LINKED_LIST_LINE_SPACING = 100;
 
-const PUSH_LABEL_X = 65;
+const PUSH_LABEL_X = 600;
 const PUSH_LABEL_Y = 25;
-const PUSH_ELEMENT_X = 125;
+const PUSH_ELEMENT_X = 700;
 const PUSH_ELEMENT_Y = 25;
 
-const HEAD_POS_X = 170;
-const HEAD_POS_Y = 60;
+const HEAD_POS_X = 650;
+const HEAD_POS_Y = 100;
 
-const TAIL_POS_X = 170;
-const TAIL_POS_Y = 195;
+const TAIL_POS_X = 650;
+const TAIL_POS_Y = 250;
 
-const POINTER_LABEL_X = 220;
-const HEAD_LABEL_Y = 60;
+const POINTER_LABEL_X = 600;
+const HEAD_LABEL_Y = 100;
 
 const POINTER_ELEM_WIDTH = 30;
 const POINTER_ELEM_HEIGHT = 30;
@@ -74,28 +74,11 @@ export default class DoublyLinkedList extends Algorithm {
     this.addValueField.style.textAlign = "center";
     this.addValueField.onkeydown = this.returnSubmit(
       this.addValueField,
-      () => this.addIndexCallback(),
+      () => this.addFrontCallback(),
       4,
       false
     );
     this.controls.push(this.addValueField);
-
-    addLabelToAlgorithmBar("at index", addTopHorizontalGroup);
-
-    // Add's index text field
-    this.addIndexField = addControlToAlgorithmBar(
-      "Text",
-      "",
-      addTopHorizontalGroup
-    );
-    this.addIndexField.style.textAlign = "center";
-    this.addIndexField.onkeydown = this.returnSubmit(
-      this.addIndexField,
-      () => this.addIndexCallback(),
-      4,
-      true
-    );
-    this.controls.push(this.addIndexField);
 
     // Add to front button
     this.addFrontButton = addControlToAlgorithmBar(
@@ -114,17 +97,6 @@ export default class DoublyLinkedList extends Algorithm {
     );
     this.addBackButton.onclick = () => this.addBackCallback();
     this.controls.push(this.addBackButton);
-
-    addLabelToAlgorithmBar("or", addBottomHorizontalGroup);
-
-    // Add at index button
-    this.addIndexButton = addControlToAlgorithmBar(
-      "Button",
-      "Add at Index",
-      addBottomHorizontalGroup
-    );
-    this.addIndexButton.onclick = this.addIndexCallback.bind(this);
-    this.controls.push(this.addIndexButton);
 
     addDivisorToAlgorithmBar();
 
@@ -249,8 +221,6 @@ export default class DoublyLinkedList extends Algorithm {
     });
   }
 
-
-
   setup() {
     this.linkedListElemID = new Array(SIZE);
 
@@ -288,8 +258,8 @@ export default class DoublyLinkedList extends Algorithm {
       act.createLabel,
       this.tailLabelID,
       "Tail",
-      POINTER_LABEL_X - 95,
-      HEAD_LABEL_Y + 135
+      POINTER_LABEL_X,
+      HEAD_LABEL_Y + 150
     );
     this.cmd(
       act.createRectangle,
@@ -330,38 +300,7 @@ export default class DoublyLinkedList extends Algorithm {
     return this.commands;
   }
 
-  addIndexCallback() {
-    if (this.addValueField.value !== "" && this.addIndexField.value !== "") {
-      const addVal = this.addValueField.value;
-      const index = parseInt(this.addIndexField.value);
-      if (index >= 0 && index <= this.size) {
-        this.addValueField.value = "";
-        this.addIndexField.value = "";
-        this.implementAction(
-          this.add.bind(this),
-          addVal,
-          index,
-          false,
-          false,
-          true
-        );
-      } else {
-        this.implementAction(
-          this.setInfoText.bind(this),
-          this.size === 0
-            ? "Index must be 0 when the list is empty."
-            : `Index must be between 0 and ${this.size}.`
-        );
-        this.shake(this.addIndexButton);
-      }
-    } else {
-      this.implementAction(
-        this.setInfoText.bind(this),
-        "Missing input data or index."
-      );
-      this.shake(this.addIndexButton);
-    }
-  }
+
 
   addFrontCallback() {
     if (this.addValueField.value !== "") {

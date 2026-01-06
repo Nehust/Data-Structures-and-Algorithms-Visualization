@@ -5,7 +5,7 @@ export default class AnimatedObject {
     this.x = 0;
     this.y = 0;
 
-    this.backgroundColor = "#1e293b";
+    this.backgroundColor = "#ffffff";
     this.foregroundColor = "#e2e8f0";
     this.highlighted = false;
 

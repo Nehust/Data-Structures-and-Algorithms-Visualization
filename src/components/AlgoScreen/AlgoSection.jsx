@@ -34,8 +34,8 @@ const AlgoSection = () => {
     // Tạo đối tượng Thuật toán
     const curAlgo = new AlgoClass(
       animManager,
-      canvasRef.current.width,
-      canvasRef.current.height
+      canvasRef.current.clientWidth,
+      canvasRef.current.clientHeight
     );
     if (searchParams.toString()) {
       try {

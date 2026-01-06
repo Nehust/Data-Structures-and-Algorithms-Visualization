@@ -1,29 +1,3 @@
-// Copyright 2011 David Galles, University of San Francisco. All rights reserved.
-//
-// Redistribution and use in source and binary forms, with or without modification, are
-// permitted provided that the following conditions are met:
-//
-// 1. Redistributions of source code must retain the above copyright notice, this list of
-// conditions and the following disclaimer.
-//
-// 2. Redistributions in binary form must reproduce the above copyright notice, this list
-// of conditions and the following disclaimer in the documentation and/or other materials
-// provided with the distribution.
-//
-// THIS SOFTWARE IS PROVIDED BY <COPYRIGHT HOLDER> ``AS IS'' AND ANY EXPRESS OR IMPLIED
-// WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
-// FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL <COPYRIGHT HOLDER> OR
-// CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
-// CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-// SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
-// ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
-// NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
-// ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-//
-// The views and conclusions contained in the software and documentation are those of the
-// authors and should not be interpreted as representing official policies, either expressed
-// or implied, of the University of San Francisco
-
 import Algorithm, {
   addControlToAlgorithmBar,
   addDivisorToAlgorithmBar,
@@ -31,7 +5,7 @@ import Algorithm, {
 } from "./Algorithm";
 import { act } from "../anim/AnimationMain";
 
-const ARRAY_START_X = 100;
+const ARRAY_START_X = 300;
 const ARRAY_START_Y = 245;
 const ARRAY_ELEM_WIDTH = 50;
 const ARRAY_ELEM_HEIGHT = 50;
@@ -39,29 +13,29 @@ const ARRAY_ELEM_HEIGHT = 50;
 const ARRAY_ELEMS_PER_LINE = 14;
 const ARRAY_LINE_SPACING = 130;
 
-const FRONT_POS_X = 180;
+const FRONT_POS_X = 380;
 const FRONT_POS_Y = 120;
-const FRONT_LABEL_X = 130;
+const FRONT_LABEL_X = 330;
 const FRONT_LABEL_Y = 120;
 
-const SIZE_POS_X = 280;
+const SIZE_POS_X = 480;
 const SIZE_POS_Y = 120;
-const SIZE_LABEL_X = 230;
+const SIZE_LABEL_X = 430;
 const SIZE_LABEL_Y = 120;
 
-const QUEUE_LABEL_X = 60;
+const QUEUE_LABEL_X = 260;
 const QUEUE_LABEL_Y = 30;
-const QUEUE_ELEMENT_X = 130;
+const QUEUE_ELEMENT_X = 330;
 const QUEUE_ELEMENT_Y = 30;
 
-const RESIZE_ARRAY_START_X = 100;
+const RESIZE_ARRAY_START_X = 300;
 const RESIZE_ARRAY_START_Y = 340;
-const QUEUE_RESIZE_LABEL_X = 60;
+const QUEUE_RESIZE_LABEL_X = 260;
 const QUEUE_RESIZE_LABEL_Y = 60;
 
 const FRONT_LABEL_OFFSET = -40;
 
-const INDEX_COLOR = "#0000FF";
+const INDEX_COLOR = "#ffffffff";
 
 const SIZE = 7;
 const MAX_SIZE = 30;
@@ -396,7 +370,6 @@ export default class DequeArray extends Algorithm {
     const labAddLastValID = this.nextIndex++;
     const addIndex = (this.front + this.size) % this.arraySize;
 
-
     this.cmd(act.setText, this.leftoverLabelID, "");
     this.cmd(act.setText, this.leftoverValID, "");
 
@@ -418,7 +391,6 @@ export default class DequeArray extends Algorithm {
     );
 
     this.cmd(act.step);
-
 
     this.cmd(
       act.createHighlightCircle,
@@ -451,19 +423,12 @@ export default class DequeArray extends Algorithm {
 
     this.cmd(act.delete, this.highlight1ID);
 
-
-
-
-
     this.cmd(act.setHighlight, this.sizeID, 1);
     this.cmd(act.step);
 
     this.size = this.size + 1;
     this.cmd(act.setText, this.sizeID, this.size);
     this.cmd(act.step);
-
-
-
 
     this.cmd(act.setHighlight, this.sizeID, 0);
     this.cmd(act.delete, labAddLastID);
@@ -479,7 +444,6 @@ export default class DequeArray extends Algorithm {
 
     const labelAddID = this.nextIndex++;
     const labelAddIDVal = this.nextIndex++;
-
 
     this.cmd(act.setText, this.leftoverLabelID, "");
     this.cmd(act.setText, this.leftoverValID, "");
@@ -510,13 +474,10 @@ export default class DequeArray extends Algorithm {
     );
     this.cmd(act.step);
 
-
-
-
     this.cmd(
       act.createHighlightCircle,
       this.highlight1ID,
-      INDEX_COLOR,
+      "#FF0000",
       FRONT_POS_X,
       FRONT_POS_Y
     );
@@ -552,11 +513,6 @@ export default class DequeArray extends Algorithm {
     this.cmd(act.setText, this.frontID, this.front);
     this.cmd(act.step);
 
-
-
-
-
-
     this.cmd(act.setHighlight, this.frontID, 0);
     this.cmd(act.setHighlight, this.frontPointerID, 0);
     this.cmd(act.move, labelAddIDVal, xpos, ypos);
@@ -566,21 +522,14 @@ export default class DequeArray extends Algorithm {
     this.cmd(act.delete, labelAddIDVal);
     this.cmd(act.step);
 
-
-
-
-
     this.cmd(act.setHighlight, this.sizeID, 1);
     this.cmd(act.step);
 
     this.cmd(act.setText, this.sizeID, this.size + 1);
     this.cmd(act.step);
 
-
-
     this.cmd(act.setHighlight, this.sizeID, 0);
     this.cmd(act.step);
-
 
     this.cmd(act.delete, this.highlight1ID);
     this.cmd(act.delete, labelAddID);
@@ -598,7 +547,6 @@ export default class DequeArray extends Algorithm {
     const labremoveFirstID = this.nextIndex++;
     const labremoveFirstValID = this.nextIndex++;
 
-
     this.cmd(act.setText, this.leftoverLabelID, "");
     this.cmd(act.setText, this.leftoverValID, "");
     this.cmd(act.step);
@@ -611,11 +559,10 @@ export default class DequeArray extends Algorithm {
       QUEUE_LABEL_Y
     );
 
-
     this.cmd(
       act.createHighlightCircle,
       this.highlight1ID,
-      INDEX_COLOR,
+      "#FF0000",
       FRONT_POS_X,
       FRONT_POS_Y
     );
@@ -638,12 +585,8 @@ export default class DequeArray extends Algorithm {
     this.cmd(act.move, labremoveFirstValID, QUEUE_ELEMENT_X, QUEUE_ELEMENT_Y);
     this.cmd(act.step);
 
-
-
     this.cmd(act.setText, this.arrayID[this.front], "");
     this.cmd(act.step);
-
-
 
     this.cmd(act.setHighlight, this.frontID, 1);
     this.cmd(act.setHighlight, this.frontPointerID, 1);
@@ -661,7 +604,6 @@ export default class DequeArray extends Algorithm {
     this.cmd(act.move, this.frontPointerID, frontxpos, frontypos);
     this.cmd(act.step);
 
-
     this.cmd(act.setHighlight, this.frontID, 0);
     this.cmd(act.setHighlight, this.frontPointerID, 0);
     this.cmd(act.setText, this.leftoverLabelID, "Removed Value: ");
@@ -673,8 +615,6 @@ export default class DequeArray extends Algorithm {
     this.cmd(act.delete, labremoveFirstValID);
     this.cmd(act.step);
 
-
-
     this.cmd(act.setHighlight, this.sizeID, 1);
     this.cmd(act.step);
 
@@ -682,11 +622,8 @@ export default class DequeArray extends Algorithm {
     this.cmd(act.setText, this.sizeID, this.size);
     this.cmd(act.step);
 
-
-
     this.cmd(act.setHighlight, this.sizeID, 0);
     this.cmd(act.step);
-
 
     this.nextIndex = this.nextIndex - 2;
 
@@ -702,7 +639,6 @@ export default class DequeArray extends Algorithm {
     const remIndex =
       (this.front + this.size - 1 + this.arraySize) % this.arraySize;
 
-
     this.cmd(act.setText, this.leftoverLabelID, "");
     this.cmd(act.setText, this.leftoverValID, "");
     this.cmd(act.step);
@@ -717,14 +653,14 @@ export default class DequeArray extends Algorithm {
     this.cmd(
       act.createHighlightCircle,
       this.highlight1ID,
-      INDEX_COLOR,
+      "#FF0000",
       FRONT_POS_X,
       FRONT_POS_Y
     );
     this.cmd(
       act.createHighlightCircle,
       this.highlight2ID,
-      INDEX_COLOR,
+      "#FF0000",
       SIZE_POS_X,
       SIZE_POS_Y
     );
@@ -736,15 +672,9 @@ export default class DequeArray extends Algorithm {
       Math.floor(remIndex / ARRAY_ELEMS_PER_LINE) * ARRAY_LINE_SPACING +
       ARRAY_START_Y;
 
-
-
     this.cmd(act.move, this.highlight1ID, xpos, ypos + ARRAY_ELEM_HEIGHT);
     this.cmd(act.move, this.highlight2ID, xpos, ypos + ARRAY_ELEM_HEIGHT);
     this.cmd(act.step);
-
-
-
-
 
     this.cmd(act.delete, this.highlight1ID);
     this.cmd(act.delete, this.highlight2ID);
@@ -752,10 +682,6 @@ export default class DequeArray extends Algorithm {
     this.cmd(act.createLabel, remLabelValID, removedVal, xpos, ypos);
     this.cmd(act.move, remLabelValID, QUEUE_ELEMENT_X, QUEUE_ELEMENT_Y);
     this.cmd(act.step);
-
-
-
-
 
     this.cmd(act.setText, this.leftoverLabelID, "Removed Value: ");
     this.cmd(act.setText, this.leftoverValID, removedVal);
@@ -766,8 +692,6 @@ export default class DequeArray extends Algorithm {
     this.cmd(act.delete, remLabelValID);
     this.cmd(act.step);
 
-
-
     this.cmd(act.setHighlight, this.sizeID, 1);
     this.cmd(act.step);
 
@@ -776,10 +700,6 @@ export default class DequeArray extends Algorithm {
 
     this.cmd(act.setHighlight, this.sizeID, 0);
     this.cmd(act.step);
-
-
-
-
 
     this.size--;
     this.nextIndex = this.nextIndex - 2;
@@ -812,11 +732,7 @@ export default class DequeArray extends Algorithm {
     const extra = isFront ? ": elements shifted by 1" : "";
 
     if (isFront) {
-
-
     } else {
-
-
     }
     this.cmd(
       act.createLabel,
@@ -843,9 +759,7 @@ export default class DequeArray extends Algorithm {
 
     //Create new array
     if (isFront) {
-
     } else {
-
     }
     for (let i = 0; i < this.size * 2; i++) {
       const xpos =
@@ -869,7 +783,7 @@ export default class DequeArray extends Algorithm {
         xpos,
         ypos + ARRAY_ELEM_HEIGHT
       );
-      this.cmd(act.setForegroundColor, this.arrayLabelIDNew[i], "#0000FF");
+      this.cmd(act.setForegroundColor, this.arrayLabelIDNew[i], "#ffffffff");
     }
     this.cmd(act.step);
 
@@ -878,13 +792,7 @@ export default class DequeArray extends Algorithm {
 
     //Move old elements to new array
     if (isFront) {
-
-
-
     } else {
-
-
-
     }
     for (let i = 0; i < this.size; i++) {
       const xposinit =
@@ -930,13 +838,7 @@ export default class DequeArray extends Algorithm {
 
     //Delete old array
     if (isFront) {
-
-
-
     } else {
-
-
-
     }
     for (let i = 0; i < this.size; i++) {
       this.cmd(act.delete, this.arrayID[i]);
@@ -967,11 +869,7 @@ export default class DequeArray extends Algorithm {
     this.arrayData = this.arrayDataNew;
 
     if (isFront) {
-
-
     } else {
-
-
     }
     this.cmd(act.setHighlight, this.frontID, 1);
     this.cmd(act.setHighlight, this.frontPointerID, 1);
@@ -987,13 +885,7 @@ export default class DequeArray extends Algorithm {
     this.cmd(act.step);
 
     if (isFront) {
-
-
-
     } else {
-
-
-
     }
     this.cmd(act.setHighlight, this.frontID, 0);
     this.cmd(act.setHighlight, this.frontPointerID, 0);
@@ -1062,11 +954,7 @@ export default class DequeArray extends Algorithm {
     this.cmd(act.step);
 
     if (isFront) {
-
-
     } else {
-
-
     }
     this.cmd(act.setHighlight, this.sizeID, 1);
     this.cmd(act.step);
@@ -1075,11 +963,7 @@ export default class DequeArray extends Algorithm {
     this.cmd(act.step);
 
     if (isFront) {
-
-
     } else {
-
-
     }
     this.cmd(act.setHighlight, this.sizeID, 0);
     this.cmd(act.delete, labEnqueueID);

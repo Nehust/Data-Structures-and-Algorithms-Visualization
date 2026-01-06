@@ -816,7 +816,7 @@ export const act = {
     this.animatedObjects.connectEdge(
       params[0],
       params[1],
-      "#000000",
+      "#e2e8f0",
       0.0,
       true,
       "",
@@ -829,7 +829,7 @@ export const act = {
     this.animatedObjects.connectEdge(
       params[0],
       params[1],
-      "#000000",
+      "#e2e8f0",
       0.0,
       true,
       "",
@@ -842,7 +842,7 @@ export const act = {
     this.animatedObjects.connectEdge(
       params[0],
       params[1],
-      "#000000",
+      "#e2e8f0",
       params[2],
       true,
       "",
@@ -855,7 +855,7 @@ export const act = {
     this.animatedObjects.connectEdge(
       params[0],
       params[1],
-      "#000000",
+      "#e2e8f0",
       0.0,
       false,
       "",

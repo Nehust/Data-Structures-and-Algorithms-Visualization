@@ -1,29 +1,3 @@
-// Copyright 2011 David Galles, University of San Francisco. All rights reserved.
-//
-// Redistribution and use in source and binary forms, with or without modification, are
-// permitted provided that the following conditions are met:
-//
-// 1. Redistributions of source code must retain the above copyright notice, this list of
-// conditions and the following disclaimer.
-//
-// 2. Redistributions in binary form must reproduce the above copyright notice, this list
-// of conditions and the following disclaimer in the documentation and/or other materials
-// provided with the distribution.
-//
-// THIS SOFTWARE IS PROVIDED BY David Galles ``AS IS'' AND ANY EXPRESS OR IMPLIED
-// WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
-// FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL <COPYRIGHT HOLDER> OR
-// CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
-// CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-// SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
-// ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
-// NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
-// ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-//
-// The views and conclusions contained in the software and documentation are those of the
-// authors and should not be interpreted as representing official policies, either expressed
-// or implied, of the University of San Francisco
-
 import Algorithm, {
   addControlToAlgorithmBar,
   addDivisorToAlgorithmBar,
@@ -35,22 +9,22 @@ import { act } from "../anim/AnimationMain";
 const INFO_MSG_X = 25;
 const INFO_MSG_Y = 15;
 
-const ARRAY_START_X = 85;
-const ARRAY_START_Y = 100;
+const ARRAY_START_X = 500;
+const ARRAY_START_Y = 200;
 
-const RESIZE_ARRAY_START_X = 85;
+const RESIZE_ARRAY_START_X = 450;
 const RESIZE_ARRAY_START_Y = 215;
 
-const ARRAY_ELEM_WIDTH = 50;
+const ARRAY_ELEM_WIDTH = 45;
 const ARRAY_ELEM_HEIGHT = 50;
 
 const ARRAY_ELEMS_PER_LINE = 14;
 const ARRAY_LINE_SPACING = 130;
 
-const PUSH_LABEL_X = 50;
+const PUSH_LABEL_X = 600;
 const PUSH_LABEL_Y = 25;
 
-const PUSH_ELEMENT_X = 120;
+const PUSH_ELEMENT_X = 700;
 const PUSH_ELEMENT_Y = 25;
 const PUSH_RESIZE_LABEL_X = 60;
 const PUSH_RESIZE_LABEL_Y = 55;
@@ -61,6 +35,8 @@ const MAX_SIZE = 30;
 export default class ArrayList extends Algorithm {
   constructor(am, w, h) {
     super(am, w, h);
+    this.startX = (w - ARRAY_ELEMS_PER_LINE * ARRAY_ELEM_WIDTH) / 2;
+    this.resizeStartX = this.startX;
     this.addControls();
     this.nextIndex = 0;
     this.setup();
@@ -318,7 +294,7 @@ export default class ArrayList extends Algorithm {
         xpos,
         ypos + ARRAY_ELEM_HEIGHT
       );
-      this.cmd(act.setForegroundColor, this.arrayLabelID[i], "#0000FF");
+      this.cmd(act.setForegroundColor, this.arrayLabelID[i], "#ffffffff");
     }
 
     this.highlight1ID = this.nextIndex++;
@@ -617,7 +593,7 @@ export default class ArrayList extends Algorithm {
     this.cmd(
       act.createHighlightCircle,
       this.highlight1ID,
-      "#0000FF",
+      "#f32222ff",
       PUSH_ELEMENT_X,
       PUSH_ELEMENT_Y
     );
@@ -671,7 +647,7 @@ export default class ArrayList extends Algorithm {
     this.cmd(
       act.createHighlightCircle,
       this.highlight1ID,
-      "#0000FF",
+      "#f32222ff",
       xpos,
       ypos
     );

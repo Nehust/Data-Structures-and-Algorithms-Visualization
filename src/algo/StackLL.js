@@ -1,34 +1,32 @@
-
-
 import Algorithm, {
   addControlToAlgorithmBar,
   addDivisorToAlgorithmBar,
 } from "./Algorithm.js";
 import { act } from "../anim/AnimationMain";
 
-const LINKED_LIST_START_X = 100;
+const LINKED_LIST_START_X = 300;
 const LINKED_LIST_START_Y = 250;
 const LINKED_LIST_ELEM_WIDTH = 70;
 const LINKED_LIST_ELEM_HEIGHT = 30;
 
-const LINKED_LIST_INSERT_X = 250;
+const LINKED_LIST_INSERT_X = 450;
 const LINKED_LIST_INSERT_Y = 50;
 
 const LINKED_LIST_ELEMS_PER_LINE = 12;
 const LINKED_LIST_ELEM_SPACING = 100;
 const LINKED_LIST_LINE_SPACING = 100;
 
-const TOP_POS_X = 180;
+const TOP_POS_X = 380;
 const TOP_POS_Y = 135;
-const TOP_LABEL_X = 130;
+const TOP_LABEL_X = 330;
 const TOP_LABEL_Y = 135;
 
 const TOP_ELEM_WIDTH = 30;
 const TOP_ELEM_HEIGHT = 30;
 
-const PUSH_LABEL_X = 50;
+const PUSH_LABEL_X = 250;
 const PUSH_LABEL_Y = 30;
-const PUSH_ELEMENT_X = 120;
+const PUSH_ELEMENT_X = 320;
 const PUSH_ELEMENT_Y = 30;
 
 const SIZE = 32;
@@ -231,7 +229,6 @@ export default class StackLL extends Algorithm {
     this.cmd(act.setText, this.leftoverLabelID, "");
     this.cmd(act.setText, this.leftoverValID, "");
 
-
     this.cmd(
       act.createLinkedListNode,
       this.linkedListElemID[this.top],
@@ -273,7 +270,6 @@ export default class StackLL extends Algorithm {
     this.cmd(act.setText, this.linkedListElemID[this.top], elemToPush);
     this.cmd(act.delete, labPushValID);
 
-
     if (this.top === 0) {
       this.cmd(act.setNull, this.topID, 0);
       this.cmd(act.setNull, this.linkedListElemID[this.top], 1);
@@ -288,17 +284,12 @@ export default class StackLL extends Algorithm {
     }
     this.cmd(act.connect, this.topID, this.linkedListElemID[this.top]);
 
-
-
     this.cmd(act.step);
     this.top = this.top + 1;
-
-
 
     this.resetLinkedListPositions();
     this.cmd(act.delete, labPushID);
     this.cmd(act.step);
-
 
     return this.commands;
   }
@@ -327,11 +318,9 @@ export default class StackLL extends Algorithm {
       LINKED_LIST_START_Y
     );
 
-
     this.cmd(act.move, labPopValID, PUSH_ELEMENT_X, PUSH_ELEMENT_Y);
     this.cmd(act.step);
     this.cmd(act.disconnect, this.topID, this.linkedListElemID[this.top - 1]);
-
 
     if (this.top === 1) {
       this.cmd(act.setNull, this.topID, 1);
@@ -343,12 +332,9 @@ export default class StackLL extends Algorithm {
 
     this.cmd(act.delete, this.linkedListElemID[this.top - 1]);
 
-
     this.top = this.top - 1;
     this.resetLinkedListPositions();
     this.cmd(act.step);
-
-
 
     this.cmd(act.delete, labPopValID);
     this.cmd(act.delete, labPopID);

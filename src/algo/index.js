@@ -1,4 +1,4 @@
-export { default as ArrayList } from "./Arraylist";
+export { default as ArrayList } from "./ArrayList";
 export { default as LinkedList } from "./LinkedList";
 export { default as DoublyLinkedList } from "./DoublyLinkedList";
 export { default as CircularlyLinkedList } from "./CircularlyLinkedList";
@@ -19,4 +19,6 @@ export { default as BFS } from "./BFS";
 export { default as DFS } from "./DFS";
 export { default as Dijkstras } from "./Dijkstras";
 export { default as CreateGraph } from "./CreateGraph";
-export { default as Kruskals } from "./Kruskals";
+export { default as Kruskals } from "./Kruskals"; 
+export { default as Heap } from "./Heap"; 
+	

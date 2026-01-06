@@ -10,7 +10,7 @@ import { act } from "../anim/AnimationMain";
 const INFO_MSG_X = 25;
 const INFO_MSG_Y = 15;
 
-const LINKED_LIST_START_X = 100;
+const LINKED_LIST_START_X = 650;
 const LINKED_LIST_START_Y = 200;
 const LINKED_LIST_ELEM_WIDTH = 70;
 const LINKED_LIST_ELEM_HEIGHT = 30;
@@ -27,14 +27,14 @@ const PUSH_LABEL_Y = 30;
 const PUSH_ELEMENT_X = 120;
 const PUSH_ELEMENT_Y = 30;
 
-const HEAD_POS_X = 180;
+const HEAD_POS_X = 650;
 const HEAD_POS_Y = 100;
-const HEAD_LABEL_X = 130;
+const HEAD_LABEL_X = 600;
 const HEAD_LABEL_Y = 100;
 
-const TAIL_POS_X = 180;
+const TAIL_POS_X = 650;
 const TAIL_POS_Y = 500;
-const TAIL_LABEL_X = 130;
+const TAIL_LABEL_X = 600;
 const TAIL_LABEL_Y = 500;
 
 const HEAD_ELEM_WIDTH = 30;
@@ -64,7 +64,7 @@ export default class LinkedList extends Algorithm {
     this.addValueField.style.textAlign = "center";
     this.addValueField.onkeydown = this.returnSubmit(
       this.addValueField,
-      () => this.addIndexCallback(),
+      () => this.addFrontCallback(),
       4,
       false
     );
@@ -78,26 +78,6 @@ export default class LinkedList extends Algorithm {
     this.addBackButton = addControlToAlgorithmBar("Button", "Add to Back", addGroup);
     this.addBackButton.onclick = () => this.addBackCallback();
     this.controls.push(this.addBackButton);
-
-    // Separator
-    addLabelToAlgorithmBar("|", addGroup);
-
-    // Index input for Add
-    addLabelToAlgorithmBar("Index:", addGroup);
-    this.addIndexField = addControlToAlgorithmBar("Text", "", addGroup);
-    this.addIndexField.style.textAlign = "center";
-    this.addIndexField.onkeydown = this.returnSubmit(
-      this.addIndexField,
-      () => this.addIndexCallback(),
-      4,
-      true
-    );
-    this.controls.push(this.addIndexField);
-
-    // Add at Index button
-    this.addIndexButton = addControlToAlgorithmBar("Button", "Add at Index", addGroup);
-    this.addIndexButton.onclick = this.addIndexCallback.bind(this);
-    this.controls.push(this.addIndexButton);
 
     // Global Separator
     addDivisorToAlgorithmBar();
@@ -305,38 +285,7 @@ export default class LinkedList extends Algorithm {
     return this.commands;
   }
 
-  addIndexCallback() {
-    if (this.addValueField.value !== "" && this.addIndexField.value !== "") {
-      const addVal = this.addValueField.value;
-      const index = parseInt(this.addIndexField.value);
-      if (index >= 0 && index <= this.size) {
-        this.addValueField.value = "";
-        this.addIndexField.value = "";
-        this.implementAction(
-          this.add.bind(this),
-          addVal,
-          index,
-          false,
-          false,
-          true
-        );
-      } else {
-        this.implementAction(
-          this.setInfoText.bind(this),
-          this.size === 0
-            ? "Index must be 0 when the list is empty."
-            : `Index must be between 0 and ${this.size}.`
-        );
-        this.shake(this.addIndexButton);
-      }
-    } else {
-      this.implementAction(
-        this.setInfoText.bind(this),
-        "Missing input data or index."
-      );
-      this.shake(this.addIndexButton);
-    }
-  }
+
 
   addFrontCallback() {
     if (this.addValueField.value !== "") {
